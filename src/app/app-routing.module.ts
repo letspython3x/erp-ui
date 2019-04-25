@@ -17,6 +17,12 @@ import { DropdownComponent } from './dropdown/dropdown.component';
 import { TooltipsComponent } from './tooltips/tooltips.component';
 import { CarouselComponent } from './carousel/carousel.component';
 import { TabsComponent } from './tabs/tabs.component';
+import { ProductComponent } from './modules/product/product.component';
+import { ProductsComponent } from './modules/product/products/products.component';
+import { ProductDetailComponent } from './modules/product/product-detail/product-detail.component';
+import { ProductAddComponent } from './modules/product/product-add/product-add.component';
+import { ProductEditComponent } from './modules/product/product-edit/product-edit.component';
+
 
 const routes: Routes = [
   { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
@@ -35,7 +41,28 @@ const routes: Routes = [
   { path: 'dropdowns', component: DropdownComponent },
   { path: 'tooltips', component: TooltipsComponent },
   { path: 'carousel', component: CarouselComponent },
-  { path: 'tabs', component: TabsComponent }
+  { path: 'tabs', component: TabsComponent },
+  // { path: 'product', component: ProductComponent },
+  {
+    path: 'products',
+    component: ProductsComponent,
+    data: { title: 'List of Products' }
+  },
+  {
+    path: 'product-details/:id',
+    component: ProductDetailComponent,
+    data: { title: 'Product Details' }
+  },
+  {
+    path: 'product-add',
+    component: ProductAddComponent,
+    data: { title: 'Add Product' }
+  },
+  {
+    path: 'product-edit/:id',
+    component: ProductEditComponent,
+    data: { title: 'Edit Product' }
+  }
 ];
 
 @NgModule({

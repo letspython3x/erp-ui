@@ -26,7 +26,13 @@ import { DropdownComponent } from './dropdown/dropdown.component';
 import { TooltipsComponent } from './tooltips/tooltips.component';
 import { CarouselComponent } from './carousel/carousel.component';
 import { TabsComponent } from './tabs/tabs.component';
-
+import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { ProductComponent } from './modules/product/product.component';
+import { ProductsComponent } from './modules/product/products/products.component';
+import { ProductDetailComponent } from './modules/product/product-detail/product-detail.component';
+import { ProductAddComponent } from './modules/product/product-add/product-add.component';
+import { ProductEditComponent } from './modules/product/product-edit/product-edit.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -48,14 +54,21 @@ import { TabsComponent } from './tabs/tabs.component';
     DropdownComponent,
     TooltipsComponent,
     CarouselComponent,
-    TabsComponent
+    TabsComponent,
+    ProductComponent,
+    ProductsComponent,
+    ProductDetailComponent,
+    ProductAddComponent,
+    ProductEditComponent
   ],
   imports: [
     BrowserModule,
     RouterModule,
     AppRoutingModule,
     FormsModule,
-    NgbModule.forRoot()
+    NgbModule.forRoot(),
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

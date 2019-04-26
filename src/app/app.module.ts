@@ -28,11 +28,12 @@ import { CarouselComponent } from './carousel/carousel.component';
 import { TabsComponent } from './tabs/tabs.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { ProductComponent } from './modules/product/product.component';
 import { ProductsComponent } from './modules/product/products/products.component';
 import { ProductDetailComponent } from './modules/product/product-detail/product-detail.component';
 import { ProductAddComponent } from './modules/product/product-add/product-add.component';
 import { ProductEditComponent } from './modules/product/product-edit/product-edit.component';
+import { QuotationAddComponent } from './modules/quotation/quotation-add/quotation-add.component';
+import { QuotationDetailsComponent } from './modules/quotation/quotation-details/quotation-details.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -55,11 +56,12 @@ import { ProductEditComponent } from './modules/product/product-edit/product-edi
     TooltipsComponent,
     CarouselComponent,
     TabsComponent,
-    ProductComponent,
     ProductsComponent,
     ProductDetailComponent,
     ProductAddComponent,
-    ProductEditComponent
+    ProductEditComponent,
+    QuotationAddComponent,
+    QuotationDetailsComponent
   ],
   imports: [
     BrowserModule,

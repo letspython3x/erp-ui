@@ -16,14 +16,14 @@ export class ProductComponent implements OnInit {
 
     productList: Object;
     constructor(private product: ProductService) { }
-    ngOnInit() { }
-    // ngOnInit() {
-    //     this.product.getProducts().subscribe(
-    //         productList => {
-    //             this.productList = productList
-    //              console.log(this.productList);
-    //         });
-    // }
+    
+    ngOnInit() {
+        this.product.getProducts().subscribe(
+            data => {
+                this.productList = data;
+                 console.log(this.productList);
+            });
+    }
 
     saveProduct() {
         this.getProduct()

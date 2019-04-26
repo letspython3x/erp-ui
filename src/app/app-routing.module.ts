@@ -49,7 +49,7 @@ const routes: Routes = [
     data: { title: 'List of Products' }
   },
   {
-    path: 'product-details/:id',
+    path: 'product-details',
     component: ProductDetailComponent,
     data: { title: 'Product Details' }
   },
@@ -59,7 +59,7 @@ const routes: Routes = [
     data: { title: 'Add Product' }
   },
   {
-    path: 'product-edit/:id',
+    path: 'product-edit',
     component: ProductEditComponent,
     data: { title: 'Edit Product' }
   }

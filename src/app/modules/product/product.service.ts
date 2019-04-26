@@ -9,13 +9,14 @@ import { Product } from './product';
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
-const apiUrl = 'http://127.0.0.1:3001/product/';
+const apiUrl = 'http://127.0.0.1:3001/product';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
+  productList: any ;
   constructor(private http: HttpClient) { }
 
   private handleError<T>(operation = 'operation', result?: T) {
@@ -29,12 +30,13 @@ export class ProductService {
     };
   }
 
-  getProducts(): Observable<Product[]> {
-    return this.http.get<Product[]>(apiUrl)
-      .pipe(
-        tap(heroes => console.log('fetched products below')),
-        catchError(this.handleError('getProducts', []))
-      );
+  getProducts(): Observable<IProduct[]> {
+    const url = `${apiUrl}/`;
+    return this.http.get<IProduct[]>(apiUrl);
+      // .pipe(
+      //   tap(heroes => console.log('fetched products below')),
+      //   catchError(this.handleError('getProducts', []))
+      
   }
 
   getProduct(id: number): Observable<Product> {

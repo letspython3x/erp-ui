@@ -8,7 +8,7 @@ import { FormControl, FormGroupDirective, FormBuilder, FormGroup, NgForm, Valida
   templateUrl: './product-add.component.html',
   styleUrls: ['./product-add.component.scss']
 })
-export class ProductAddComponent implements OnInit {
+export class ProductAddComponent {
   productForm: FormGroup;
   name: string = '';
   category: string = '';
@@ -49,13 +49,13 @@ export class ProductAddComponent implements OnInit {
     this.is_active = productForm.is_active;
 
     console.log('name' + this.name);
-    
+
 
     this.api.addProduct(productForm)
       .subscribe(res => {
-        console.log("Logging the form");
-        let id = res['id'];
-        console.log("Product ID: " + id);
+        let product_id = res['product_id'];
+        alert(`Product Saved: ${product_id}`);
+        console.log("Product ID: " + product_id);
         this.isLoadingResults = false;
         // this.router.navigate(['/product-details', id]);
       }, (err) => {
@@ -64,7 +64,4 @@ export class ProductAddComponent implements OnInit {
       });
   }
 
-  ngOnInit() {  }
-
-  
 }

@@ -1,9 +1,11 @@
 export interface IProduct {
+    id:number;
     name: string;
+    description: string;
     category: string;
-    price: number;
+    disributor: string;
+    cost_price: number;
+    sell_price: number;
     quantity: number;
-    serial_no: string;
     is_active: number;
-}
-
+  }

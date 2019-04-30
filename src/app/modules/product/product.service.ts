@@ -4,7 +4,6 @@ import { IProduct } from '../../shared/models/product.model';
 import { Observable, of, throwError } from 'rxjs';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { catchError, tap, map } from 'rxjs/operators';
-import { Product } from './product';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -33,10 +32,10 @@ export class ProductService {
     };
   }
 
-  addProduct(product): Observable<Product> {
-    return this.http.put<Product>(apiUrl, product, httpOptions).pipe(
-      tap((product: Product) => console.log(`added product w/ id=${product.id}`)),
-      catchError(this.handleError<Product>('addProduct'))
+  addProduct(product): Observable<IProduct> {
+    return this.http.put<IProduct>(apiUrl, product, httpOptions).pipe(
+      tap((product: IProduct) => console.log(`added product w/ id=${product.id}`)),
+      catchError(this.handleError<IProduct>('addProduct'))
     );
   }
 
@@ -49,11 +48,11 @@ export class ProductService {
 
   }
 
-  getProduct(id: number): Observable<Product> {
+  getProduct(id: number): Observable<IProduct> {
     const url = `${apiUrl}+${id}`;
-    return this.http.get<Product>(url).pipe(
+    return this.http.get<IProduct>(url).pipe(
       tap(_ => console.log(`fetched product id=${id}`)),
-      catchError(this.handleError<Product>(`getProduct id=${id}`))
+      catchError(this.handleError<IProduct>(`getProduct id=${id}`))
     );
   }
 
@@ -65,12 +64,12 @@ export class ProductService {
     );
   }
 
-  deleteProduct(id): Observable<Product> {
+  deleteProduct(id): Observable<IProduct> {
     const url = `${apiUrl} + ${id}`;
 
-    return this.http.delete<Product>(url, httpOptions).pipe(
+    return this.http.delete<IProduct>(url, httpOptions).pipe(
       tap(_ => console.log(`deleted product id=${id}`)),
-      catchError(this.handleError<Product>('deleteProduct'))
+      catchError(this.handleError<IProduct>('deleteProduct'))
     );
   }
 

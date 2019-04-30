@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../product.service';
-import { Product } from '../product';
+import { IProduct } from '../../../shared/models/product.model';
 import { FormControl, FormGroupDirective, FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 
 @Component({
@@ -11,7 +11,7 @@ import { FormControl, FormGroupDirective, FormBuilder, FormGroup, NgForm, Valida
 export class ProductDetailComponent {
   product_id: number;
   name: string;
-  product: Product;
+  product: IProduct;
   productDetailForm: FormGroup;
 
   constructor(private api: ProductService, private formBuilder: FormBuilder) {
@@ -21,7 +21,7 @@ export class ProductDetailComponent {
     });
   }
 
-  
+
   onFormSubmit(productDetailForm: any) {
     this.product_id = productDetailForm.product_id;
     this.name = productDetailForm.name;

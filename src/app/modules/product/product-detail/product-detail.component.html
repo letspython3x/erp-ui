@@ -17,7 +17,12 @@
                 <div class="col-sm-9">
                   <input type="text" class="form-control" formControlName="name" placeholder="Product name">
                 </div>
-                <p>OR</p>
+              </div>
+              <div class="form-group row">
+                <label for="serial_no" class="col-sm-3 col-form-label">Serial No</label>
+                <div class="col-sm-9">
+                  <input type="text" class="form-control" formControlName="serial_no" placeholder="Product name">
+                </div>
               </div>
               <button type="submit" class="btn btn-success mr-2">Search</button>
               <button class="btn btn-light">Cancel</button>
@@ -25,6 +30,7 @@
           </div>
         </div>
       </div>
+      <div *ngIf="product">
       <div class="col-12 grid-margin">
         <div class="card">
           <div class="card-body">
@@ -41,6 +47,10 @@
                   <tr>
                     <th> Product Name </th>
                     <td>{{ product.name }} </td>
+                  </tr>
+                  <tr>
+                    <th> Serial No. </th>
+                    <td>{{ product.serial_no }} </td>
                   </tr>
                   <tr>
                     <th> Category </th>
@@ -71,6 +81,7 @@
             </div>
           </div>
         </div>
+      </div>
       </div>
     </div>
   </div>

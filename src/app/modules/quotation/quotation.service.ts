@@ -22,22 +22,22 @@ export class QuotationService {
     product_list: any;
     constructor(private api: HttpClient) { }
 
-    private handleError<T>(operation = 'operation', result?: T) {
-        return (error: any): Observable<T> => {
+    // private handleError<T>(operation = 'operation', result?: T) {
+    //     return (error: any): Observable<T> => {
 
-            // TODO: send the error to remote logging infrastructure
-            console.error(error); // log to console instead
+    //         // TODO: send the error to remote logging infrastructure
+    //         console.error(error); // log to console instead
 
-            // Let the app keep running by returning an empty result.
-            return of(result as T);
-        };
-    }
+    //         // Let the app keep running by returning an empty result.
+    //         return of(result as T);
+    //     };
+    // }
 
     addQuotation(quotation): Observable<IQuotation> {
-        return this.api.put<IQuotation>(apiUrl, quotation, httpOptions).pipe(
-            tap((quotation: IQuotation) => console.log(`Added quotation`)),
-            catchError(this.handleError<IQuotation>('addProduct'))
-        );
+        console.log(quotation)
+        return this.api.post<IQuotation>(apiUrl, quotation, httpOptions);
+        // .pipe(            tap((quotation: IQuotation) => console.log(`Added quotation`)),
+        //     catchError(this.handleError<IQuotation>('addProduct')));
     }
 
     getQuotations(): Observable<IQuotation[]> {
@@ -50,10 +50,11 @@ export class QuotationService {
     }
 
     getQuotation(quotation_id: number): Observable<IQuotation> {
-        const url = `${apiUrl}+${quotation_id}`;
-        return this.api.get<IQuotation>(url).pipe(
-            tap(_ => console.log(`fetched quotation id=${quotation_id}`)),
-            catchError(this.handleError<IQuotation>(`getProduct id=${quotation_id}`))
-        );
+        const url = `${apiUrl}${quotation_id}`;
+        return this.api.get<IQuotation>(url);
+        // .pipe(
+        //     tap(_ => console.log(`fetched quotation id=${quotation_id}`)),
+        //     catchError(this.handleError<IQuotation>(`getProduct id=${quotation_id}`))
+        
     }
 }

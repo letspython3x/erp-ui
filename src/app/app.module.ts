@@ -34,6 +34,16 @@ import { ProductAddComponent } from './modules/product/product-add/product-add.c
 import { ProductEditComponent } from './modules/product/product-edit/product-edit.component';
 import { QuotationAddComponent } from './modules/quotation/quotation-add/quotation-add.component';
 import { QuotationDetailsComponent } from './modules/quotation/quotation-details/quotation-details.component';
+import { CustomerAddComponent } from './modules/customer/customer-add/customer-add.component';
+import { CustomerDetailComponent } from './modules/customer/customer-detail/customer-detail.component';
+import { CustomersComponent } from './modules/customer/customers/customers.component';
+import { CustomerEditComponent } from './modules/customer/customer-edit/customer-edit.component';
+
+import { StoresComponent } from './modules/store/stores/stores.component';
+import { StoreAddComponent } from './modules/store/store-add/store-add.component';
+import { StoreEditComponent } from './modules/store/store-edit/store-edit.component';
+import { TradersComponent } from './modules/trader/traders/traders.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -61,7 +71,15 @@ import { QuotationDetailsComponent } from './modules/quotation/quotation-details
     ProductAddComponent,
     ProductEditComponent,
     QuotationAddComponent,
-    QuotationDetailsComponent
+    QuotationDetailsComponent,
+    CustomerAddComponent,
+    CustomerDetailComponent,
+    CustomerEditComponent,
+    CustomersComponent,
+    StoresComponent,
+    StoreAddComponent,
+    StoreEditComponent,
+    TradersComponent
   ],
   imports: [
     BrowserModule,

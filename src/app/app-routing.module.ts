@@ -23,7 +23,16 @@ import { ProductAddComponent } from './modules/product/product-add/product-add.c
 import { ProductEditComponent } from './modules/product/product-edit/product-edit.component';
 import { QuotationAddComponent } from './modules/quotation/quotation-add/quotation-add.component';
 import { QuotationDetailsComponent } from './modules/quotation/quotation-details/quotation-details.component';
+import { CustomerAddComponent } from './modules/customer/customer-add/customer-add.component';
+import { CustomerDetailComponent } from './modules/customer/customer-detail/customer-detail.component';
+import { CustomersComponent } from './modules/customer/customers/customers.component';
+import { CustomerEditComponent } from './modules/customer/customer-edit/customer-edit.component';
 
+import { StoresComponent } from './modules/store/stores/stores.component';
+import { StoreAddComponent } from './modules/store/store-add/store-add.component';
+import { StoreEditComponent } from './modules/store/store-edit/store-edit.component';
+
+import { TradersComponent } from './modules/trader/traders/traders.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
@@ -43,37 +52,23 @@ const routes: Routes = [
   { path: 'tooltips', component: TooltipsComponent },
   { path: 'carousel', component: CarouselComponent },
   { path: 'tabs', component: TabsComponent },
-  // { path: 'product', component: ProductComponent },
-  {
-    path: 'products',
-    component: ProductsComponent,
-    data: { title: 'List of Products' }
-  },
-  {
-    path: 'product-details',
-    component: ProductDetailComponent,
-    data: { title: 'Product Details' }
-  },
-  {
-    path: 'product-add',
-    component: ProductAddComponent,
-    data: { title: 'Add Product' }
-  },
-  {
-    path: 'product-edit',
-    component: ProductEditComponent,
-    data: { title: 'Edit Product' }
-  },
-  {
-    path: 'quotation-add',
-    component: QuotationAddComponent,
-    data: { title: 'Add Product' }
-  },
-  {
-    path: 'quotation-details',
-    component: QuotationDetailsComponent,
-    data: { title: 'Product Details' }
-  }
+
+  { path: 'products', component: ProductsComponent },
+  { path: 'product-details', component: ProductDetailComponent },
+  { path: 'product-add', component: ProductAddComponent },
+  { path: 'product-edit', component: ProductEditComponent },
+  { path: 'quotation-add', component: QuotationAddComponent },
+  { path: 'quotation-details', component: QuotationDetailsComponent },
+  { path: 'customers', component: CustomersComponent },
+  { path: 'customer-details', component: CustomerDetailComponent },
+  { path: 'customer-add', component: CustomerAddComponent },
+  { path: 'customer-edit', component: CustomerEditComponent, data: { title: 'Edit Customer' } },
+
+  { path: 'stores', component: StoresComponent },  
+  { path: 'store-add', component: StoreAddComponent },
+  { path: 'store-edit', component: StoreEditComponent, data: { title: 'Edit Store' } },
+
+  { path: 'traders', component: TradersComponent, data: { title: 'Traders' } },
 ];
 
 @NgModule({

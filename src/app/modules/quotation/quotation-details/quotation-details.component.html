@@ -1,3 +1,52 @@
-<p>
-  quotation-details works!
-</p>
+<div class="row">
+  <div class="col-md-8 d-flex align-items-stretch grid-margin">
+    <div class="row flex-grow">
+      <div class="col-12 grid-margin">
+        <div class="card">
+          <div class="card-body">
+            <h4 class="card-title">Fetch quotation</h4>
+            <p class="card-description">
+              Get the quotation by Quotation ID.
+            </p>
+            <form [formGroup]="quotationDetailForm" (ngSubmit)="onFormSubmit(quotationDetailForm.value)">
+              <div class="form-group row">
+                <label for="quotation_id" class="col-sm-3 col-form-label">Quotation ID</label>
+                <div class="col-sm-9">
+                  <input type="text" class="form-control" formControlName="quotation_id" placeholder="Quotation ID">
+                </div>
+              </div>
+              <button type="submit" class="btn btn-success mr-2">Search</button>
+              <button class="btn btn-light">Cancel</button>
+            </form>
+            <div *ngIf="quotation">
+              <table class="table table-condensed">
+                <thead>
+                  <tr>
+                    <td>Product Description</td>
+                    <td>Category</td>
+                    <td>Price</td>
+                    <td>Quantity</td>
+                    <td>Discount</td>
+                    <td>Sub-Total</td>
+                  </tr>
+                </thead>
+                <tbody>
+                  <!-- <div *ngFor="let product of products"> -->
+                  <tr *ngFor="let product of products">
+                    <td>{{ product.name }}</td>
+                    <td>{{ product.category }}</td>
+                    <td>{{ product.quoted_price }}</td>
+                    <td>{{ product.quantity }}</td>
+                    <td>{{ product.discount }}</td>
+                    <td>{{ product.sub_total }}</td>
+                  </tr>
+                  <!-- </div> -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

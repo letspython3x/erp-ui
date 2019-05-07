@@ -1,6 +1,7 @@
 export interface IProduct {
-    id:number;
+    product_id:number;
     name: string;
+    serial_no: string;
     description: string;
     category: string;
     disributor: string;

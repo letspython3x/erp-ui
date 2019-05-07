@@ -33,31 +33,31 @@ export class ProductService {
   }
 
   addProduct(product): Observable<IProduct> {
-    return this.http.put<IProduct>(apiUrl, product, httpOptions).pipe(
-      tap((product: IProduct) => console.log(`added product w/ id=${product.id}`)),
+    return this.http.post<IProduct>(apiUrl, product, httpOptions).pipe(
+      tap((product: IProduct) => console.log(`added product w/ id=${product.product_id}`)),
       catchError(this.handleError<IProduct>('addProduct'))
     );
   }
 
   getProducts(): Observable<IProduct[]> {
-    const url = `${apiUrl}`;
-    return this.http.get<IProduct[]>(apiUrl);
+    const url = `${apiUrl}`;    
+    return this.http.get<IProduct[]>(url);
     // .pipe(
     //   tap(heroes => console.log('fetched products below')),
     //   catchError(this.handleError('getProducts', []))
 
   }
 
-  getProduct(id: number): Observable<IProduct> {
-    const url = `${apiUrl}+${id}`;
+  getProduct(param: any): Observable<IProduct> {
+    const url = `${apiUrl}${param}`;
     return this.http.get<IProduct>(url).pipe(
-      tap(_ => console.log(`fetched product id=${id}`)),
-      catchError(this.handleError<IProduct>(`getProduct id=${id}`))
+      tap(_ => console.log(`fetched product id=${param}`)),
+      catchError(this.handleError<IProduct>(`getProduct id=${param}`))
     );
   }
 
   updateProduct(id, product): Observable<any> {
-    const url = `${apiUrl}+${id}`;
+    const url = `${apiUrl}${id}`;
     return this.http.put(url, product, httpOptions).pipe(
       tap(_ => console.log(`updated product id=${id}`)),
       catchError(this.handleError<any>('updateProduct'))
@@ -65,7 +65,7 @@ export class ProductService {
   }
 
   deleteProduct(id): Observable<IProduct> {
-    const url = `${apiUrl} + ${id}`;
+    const url = `${apiUrl}${id}`;
 
     return this.http.delete<IProduct>(url, httpOptions).pipe(
       tap(_ => console.log(`deleted product id=${id}`)),

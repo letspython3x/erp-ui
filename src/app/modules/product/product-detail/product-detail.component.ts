@@ -11,6 +11,7 @@ import { FormControl, FormGroupDirective, FormBuilder, FormGroup, NgForm, Valida
 export class ProductDetailComponent {
   product_id: number;
   name: string;
+  serial_no: string;
   product: IProduct;
   productDetailForm: FormGroup;
 
@@ -18,6 +19,7 @@ export class ProductDetailComponent {
     this.productDetailForm = this.formBuilder.group({
       product_id: new FormControl(),
       name: new FormControl(),
+      serial_no: new FormControl(),
     });
   }
 
@@ -25,9 +27,40 @@ export class ProductDetailComponent {
   onFormSubmit(productDetailForm: any) {
     this.product_id = productDetailForm.product_id;
     this.name = productDetailForm.name;
-    console.log(`Fetching Data for ${this.product_id} ${this.name}`);
-    this.api.getProduct(this.product_id).
-      subscribe(data => this.product = data);
+    this.serial_no = productDetailForm.serial_no;
+    console.log(`Fetching product data for ${this.product_id} ${this.name}`);
+    if (this.product_id) {
+      this.api.getProduct(this.product_id).
+        subscribe(data => {
+          if (data) {
+            this.product = data;
+          }
+          else {
+            this.product = null;
+          }
+        });
+    }
+    else if (this.name) {
+      this.api.getProduct(this.name).
+        subscribe(data => {
+          if (data) {
+            this.product = data[0]
+          } else {
+            this.product = null;
+          }
+        });
+    }
+    else if (this.serial_no) {
+      this.api.getProduct(this.serial_no).
+        subscribe(data => {
+          if (data) {
+            this.product = data[0]
+          } else {
+            this.product = null;
+          }
+        });
+    }
+
   }
 
 }

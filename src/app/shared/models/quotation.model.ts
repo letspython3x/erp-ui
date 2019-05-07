@@ -1,4 +1,6 @@
 export interface IQuotation {
-    customer_phone: string;
-    product_list: any;
+    customer_id: string;
+    products: any;
+    quotation: any;
+    quotation_id: number;
 }

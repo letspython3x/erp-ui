@@ -11,6 +11,7 @@ import { FormControl, FormGroupDirective, FormBuilder, FormGroup, NgForm, Valida
 export class ProductAddComponent {
   productForm: FormGroup;
   name: string = '';
+  serial_no: string = '';
   category: string = '';
   description: string = '';
   distributor: string = '';
@@ -25,6 +26,7 @@ export class ProductAddComponent {
     private formBuilder: FormBuilder) {
     this.productForm = this.formBuilder.group({
       name: new FormControl(),
+      serial_no: new FormControl(),
       description: new FormControl(),
       category: new FormControl(),
       distributor: new FormControl(),
@@ -40,6 +42,7 @@ export class ProductAddComponent {
     console.log("Sending request to add the product");
     console.log(productForm);
     this.name = productForm.pname;
+    this.serial_no = productForm.serial_no;
     this.description = productForm.description;
     this.category = productForm.category;
     this.distributor = productForm.distributor;

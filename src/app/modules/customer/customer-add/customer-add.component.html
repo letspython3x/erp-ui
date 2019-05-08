@@ -2,35 +2,44 @@
   <div class="col-10 grid-margin">
     <div class="card">
       <div class="card-body">
-        <h4 class="card-title">Horizontal Two column</h4>
-        <form class="form-sample">
+        <h4 class="card-title">Customer Form</h4>
+        <form class="form-sample" [formGroup]="customerForm" (ngSubmit)="onFormSubmit(customerForm.value)">
           <p class="card-description">
             Personal info
           </p>
           <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-4">
               <div class="form-group row">
                 <label class="col-sm-3 col-form-label">First Name</label>
                 <div class="col-sm-9">
-                  <input type="text" class="form-control" />
+                  <input type="text" class="form-control" formControlName="first_name" />
                 </div>
               </div>
             </div>
-            <div class="col-md-6">
+
+            <div class="col-md-4">
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label">Middle Name</label>
+                <div class="col-sm-9">
+                  <input type="text" class="form-control" formControlName="middle_name" />
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
               <div class="form-group row">
                 <label class="col-sm-3 col-form-label">Last Name</label>
                 <div class="col-sm-9">
-                  <input type="text" class="form-control" />
+                  <input type="text" class="form-control" formControlName="last_name" />
                 </div>
               </div>
             </div>
           </div>
-          <div class="row">
+          <div class="row">            
             <div class="col-md-6">
               <div class="form-group row">
                 <label class="col-sm-3 col-form-label">Gender</label>
                 <div class="col-sm-9">
-                  <select class="form-control">
+                  <select class="form-control" formControlName="gender">
                     <option>Male</option>
                     <option>Female</option>
                   </select>
@@ -41,7 +50,7 @@
               <div class="form-group row">
                 <label class="col-sm-3 col-form-label">Date of Birth</label>
                 <div class="col-sm-9">
-                  <input class="form-control" placeholder="dd/mm/yyyy" />
+                  <input type="Date" class="form-control" placeholder="dd/mm/yyyy" formControlName="dob" />
                 </div>
               </div>
             </div>
@@ -51,9 +60,9 @@
               <div class="form-group row">
                 <label class="col-sm-3 col-form-label">Category</label>
                 <div class="col-sm-9">
-                  <select class="form-control">
-                    <option>Category1</option>
-                    <option>Category2</option>
+                  <select class="form-control" formControlName="category">
+                    <option>Premium</option>
+                    <option>Ad-Hoc</option>
                     <option>Category3</option>
                     <option>Category4</option>
                   </select>
@@ -66,8 +75,8 @@
                 <div class="col-sm-4">
                   <div class="form-radio">
                     <label class="form-check-label">
-                      <input type="radio" class="form-check-input" name="membershipRadios" id="membershipRadios1"
-                        value="" checked>
+                      <input type="radio" class="form-check-input" id="membershipRadios1" value="Free"
+                        formControlName="membership" checked>
                       Free
                     </label>
                   </div>
@@ -75,8 +84,8 @@
                 <div class="col-sm-5">
                   <div class="form-radio">
                     <label class="form-check-label">
-                      <input type="radio" class="form-check-input" name="membershipRadios" id="membershipRadios2"
-                        value="option2">
+                      <input type="radio" class="form-check-input" id="membershipRadios2" value="Professional"
+                        formControlName="membership">
                       Professional
                     </label>
                   </div>
@@ -85,6 +94,27 @@
             </div>
           </div>
           <p class="card-description">
+              Contact Details
+            </p>
+          <div class="row">
+              <div class="col-md-6">
+                <div class="form-group row">
+                  <label class="col-sm-3 col-form-label">Phone</label>
+                  <div class="col-sm-9">
+                    <input type="text" class="form-control" formControlName="phone" />
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group row">
+                  <label class="col-sm-3 col-form-label">Email</label>
+                  <div class="col-sm-9">
+                    <input type="text" class="form-control" formControlName="email" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          <p class="card-description">
             Address
           </p>
           <div class="row">
@@ -92,7 +122,7 @@
               <div class="form-group row">
                 <label class="col-sm-3 col-form-label">Address 1</label>
                 <div class="col-sm-9">
-                  <input type="text" class="form-control" />
+                  <input type="text" class="form-control" formControlName="address_1" />
                 </div>
               </div>
             </div>
@@ -100,7 +130,7 @@
               <div class="form-group row">
                 <label class="col-sm-3 col-form-label">State</label>
                 <div class="col-sm-9">
-                  <input type="text" class="form-control" />
+                  <input type="text" class="form-control" formControlName="state" />
                 </div>
               </div>
             </div>
@@ -110,43 +140,26 @@
               <div class="form-group row">
                 <label class="col-sm-3 col-form-label">Address 2</label>
                 <div class="col-sm-9">
-                  <input type="text" class="form-control" />
+                  <input type="text" class="form-control" formControlName="address_2" />
                 </div>
               </div>
             </div>
             <div class="col-md-6">
               <div class="form-group row">
-                <label class="col-sm-3 col-form-label">Postcode</label>
+                <label class="col-sm-3 col-form-label">Post Code</label>
                 <div class="col-sm-9">
-                  <input type="text" class="form-control" />
+                  <input type="text" class="form-control" formControlName="postcode" />
                 </div>
               </div>
             </div>
           </div>
-          <div class="row">
-            <div class="col-md-6">
-              <div class="form-group row">
-                <label class="col-sm-3 col-form-label">Phone 1</label>
-                <div class="col-sm-9">
-                  <input type="text" class="form-control" />
-                </div>
-              </div>
-            </div>
-            <div class="col-md-6">
-              <div class="form-group row">
-                <label class="col-sm-3 col-form-label">Phone 2</label>
-                <div class="col-sm-9">
-                  <input type="text" class="form-control" />
-                </div>
-              </div>
-            </div>
-          </div>
+         
           <div class="row">
             <div class="col-md-6">
               <div class="form-group row">
                 <label class="col-sm-3 col-form-label">City</label>
                 <div class="col-sm-9">
-                  <input type="text" class="form-control" />
+                  <input type="text" class="form-control" formControlName="city" />
                 </div>
               </div>
             </div>
@@ -154,7 +167,7 @@
               <div class="form-group row">
                 <label class="col-sm-3 col-form-label">Country</label>
                 <div class="col-sm-9">
-                  <select class="form-control">
+                  <select class="form-control" formControlName="country">
                     <option>America</option>
                     <option>Italy</option>
                     <option>Russia</option>

@@ -1,3 +1,108 @@
-<p>
-  customer-detail works!
-</p>
+<div class="row">
+  <div class="col-md-8 d-flex align-items-stretch grid-margin">
+    <div class="row flex-grow">
+      <div class="col-12 grid-margin">
+        <div class="card">
+          <div class="card-body">
+            <h4 class="card-title">Fetch Customer</h4>
+            <form [formGroup]="customerDetailForm" (ngSubmit)="onFormSubmit(customerDetailForm.value)">
+              <div class="form-group row">
+                <label for="customer_id" class="col-sm-3 col-form-label">Customer ID</label>
+                <div class="col-sm-9">
+                  <input type="number" class="form-control" formControlName="customer_id" placeholder="Customer ID">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="email" class="col-sm-3 col-form-label">Customer Email</label>
+                <div class="col-sm-9">
+                  <input type="text" class="form-control" formControlName="email" placeholder="Customer Email">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="phone" class="col-sm-3 col-form-label">Customer Phone</label>
+                <div class="col-sm-9">
+                  <input type="text" class="form-control" formControlName="phone" placeholder="Customer Phone">
+                </div>
+              </div>
+              <button type="submit" class="btn btn-success mr-2">Search</button>
+              <button class="btn btn-light">Cancel</button>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="customer">
+      <div class="col-12 grid-margin">
+        <div class="card">
+          <div class="card-body">
+            <div *ngIf="customer" class="table-responsive">
+              <p class="card-description">
+                Below is the Customer details !!
+              </p>
+              <table class="table table-bordered">
+                <tbody>
+                  <tr>
+                    <th> Customer ID </th>
+                    <td class="font-weight-medium"> {{ customer.customer_id }} </td>
+                  </tr>                  
+                  <tr>
+                    <th> Customer Name </th>
+                    <td>{{ customer.first_name + ' ' }} {{ customer.middle_name + ' '}} {{ customer.last_name }} </td>
+                  </tr>
+                  <tr>
+                    <th> Gender </th>
+                    <td> {{ customer.gender }} </td>
+                  </tr>
+                  <tr>
+                    <th>Registered Phone </th>
+                    <td>{{ customer.phone }} </td>
+                  </tr>
+                  <tr>
+                    <th> Registered Email </th>
+                    <td>{{ customer.email }} </td>
+                  </tr>
+                  <tr>
+                    <th> Category </th>
+                    <td>{{ customer.category }} </td>
+                  </tr>
+                  <tr>
+                    <th> Date of Birth </th>
+                    <td>{{ customer.dob }} </td>
+                  </tr>
+                  <tr>
+                    <th> Membership </th>
+                    <td>{{ customer.membership }} </td>
+                  </tr>
+                  <tr>
+                    <th> Address 1</th>
+                    <td>{{ customer.address_1 }} </td>
+                  </tr>
+                  <tr>
+                    <th> Address 2</th>
+                    <td>{{ customer.address_2 }} </td>
+                  </tr>
+                  <tr>
+                    <th> Postcode </th>
+                    <td>{{ customer.postcode }} </td>
+                  </tr>
+                  <tr>
+                    <th> State </th>
+                    <td>{{ customer.state }} </td>
+                  </tr>
+                  <tr>
+                    <th> City </th>
+                    <td>{{ customer.city }} </td>
+                  </tr>
+                  <tr>
+                    <th> Country </th>
+                    <td>{{ customer.country }} </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -29,8 +29,7 @@ export class ProductDetailComponent {
     this.name = productDetailForm.name;
     this.serial_no = productDetailForm.serial_no;
     console.log(`Fetching product data for ${this.product_id} ${this.name}`);
-    if (this.product_id) {
-      this.api.getProduct(this.product_id).
+    this.api.getProduct(this.product_id, this.serial_no , this.name ).
         subscribe(data => {
           if (data) {
             this.product = data;
@@ -39,27 +38,38 @@ export class ProductDetailComponent {
             this.product = null;
           }
         });
-    }
-    else if (this.name) {
-      this.api.getProduct(this.name).
-        subscribe(data => {
-          if (data) {
-            this.product = data[0]
-          } else {
-            this.product = null;
-          }
-        });
-    }
-    else if (this.serial_no) {
-      this.api.getProduct(this.serial_no).
-        subscribe(data => {
-          if (data) {
-            this.product = data[0]
-          } else {
-            this.product = null;
-          }
-        });
-    }
+
+    // if (this.product_id) {
+    //   this.api.getProduct(this.product_id, this.serial_no , this.name ).
+    //     subscribe(data => {
+    //       if (data) {
+    //         this.product = data;
+    //       }
+    //       else {
+    //         this.product = null;
+    //       }
+    //     });
+    // }
+    // else if (this.name) {
+    //   this.api.getProduct(this.name).
+    //     subscribe(data => {
+    //       if (data) {
+    //         this.product = data[0]
+    //       } else {
+    //         this.product = null;
+    //       }
+    //     });
+    // }
+    // else if (this.serial_no) {
+    //   this.api.getProduct(this.serial_no).
+    //     subscribe(data => {
+    //       if (data) {
+    //         this.product = data[0]
+    //       } else {
+    //         this.product = null;
+    //       }
+    //     });
+    // }
 
   }
 

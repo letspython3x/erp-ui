@@ -1,65 +1,88 @@
-<div class="row">
-  <div class="col-md-8 d-flex align-items-stretch grid-margin">
-    <div class="row flex-grow">
-      <div class="col-12 grid-margin">
-        <div class="card">
-          <div class="card-body">
-            <h4 class="card-title">Create a new quotation</h4>
-            <p class="card-description">
-              Fill up the below form !!!
-            </p>
-            <form class="forms-sample" [formGroup]="quotationForm" (ngSubmit)="onFormSubmit()">
-              <div class="form-group row">
-                <label>Customer ID</label>
-                <div class="col-sm-9">
-                  <input type="number" formControlName="customer_id" class="form-control">
-                </div>
-              </div>
-              <table class="table table-bordered">
-                <div class="form-group row">
-                  <thead>
-                    <tr>
-                      <th>#</th>
-                      <th>Product Name</th>
-                      <th>Category</th>
-                      <th>Quantity</th>
-                      <th>Price</th>
-                      <th>Discount</th>
-                      <th>Sub-Total</th>
-                      <th>New row</th>
-                    </tr>
-                  </thead>
-                </div>
-                <div class="form-group row" formArrayName="products"
-                  *ngFor="let pd of quotationForm.get('products').controls; let i=index">
-                  <div [formGroupName]="i">
-                    <tbody>
-                      <tr>
-                        <td><input type="number" value={{i+1}} class="form-control" disabled></td>
-                        <td><input type="text" formControlName="name" class="form-control"></td>
-                        <td><input type="text" formControlName="category" class="form-control"></td>
-                        <td><input type="number" formControlName="quantity" class="form-control"></td>
-                        <td><input type="number" formControlName="quoted_price" class="form-control"></td>
-                        <td><input type="number" formControlName="discount" class="form-control"></td>
-                        <td><input formControlName="sub_total" [value]="calculateSubTotal(pd)" class="form-control" aria-disabled>
-                        </td>
-                        <td></td>
-                        <button type="button" class="btn btn-light" (click)="addProductRow()">+</button>
-                      </tr>
-                    </tbody>
-                  </div>
-                </div>
-              </table>
-              <div class="col-md-offset-6 form-group row">
-                <label>Total</label>
-                <div class="col-md-offset-6 col-md-3">
-                  <input type="number" formControlName="total" class="form-control" [value]="calculateTotal(products)" aria-disabled>
-                </div>
-              </div>
-              <button type="submit" class="btn btn-success mr-2">Submit</button>
-            </form>
-          </div>
+<div class="container">
+  <div class="row">
+    <div class="col-6 grid-margin">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title">Create a new quotation</h4>
+          <p class="card-description">
+            Fill up the below form !!!
+          </p>
         </div>
       </div>
     </div>
   </div>
+
+  <div class="row">
+    <div class="col-12 grid-margin">
+      <div class="card">
+        <div class="card-body">
+          <form [formGroup]="quotationForm" (ngSubmit)="onFormSubmit()">
+            <div class="form-group row">
+              <label>Customer ID : </label>
+              <div class="col-2">
+                <input type="number" formControlName="customer_id" class="form-control">
+              </div>
+            </div>
+            <div class="form-group row">
+              <div class="col-1">
+                <label>#</label>
+              </div>
+              <div class="col-2">
+                <label>Product Name</label>
+              </div>
+              <div class="col-2">
+                <label>Category</label>
+              </div>
+              <div class="col-1">
+                <label>Quantity</label>
+              </div>
+              <div class="col-1">
+                <label>Price</label>
+              </div>
+              <div class="col-1">
+                <label>Discount</label>
+              </div>
+              <div class="col-1">
+                <label>Sub-Total</label>
+              </div>
+              <div class="col-1">
+                <label>New row</label>
+              </div>
+            </div>
+            <div formArrayName="products" *ngFor="let pd of quotationForm.get('products').controls; let i=index">
+              <div [formGroupName]="i">
+                <div class="form-group row">
+                  <div class="col-1">
+                    <input type="number" value={{i+1}} class="form-control">
+                  </div>
+                  <div class="col-2"><input type="text" formControlName="name" class="form-control"></div>
+                  <div class="col-2"><input type="text" formControlName="category" class="form-control"></div>
+                  <div class="col-1"><input type="number" formControlName="quantity" class="form-control"></div>
+                  <div class="col-1"><input type="number" formControlName="quoted_price" class="form-control"></div>
+                  <div class="col-1"><input type="number" formControlName="discount" class="form-control"></div>
+                  <div class="col-1"><input formControlName="sub_total" [value]="calculateSubTotal(pd)"
+                      class="form-control"></div>
+                  <div class="col-2">
+                    <button type="button" class="btn btn-danger">-</button>
+                  </div>
+                </div>
+              </div>
+            
+            <div class="form-group row">
+              <label>Total : </label>
+              <div class="col-2">
+                <input type="number" formControlName="total" [value]="calculateTotal(products)" class="form-control">
+              </div>
+            </div>
+            <div class="form-group row">
+              <div class="col-3">
+                <button type="button" class="btn btn-light" (click)="addProductRow()">Add New Row</button>
+                <button type="submit" class="btn btn-success mr-2">Submit</button>
+              </div>
+            </div>
+        </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

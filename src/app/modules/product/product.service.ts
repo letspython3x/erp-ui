@@ -48,11 +48,11 @@ export class ProductService {
 
   }
 
-  getProduct(param: any): Observable<IProduct> {
-    const url = `${apiUrl}${param}`;
+  getProduct(product_id:number, serial_no:string, name:string): Observable<IProduct> {
+    const url = `${apiUrl}?product_id=${product_id}&name=${name}&serial_no=${serial_no}`;
     return this.http.get<IProduct>(url).pipe(
-      tap(_ => console.log(`fetched product id=${param}`)),
-      catchError(this.handleError<IProduct>(`getProduct id=${param}`))
+      tap(_ => console.log(`fetched product id=${product_id}`)),
+      catchError(this.handleError<IProduct>(`getProduct id=${product_id}`))
     );
   }
 

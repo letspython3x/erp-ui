@@ -18,20 +18,38 @@
               <button type="submit" class="btn btn-success mr-2">Search</button>
               <button class="btn btn-light">Cancel</button>
             </form>
+            <br>
             <div *ngIf="quotation">
-              <table class="table table-condensed">
+              <table class="table table-condensed" border="2">
+                <tr>
+                  <th>Customer ID</th>
+                  <td>{{ quotation.customer_id }}</td>
+                </tr>
+                <tr>
+                  <th>Store ID</th>
+                  <td>{{ quotation.store_id }}</td>
+                </tr>
+                <tr>
+                  <th>Quotation Total</th>
+                  <td>{{ quotation.total }}</td>
+                </tr>
+                <tr>
+                  <th>Invoice Date</th>
+                  <td>{{ quotation.created_at }}</td>
+                </tr>
+              </table>
+              <table class="table table-condensed" border="2">
                 <thead>
                   <tr>
-                    <td>Product Description</td>
-                    <td>Category</td>
-                    <td>Price</td>
-                    <td>Quantity</td>
-                    <td>Discount</td>
-                    <td>Sub-Total</td>
+                    <th>Product Description</th>
+                    <th>Category</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Discount</th>
+                    <th>Sub-Total</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <!-- <div *ngFor="let product of products"> -->
                   <tr *ngFor="let product of products">
                     <td>{{ product.name }}</td>
                     <td>{{ product.category }}</td>
@@ -40,7 +58,6 @@
                     <td>{{ product.discount }}</td>
                     <td>{{ product.sub_total }}</td>
                   </tr>
-                  <!-- </div> -->
                 </tbody>
               </table>
             </div>

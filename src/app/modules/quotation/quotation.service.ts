@@ -50,7 +50,7 @@ export class QuotationService {
     }
 
     getQuotation(quotation_id: number): Observable<IQuotation> {
-        const url = `${apiUrl}${quotation_id}`;
+        const url = `${apiUrl}?quotation_id=${quotation_id}`;
         return this.api.get<IQuotation>(url);
         // .pipe(
         //     tap(_ => console.log(`fetched quotation id=${quotation_id}`)),

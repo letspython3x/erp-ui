@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, FormControl, FormArray } from '@angular/forms';
+import { FormGroup, FormBuilder, FormControl, FormArray, Validators } from '@angular/forms';
 import { QuotationService } from '../quotation.service';
 
 @Component({
@@ -32,12 +32,12 @@ export class QuotationAddComponent implements OnInit {
 
   createProductRow(): FormGroup {
     return this.formBuilder.group({
-      name: '',
+      name: '',//new FormControl({value: '', disabled: true}, Validators.required),
       category: '',
       quantity: 0,
       quoted_price: 0,
       discount: 0,
-      sub_total: 0
+      sub_total: new FormControl({ value: '', disabled: true }, Validators.required),
     });
   }
 

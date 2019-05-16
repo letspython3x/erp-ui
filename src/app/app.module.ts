@@ -43,9 +43,11 @@ import { StoresComponent } from './modules/store/stores/stores.component';
 import { StoreAddComponent } from './modules/store/store-add/store-add.component';
 import { StoreEditComponent } from './modules/store/store-edit/store-edit.component';
 import { TradersComponent } from './modules/trader/traders/traders.component';
-import { TraderAddComponent } from './trader-add/trader-add.component';
-import { TraderDetailsComponent } from './trader-details/trader-details.component';
-import { TraderEditComponent } from './trader-edit/trader-edit.component';
+import { TraderAddComponent } from './modules/trader/trader-add/trader-add.component';
+import { TraderEditComponent } from './modules/trader/trader-edit/trader-edit.component';
+import { TraderDetailsComponent } from './modules/trader/trader-details/trader-details.component';
+
+import { StoreDetailsComponent } from './modules/store/store-details/store-details.component';
 
 @NgModule({
   declarations: [
@@ -82,10 +84,11 @@ import { TraderEditComponent } from './trader-edit/trader-edit.component';
     StoresComponent,
     StoreAddComponent,
     StoreEditComponent,
+    StoreDetailsComponent,
     TradersComponent,
     TraderAddComponent,
     TraderDetailsComponent,
-    TraderEditComponent
+    TraderEditComponent    
   ],
   imports: [
     BrowserModule,

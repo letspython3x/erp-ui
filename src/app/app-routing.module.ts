@@ -31,8 +31,13 @@ import { CustomerEditComponent } from './modules/customer/customer-edit/customer
 import { StoresComponent } from './modules/store/stores/stores.component';
 import { StoreAddComponent } from './modules/store/store-add/store-add.component';
 import { StoreEditComponent } from './modules/store/store-edit/store-edit.component';
+import { StoreDetailsComponent } from './modules/store/store-details/store-details.component';
 
 import { TradersComponent } from './modules/trader/traders/traders.component';
+import { TraderAddComponent } from './modules/trader/trader-add/trader-add.component';
+import { TraderEditComponent } from './modules/trader/trader-edit/trader-edit.component';
+import { TraderDetailsComponent } from './modules/trader/trader-details/trader-details.component';
+
 
 const routes: Routes = [
   { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
@@ -67,8 +72,14 @@ const routes: Routes = [
   { path: 'stores', component: StoresComponent },  
   { path: 'store-add', component: StoreAddComponent },
   { path: 'store-edit', component: StoreEditComponent, data: { title: 'Edit Store' } },
+  { path: 'store-details', component: StoreDetailsComponent},
+
 
   { path: 'traders', component: TradersComponent, data: { title: 'Traders' } },
+  { path: 'traders-add', component: TraderAddComponent },
+  { path: 'traders-edit', component: TraderEditComponent, data: { title: 'Edit Trader' } },
+  { path: 'traders-details', component: TraderDetailsComponent},
+
 ];
 
 @NgModule({

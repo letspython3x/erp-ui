@@ -22,8 +22,7 @@ export class ProductDetailComponent {
       serial_no: new FormControl(),
     });
   }
-
-
+  
   onFormSubmit(productDetailForm: any) {
     this.product_id = productDetailForm.product_id;
     this.name = productDetailForm.name;

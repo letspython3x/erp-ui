@@ -1,3 +1,59 @@
-<p>
-  trader-details works!
-</p>
+<div class="row">
+  <div class="col-md-8 d-flex align-items-stretch grid-margin">
+    <div class="row flex-grow">
+      <div class="col-12 grid-margin">
+        <div class="card">
+          <div class="card-body">
+            <h4 class="card-title">Fetch Trader</h4>
+            <form [formGroup]="traderDetailForm" (ngSubmit)="onFormSubmit(traderDetailForm.value)">
+              <div class="form-group row">
+                <label for="trader_id" class="col-sm-3 col-form-label">trader ID</label>
+                <div class="col-sm-9">
+                  <input type="text" class="form-control" formControlName="trader_id" placeholder="trader ID">
+                </div>
+              </div>
+              <button type="submit" class="btn btn-success mr-2">Search</button>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="trader">
+        <div class="col-12 grid-margin">
+          <div class="card">
+            <div class="card-body">
+              <div *ngIf="trader" class="table-responsive">
+                <p class="card-description">
+                  Below is the trader details !!
+                </p>
+                <table class="table table-bordered">
+                  <tbody>
+                    <tr>
+                      <th> Trader ID </th>
+                      <td class="font-weight-medium"> {{ trader.trader_id }} </td>
+                    </tr>
+                    <tr>
+                      <th> Trader Name </th>
+                      <td>{{ trader.name }} </td>
+                    </tr>
+                    <tr>
+                      <th> Category </th>
+                      <td>{{ trader.category }} </td>
+                    </tr>
+                    <tr>
+                      <th> Address </th>
+                      <td>{{ trader.address }} </td>
+                    </tr>
+                    <tr>
+                      <th> Country </th>
+                      <td>{{ trader.country }} </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

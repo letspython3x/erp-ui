@@ -1,3 +1,44 @@
-<p>
-  trader-add works!
-</p>
+<div class="row">
+  <div class="col-md-8 d-flex align-items-stretch grid-margin">
+    <div class="row flex-grow">
+      <div class="col-12 grid-margin">
+        <div class="card">
+          <div class="card-body">
+            <h4 class="card-title">Add a New Store</h4>
+            <p class="card-description">
+              Fill up the form to add a new Store !!!
+            </p>
+            <form [formGroup]="traderForm" (ngSubmit)="onFormSubmit(traderForm.value)">
+              <div class="form-group row">
+                <label for="name" class="col-sm-3 col-form-label">Store Name</label>
+                <div class="col-sm-9">
+                  <input type="text" class="form-control" formControlName="name" placeholder="Store Name">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="category" class="col-sm-3 col-form-label">Category</label>
+                <div class="col-sm-9">
+                  <input type="text" class="form-control"  formControlName="category" placeholder="Category">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="quantity" class="col-sm-3 col-form-label">Address</label>
+                <div class="col-sm-9">
+                  <input type="text" class="form-control" formControlName="address" placeholder="Store Address">
+                </div>
+              </div>              
+              <div class="form-group row">
+                <label for="distributor" class="col-sm-3 col-form-label">Country</label>
+                <div class="col-sm-9">
+                  <input type="text" class="form-control" formControlName="country" placeholder="Country">
+                </div>
+              </div>
+              <button type="submit" class="btn btn-success mr-2">Save</button>
+              <button class="btn btn-light">Cancel</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,3 +1,37 @@
-<p>
-  stores works!
-</p>
+<div class="row">
+  <div class="col-md-8 d-flex align-items-stretch grid-margin">
+    <div class="row flex-grow">
+      <div class="col-12 grid-margin">
+        <div class="card">
+          <div class="card-body">
+            <h4 class="card-title">Existing stores</h4>
+            <p class="card-description">
+              Below are all available stores!!
+            </p>
+            <div *ngIf="storeList" class="table-responsive">
+              <table class="table table-bordered">
+                <thead>
+                  <tr>
+                    <th> Store ID</th>
+                    <th> Store Name </th>
+                    <th> Category </th>
+                    <th> Address </th>
+                    <th> Country </th>
+                  </tr>
+                </thead>
+                <tbody *ngFor="let sl of storeList">
+                  <tr>
+                    <td class="font-weight-medium"> {{ sl.store_id }} </td>
+                    <td>{{ sl.name }} </td>
+                    <td>{{ sl.category }} </td>
+                    <td>{{ sl.address }} </td>
+                    <td>{{ sl.country }} </td>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

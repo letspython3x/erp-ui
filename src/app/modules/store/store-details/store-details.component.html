@@ -1,3 +1,60 @@
-<p>
-  store-details works!
-</p>
+<div class="row">
+  <div class="col-md-8 d-flex align-items-stretch grid-margin">
+    <div class="row flex-grow">
+      <div class="col-12 grid-margin">
+        <div class="card">
+          <div class="card-body">
+            <h4 class="card-title">Fetch Store</h4>
+            <form [formGroup]="storeDetailForm" (ngSubmit)="onFormSubmit(storeDetailForm.value)">
+              <div class="form-group row">
+                <label for="store_id" class="col-sm-3 col-form-label">store ID</label>
+                <div class="col-sm-9">
+                  <input type="text" class="form-control" formControlName="store_id" placeholder="store ID">
+                </div>
+              </div>              
+              <button type="submit" class="btn btn-success mr-2">Search</button>
+              <button class="btn btn-light">Cancel</button>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="store">
+      <div class="col-12 grid-margin">
+        <div class="card">
+          <div class="card-body">
+            <div *ngIf="store" class="table-responsive">
+              <p class="card-description">
+                Below is the store details !!
+              </p>
+              <table class="table table-bordered">
+                <tbody>
+                  <tr>
+                    <th> store ID </th>
+                    <td class="font-weight-medium"> {{ store.store_id }} </td>
+                  </tr>
+                  <tr>
+                    <th> store Name </th>
+                    <td>{{ store.name }} </td>
+                  </tr>                  
+                  <tr>
+                    <th> Category </th>
+                    <td>{{ store.category }} </td>
+                  </tr>
+                  <tr>
+                    <th> Address </th>
+                    <td>{{ store.address }} </td>
+                  </tr>
+                  <tr>
+                    <th> Country </th>
+                    <td>{{ store.country }} </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </div>
+  </div>
+</div>

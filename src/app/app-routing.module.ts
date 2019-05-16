@@ -76,9 +76,9 @@ const routes: Routes = [
 
 
   { path: 'traders', component: TradersComponent, data: { title: 'Traders' } },
-  { path: 'traders-add', component: TraderAddComponent },
-  { path: 'traders-edit', component: TraderEditComponent, data: { title: 'Edit Trader' } },
-  { path: 'traders-details', component: TraderDetailsComponent},
+  { path: 'trader-add', component: TraderAddComponent },
+  { path: 'trader-edit', component: TraderEditComponent, data: { title: 'Edit Trader' } },
+  { path: 'trader-details', component: TraderDetailsComponent},
 
 ];
 

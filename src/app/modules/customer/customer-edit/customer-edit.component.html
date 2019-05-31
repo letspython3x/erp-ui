@@ -1,3 +1,220 @@
-<p>
-  customer-edit works!
-</p>
+<div class="row">
+  <form class="form-sample" [formGroup]="searchCustomerForm" (ngSubmit)="onSearchFormSubmit(searchCustomerForm.value)">
+    <div class="card">
+      <div class="card-header"> Search Customer by Either </div>
+      <div class="card-body">
+        <div class="form-group row">
+          <label class="col-sm-4 col-form-label">Unique ID</label>
+          <div class="col-sm-8">
+            <input type="text" class="form-control" formControlName="id" value="{{first_name}}" />
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-4 col-form-label">Phone</label>
+          <div class="col-sm-8">
+            <input type="text" class="form-control" formControlName="phone" value="{{first_name}}" />
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-4 col-form-label">Email</label>
+          <div class="col-sm-8">
+            <input type="text" class="form-control" formControlName="email" value="{{first_name}}" />
+          </div>
+        </div>
+        <div class="form-group row">
+          <button type="submit" class="col-sm-4 btn btn-success mr-2">Search</button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+
+<div class="row">
+  <div *ngIf="isLoadingResults">
+    <h5 align="center">Update Customer details Below</h5>
+    <form class="form-sample" [formGroup]="updateCustomerForm"
+      (ngSubmit)="onUpdateFormSubmit(updateCustomerForm.value)">
+      <div class="card-columns">
+        <!-- Card 1 -->
+        <div class="card">
+          <div class="card-header"> Biographical </div>
+          <div class="card-body">
+            <div class="form-group row">
+              <label class="col-sm-4 col-form-label">First Name</label>
+              <div class="col-sm-8">
+                <input type="text" class="form-control" formControlName="first_name" [value]="first_name" />
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-4 col-form-label">Middle Name</label>
+              <div class="col-sm-8">
+                <input type="text" class="form-control" formControlName="middle_name" [value]="middle_name" />
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-4 col-form-label">Last Name</label>
+              <div class="col-sm-8">
+                <input type="text" class="form-control" formControlName="last_name" value="{{last_name}}" />
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-4 col-form-label">Gender</label>
+              <div class="col-sm-8">
+                <select class="form-control" formControlName="gender" value="{{gender}}">
+                  <option value="Male">Male</option>
+                  <option value="Female">Female</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-4 col-form-label">Date of Birth</label>
+              <div class="col-sm-8">
+                <input type="Date" class="form-control" placeholder="dd/mm/yyyy" formControlName="dob"
+                  value="{{dob}}" />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header"> Phones </div>
+          <div class="card-body">
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label">Home</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" formControlName="home" value="{{home}}" />
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label">Work</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" formControlName="work" value="{{work}}" />
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label">Mobile</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" formControlName="mobile" value="{{mobile}}" />
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label">Email</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" formControlName="email" value="{{email}}" />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header"> Address </div>
+          <div class="card-body">
+            <div class="form-group row">
+              <label class="col-sm-4 col-form-label">Country</label>
+              <div class="col-sm-8">
+                <input type="text" class="form-control" formControlName="country" value="{{country}}" />
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-4 col-form-label">Address 1</label>
+              <div class="col-sm-8">
+                <input type="text" class="form-control" formControlName="address_1" value="{{address_1}}" />
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-4 col-form-label">Address 2</label>
+              <div class="col-sm-8">
+                <input type="text" class="form-control" formControlName="address_2" value="{{address_2}}" />
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-4 col-form-label">City</label>
+              <div class="col-sm-8">
+                <input type="text" class="form-control" formControlName="city" value="{{city}}" />
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-4 col-form-label">State</label>
+              <div class="col-sm-8">
+                <input type="text" class="form-control" formControlName="state" value="{{state}}" />
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-4 col-form-label">Post Code</label>
+              <div class="col-sm-8">
+                <input type="text" class="form-control" formControlName="postcode" value="{{postcode}}" />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header"> Others </div>
+          <div class="card-body">
+            <div class="form-group row">
+              <label class="col-sm-4 col-form-label">Category</label>
+              <div class="col-sm-8">
+                <select class="form-control" formControlName="category" value="{{category}}">
+                  <option value="Premium">Premium</option>
+                  <option value="Ad-Hoc">Ad-Hoc</option>
+                  <option value="Category3">Category3</option>
+                  <option value="Category4">Category4</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-5 col-form-label">Membership</label>
+              <div class="col-sm-3">
+                <div class="form-radio">
+                  <label class="form-check-label">
+                    <input type="radio" class="form-check-input" id="membershipRadios1" value="Free"
+                      formControlName="membership" checked>
+                    Free
+                  </label>
+                </div>
+              </div>
+              <div class="col-sm-3">
+                <div class="form-radio">
+                  <label class="form-check-label">
+                    <input type="radio" class="form-check-input" id="membershipRadios2" value="Professional"
+                      formControlName="membership">
+                    Professional
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header"> Contact </div>
+          <div class="card-body">
+            <p class="card-text">You must have explicit customer consent before changing
+              this customer's contact settings.
+            </p>
+            <div class="form-group row">
+              <label class="col-sm-5 col-form-label">Contact Via</label>
+              <div class="col-sm-8 offset-sm-4 ">
+                <div class="form-check-box">
+                  <label class="form-check-label">
+                    <input type="checkbox" class="form-check-input" id="contact_via_email" value="Email"
+                      formControlName="membership" checked> Email
+                  </label>
+                </div>
+              </div>
+              <div class="col-sm-8 offset-sm-4 ">
+                <div class="form-check-box">
+                  <label class="form-check-label">
+                    <input type="checkbox" class="form-check-input" id="contact_via_phone" value="Professional"
+                      formControlName="membership">Call
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="form-group row">
+        <button type="submit" class="col-sm-1 btn btn-success mr-2">Update</button>
+        <button type="submit" class="col-sm-1 btn btn-danger mr-2">Delete</button>
+        <button type="cancel" class="col-sm-1 btn">Cancel</button>
+      </div>
+    </form>
+  </div>
+</div>

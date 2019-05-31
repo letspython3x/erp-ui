@@ -1,56 +1,145 @@
 <div class="row">
-  <div class="col-md-8 d-flex align-items-stretch grid-margin">
-    <div class="row flex-grow">
-      <div class="col-12 grid-margin">
-        <div class="card">
-          <div class="card-body">
-            <h4 class="card-title">Update Product Details</h4>
-            <p class="card-description">
-              For the provided product ID, you may update below values !!!
-            </p>
-            <form class="forms-sample">
-              <div class="form-group row">
-                <label for="name" class="col-sm-3 col-form-label">Product Name</label>
-                <div class="col-sm-9">
-                  <input type="text" class="form-control" id="updateName" placeholder="product name">
-                </div>
-              </div>
-              <div class="form-group row">
-                <label for="category" class="col-sm-3 col-form-label">Category</label>
-                <div class="col-sm-9">
-                  <input type="text" class="form-control" id="updateCategory" placeholder="category">
-                </div>
-              </div>
-              <div class="form-group row">
-                <label for="price" class="col-sm-3 col-form-label">Price</label>
-                <div class="col-sm-9">
-                  <input type="number" class="form-control" id="updatePrice" placeholder="price">
-                </div>
-              </div>
-              <div class="form-group row">
-                <label for="quantity" class="col-sm-3 col-form-label">Quantity</label>
-                <div class="col-sm-9">
-                  <input type="number" class="form-control" id="updateQuantity" placeholder="quantity">
-                </div>
-              </div>
-              <div class="form-group row">
-                <label for="serial_no" class="col-sm-3 col-form-label">Serial Number</label>
-                <div class="col-sm-9">
-                  <input type="text" class="form-control" id="updateSerialNo" placeholder="serial number">
-                </div>
-              </div>
-              <div class="form-group row">
-                <label for="is_active" class="col-sm-3 col-form-label">Mark Active</label>
-                <div class="col-sm-9">
-                  <input type="checkbox" class="form-control" id="updateIsActive">
-                </div>
-              </div>
-              <button type="submit" class="btn btn-success mr-2" (click)="updateProduct()">Update</button>
-              <button class="btn btn-light">Cancel</button>
-            </form>
+  <form class="form-sample" [formGroup]="searchProductForm" (ngSubmit)="onSearchFormSubmit(searchProductForm.value)">
+    <div class="card">
+      <div class="card-header"> Search Product by Either </div>
+      <div class="card-body">
+        <div class="form-group row">
+          <label class="col-sm-4 col-form-label">Product ID</label>
+          <div class="col-sm-8">
+            <input type="text" class="form-control" formControlName="id" />
           </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-4 col-form-label">Serial No</label>
+          <div class="col-sm-8">
+            <input type="text" class="form-control" formControlName="serial_no" />
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-4 col-form-label">Product Name</label>
+          <div class="col-sm-8">
+            <input type="text" class="form-control" formControlName="name" />
+          </div>
+        </div>
+        <div class="form-group row">
+          <button type="submit" class="col-sm-4 btn btn-success mr-2">Search</button>
         </div>
       </div>
     </div>
+  </form>
+</div>
+
+<div class="row">
+  <div *ngIf="isLoadingResults">
+    <h5 align="center">Update Product details Below</h5>
+
+    <form class="form-sample" [formGroup]="updateProductForm" (ngSubmit)="onUpdateFormSubmit(updateProductForm.value)">
+      <div class="card-columns">
+        <!-- Card 1 -->
+        <div class="card">
+          <div class="card-header"> Product Details </div>
+          <div class="card-body">
+            <div class="form-group row">
+              <label class="col-sm-4 col-form-label">Name</label>
+              <div class="col-sm-8">
+                <input type="text" class="form-control" formControlName="name" />
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="serial_no" class="col-sm-4 col-form-label">Serial No</label>
+              <div class="col-sm-8">
+                <input type="text" class="form-control" formControlName="serial_no">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-4 col-form-label">Category</label>
+              <div class="col-sm-8">
+                <input type="text" class="form-control" formControlName="category" />
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-4 col-form-label">Sub-Category</label>
+              <div class="col-sm-8">
+                <input type="text" class="form-control" formControlName="sub_category" />
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="description" class="col-sm-4 col-form-label">Description</label>
+              <div class="col-sm-8">
+                <input type="text" class="form-control" formControlName="description">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header"> Pricing </div>
+          <div class="card-body">
+            <div class="form-group row">
+              <label class="col-sm-4 col-form-label">Store ID</label>
+              <div class="col-sm-8">
+                <input type="text" class="form-control" formControlName="store_id" />
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-4 col-form-label">Cost Price</label>
+              <div class="col-sm-8">
+                <input type="text" class="form-control" formControlName="cost_price" />
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-4 col-form-label">Sell Price</label>
+              <div class="col-sm-8">
+                <input type="text" class="form-control" formControlName="sell_price" />
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-4 col-form-label">Quantity</label>
+              <div class="col-sm-8">
+                <input type="text" class="form-control" formControlName="quantity" />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header"> Shipping </div>
+          <div class="card-body">
+            <div class="form-group row">
+              <label for="distributor" class="col-sm-4 col-form-label">Distributor</label>
+              <div class="col-sm-8">
+                <input type="text" class="form-control" formControlName="distributor" placeholder="Distributor">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header"> Specific Details </div>
+          <div class="card-body">
+            <div class="form-group row">
+              <label for="is_active" class="col-sm-4 col-form-label">Is Available</label>
+              <div class="col-sm-2">
+                <input type="checkbox" class="form-control" formControlName="is_active">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-4 col-form-label">Attributes</label>
+              <div class="col-sm-8">
+                <select class="form-control" formControlName="category">
+                  <option>Premium</option>
+                  <option>Ad-Hoc</option>
+                  <option>Category4</option>
+                  <option>Category4</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <button type="submit" class="btn btn-success mr-2">Update</button>
+        <button type="submit" class="btn btn-danger mr-2">Delete</button>
+        <button class="btn btn-light">Cancel</button>
+      </div>
+    </form>
   </div>
 </div>

@@ -1,3 +1,30 @@
+<div class="row">
+  <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 grid-margin">
+    <div class="thumbnail">
+      <a class="nav-link" routerLink="/quotation-add/" routerLinkActive="active">
+        <div class="caption">
+          <h4>Add Quotation</h4>
+          <p>Lorem Ipsum</p>
+        </div>
+        <img class="img-thumbnail rounded-circle" src="assets/images/menu_icons/add_customer.ico" alt="Add Quotation"
+          style="width:100px;height:100px">
+      </a>
+    </div>
+  </div>
+  <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 grid-margin">
+    <div class="thumbnail">
+      <a class="nav-link" routerLink="/quotation-details/" routerLinkActive="active">
+        <div class="caption">
+          <h4>Search Quotation</h4>
+          <p>Lorem Ipsum</p>
+        </div>
+        <img class="img-thumbnail rounded-circle" src="assets/images/menu_icons/edit_customer.jpeg" alt="Search Quotation"
+          style="width:80px;height:80px">
+      </a>
+    </div>
+  </div>
+</div>
+
 <div class="container">
   <div class="row">
     <div class="col-6 grid-margin">
@@ -43,10 +70,13 @@
                 <label>Discount</label>
               </div>
               <div class="col-1">
+                <label>Tax</label>
+              </div>
+              <div class="col-1">
                 <label>Sub-Total</label>
               </div>
               <div class="col-1">
-                <label>New row</label>
+                <label>Tax</label>
               </div>
             </div>
             <div formArrayName="products" *ngFor="let pd of quotationForm.get('products').controls; let i=index">
@@ -60,14 +90,37 @@
                   <div class="col-1"><input type="number" formControlName="quantity" class="form-control"></div>
                   <div class="col-1"><input type="number" formControlName="quoted_price" class="form-control"></div>
                   <div class="col-1"><input type="number" formControlName="discount" class="form-control"></div>
+                  <div class="col-1"><input type="number" formControlName="tax" class="form-control"></div>
                   <div class="col-1"><input formControlName="sub_total" [value]="calculateSubTotal(pd)"
                       class="form-control"></div>
                   <div class="col-2">
+                    <button type="button" class="btn btn-light" (click)="addProductRow()">+</button>
                     <button type="button" class="btn btn-danger">-</button>
                   </div>
                 </div>
               </div>
-            
+            </div>
+            <div class="form-group row">
+              <label>Sub-Total : </label>
+              <div class="col-2">
+                <input type="number" formControlName="discount_total" [value]="calculateTotal(products)"
+                  class="form-control">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label>Discount : </label>
+              <div class="col-2">
+                <input type="number" formControlName="total_discount" [value]="calculateTotal(products)"
+                  class="form-control">
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <label>Tax : </label>
+              <div class="col-2">
+                <input type="number" formControlName="total" [value]="calculateTotal(products)" class="form-control">
+              </div>
+            </div>
             <div class="form-group row">
               <label>Total : </label>
               <div class="col-2">
@@ -76,13 +129,11 @@
             </div>
             <div class="form-group row">
               <div class="col-3">
-                <button type="button" class="btn btn-light" (click)="addProductRow()">Add New Row</button>
                 <button type="submit" class="btn btn-success mr-2">Submit</button>
               </div>
             </div>
+          </form>
         </div>
-        </form>
       </div>
     </div>
   </div>
-</div>

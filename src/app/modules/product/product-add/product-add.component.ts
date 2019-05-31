@@ -12,7 +12,9 @@ export class ProductAddComponent {
   productForm: FormGroup;
   name: string = '';
   serial_no: string = '';
+  store_id:number;
   category: string = '';
+  sub_category: string = '';
   description: string = '';
   distributor: string = '';
   cost_price: number = 0;
@@ -29,8 +31,11 @@ export class ProductAddComponent {
       serial_no: new FormControl(),
       description: new FormControl(),
       category: new FormControl(),
+      sub_category: new FormControl(),
+      membership: new FormControl(),
       distributor: new FormControl(),
       cost_price: new FormControl(),
+      store_id: new FormControl(),
       sell_price: new FormControl(),
       quantity: new FormControl(),
       is_active: new FormControl(),
@@ -43,8 +48,10 @@ export class ProductAddComponent {
     console.log(productForm);
     this.name = productForm.pname;
     this.serial_no = productForm.serial_no;
+    this.store_id = productForm.store_id;
     this.description = productForm.description;
     this.category = productForm.category;
+    this.sub_category = productForm.sub_category;
     this.distributor = productForm.distributor;
     this.cost_price = productForm.cost_price;
     this.sell_price = productForm.sell_price;

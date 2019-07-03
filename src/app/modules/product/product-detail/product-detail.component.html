@@ -46,7 +46,7 @@
                   </tr>
                   <tr>
                     <th> Product Name </th>
-                    <td>{{ product.name }} </td>
+                    <td>{{ product.product_name }} </td>
                   </tr>
                   <tr>
                     <th> Serial No. </th>
@@ -54,11 +54,11 @@
                   </tr>
                   <tr>
                     <th> Category </th>
-                    <td>{{ product.category }} </td>
+                    <td>{{ product.category_id }} </td>
                   </tr>
                   <tr>
                     <th> Cost Price </th>
-                    <td>{{ product.cost_price }} </td>
+                    <td>{{ product.unit_price }} </td>
                   </tr>
                   <tr>
                     <th> Selling Price </th>
@@ -66,7 +66,7 @@
                   </tr>
                   <tr>
                     <th> Quantity </th>
-                    <td>{{ product.quantity }} </td>
+                    <td>{{ product.units_in_stock }} </td>
                   </tr>
                   <tr>
                     <th> Description </th>
@@ -74,7 +74,7 @@
                   </tr>
                   <tr>
                     <th> Distributor </th>
-                    <td>{{ product.distributor }} </td>
+                    <td>{{ product.supplier_id }} </td>
                   </tr>
                 </tbody>
               </table>

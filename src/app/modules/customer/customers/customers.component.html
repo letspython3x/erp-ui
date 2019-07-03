@@ -1,50 +1,92 @@
 <div class="row">
-    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 grid-margin">
-      <div class="thumbnail">
-        <a class="nav-link" routerLink="/customer-add/" routerLinkActive="active">
-          <div class="caption">
-            <h4>Add Customer</h4>
-            <p>Lorem Ipsum</p>
-          </div>
-          <img class="img-thumbnail rounded-circle" src="assets/images/menu_icons/add_customer.ico" alt="Add Customer"
-            style="width:100px;height:100px">
-        </a>
-      </div>
+  <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 grid-margin">
+    <div class="thumbnail">
+      <a class="nav-link" routerLink="/customer-add/" routerLinkActive="active">
+        <div class="caption">
+          <h4>Add Customer</h4>
+          <p>Lorem Ipsum</p>
+        </div>
+        <img class="img-thumbnail rounded-circle" src="assets/images/menu_icons/add_customer.ico" alt="Add Customer"
+          style="width:100px;height:100px">
+      </a>
     </div>
-    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 grid-margin">
-      <div class="thumbnail">
-        <a class="nav-link" routerLink="/customer-edit/" routerLinkActive="active">
-          <div class="caption">
-            <h4>Search & Edit Customer</h4>
-            <p>Lorem Ipsum</p>
-          </div>
-          <img class="img-thumbnail rounded-circle" src="assets/images/menu_icons/edit_customer.jpeg" alt="Add Customer"
-            style="width:80px;height:80px">
-        </a>
-      </div>
+  </div>
+  <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 grid-margin">
+    <div class="thumbnail">
+      <a class="nav-link" routerLink="/customer-edit/" routerLinkActive="active">
+        <div class="caption">
+          <h4>Search & Edit Customer</h4>
+          <p>Lorem Ipsum</p>
+        </div>
+        <img class="img-thumbnail rounded-circle" src="assets/images/menu_icons/edit_customer.jpeg" alt="Add Customer"
+          style="width:80px;height:80px">
+      </a>
     </div>
-    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 grid-margin">
-      <div class="thumbnail">
-        <a class="nav-link" routerLink="/customer-details/" routerLinkActive="active">
-          <div class="caption">
-            <h4>Details Customer</h4>
-            <p>Lorem Ipsum</p>
-          </div>
-          <img class="img-thumbnail rounded-circle" src="assets/images/menu_icons/customer_detail.png" alt="Add Customer"
-            style="width:80px;height:80px">
-        </a>
-      </div>
+  </div>
+  <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 grid-margin">
+    <div class="thumbnail">
+      <a class="nav-link" routerLink="/customer-details/" routerLinkActive="active">
+        <div class="caption">
+          <h4>Details Customer</h4>
+          <p>Lorem Ipsum</p>
+        </div>
+        <img class="img-thumbnail rounded-circle" src="assets/images/menu_icons/customer_detail.png" alt="Add Customer"
+          style="width:80px;height:80px">
+      </a>
     </div>
-    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 grid-margin">
-      <div class="thumbnail">
-        <a class="nav-link" routerLink="/customers/" routerLinkActive="active">
-          <div class="caption">
-            <h4>View Customers</h4>
-            <p>Lorem Ipsum</p>
+  </div>
+  <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 grid-margin">
+    <div class="thumbnail">
+      <a class="nav-link" routerLink="/customers/" routerLinkActive="active">
+        <div class="caption">
+          <h4>View Customers</h4>
+          <p>Lorem Ipsum</p>
+        </div>
+        <img class="img-thumbnail rounded-circle" src="assets/images/menu_icons/customers.jpg" alt="View Customers"
+          style="width:80px;height:80px">
+      </a>
+    </div>
+  </div>
+</div>
+
+
+<div class="row">
+  <div class="col-sm-12 d-flex align-items-stretch grid-margin">
+    <div class="row flex-grow">
+      <div class="col-sm-12 grid-margin">
+        <div class="card">
+          <div class="card-body">
+            <h4 class="card-title">Existing Customers</h4>
+              <p class="card-description">
+                Below are all available Customers!!
+              </p>
+              <div *ngIf="customerList" class="table-responsive">
+                <table class="table table-bordered">
+                  <thead>
+                    <tr>
+                      <th> Customer ID </th>
+                      <th> Name </th>
+                      <th> Primary Phone </th>
+                      <th> Email </th>
+                      <th> City </th>
+                      <th> Country </th>
+                    </tr>
+                  </thead>
+                  <tbody *ngFor="let cl of customerList">
+                    <tr>
+                      <td class="font-weight-medium"> {{ cl.id }} </td>
+                      <td>{{ cl.serial_no }} </td>
+                      <td>{{ cl.first_name }} </td>
+                      <td>{{ cl.work }} </td>
+                      <td>{{ cl.email }} </td>
+                      <td>{{ cl.city }} </td>
+                      <td>{{ cl.country }} </td>
+                  </tbody>
+                </table>
+              </div>
           </div>
-          <img class="img-thumbnail rounded-circle" src="assets/images/menu_icons/customers.jpg" alt="View Customers"
-            style="width:80px;height:80px">
-        </a>
+        </div>
       </div>
     </div>
   </div>
+</div>

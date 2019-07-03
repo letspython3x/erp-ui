@@ -40,7 +40,7 @@ export class ProductService {
   }
 
   getProducts(): Observable<IProduct[]> {
-    const url = `${apiUrl}`;    
+    const url = `${apiUrl}`;
     return this.http.get<IProduct[]>(url);
     // .pipe(
     //   tap(heroes => console.log('fetched products below')),
@@ -65,8 +65,8 @@ export class ProductService {
   }
 
   deleteProduct(id): Observable<IProduct> {
-    const url = `${apiUrl}${id}`;
-
+    const url = `${apiUrl}?product_id=${id}`;
+    console.log(url);
     return this.http.delete<IProduct>(url, httpOptions).pipe(
       tap(_ => console.log(`deleted product id=${id}`)),
       catchError(this.handleError<IProduct>('deleteProduct'))

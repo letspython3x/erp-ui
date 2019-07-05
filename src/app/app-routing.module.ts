@@ -23,7 +23,7 @@ import { TraderAddComponent } from './modules/trader/trader-add/trader-add.compo
 import { TraderEditComponent } from './modules/trader/trader-edit/trader-edit.component';
 import { TraderDetailsComponent } from './modules/trader/trader-details/trader-details.component';
 
-import { ReportsComponent} from './modules/reports/reports.component';
+import { ReportComponent} from './modules/report/report.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
@@ -50,7 +50,7 @@ const routes: Routes = [
   { path: 'trader-edit', component: TraderEditComponent, data: { title: 'Edit Trader' } },
   { path: 'trader-details', component: TraderDetailsComponent},
   
-  { path: 'reports', component: ReportsComponent, data: { title: 'Reports' } },
+  { path: 'reports', component: ReportComponent, data: { title: 'Reports' } },
 ];
 
 @NgModule({

@@ -48,7 +48,7 @@ import { TraderEditComponent } from './modules/trader/trader-edit/trader-edit.co
 import { TraderDetailsComponent } from './modules/trader/trader-details/trader-details.component';
 
 import { StoreDetailsComponent } from './modules/store/store-details/store-details.component';
-import { ReportsComponent} from './modules/reports/reports.component';
+import { ReportComponent} from './modules/report/report.component';
 
 @NgModule({
   declarations: [
@@ -90,7 +90,7 @@ import { ReportsComponent} from './modules/reports/reports.component';
     TraderAddComponent,
     TraderDetailsComponent,
     TraderEditComponent,
-    ReportsComponent,    
+    ReportComponent,    
   ],
   imports: [
     BrowserModule,

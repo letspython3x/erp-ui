@@ -49,7 +49,7 @@ const routes: Routes = [
   { path: 'trader-add', component: TraderAddComponent },
   { path: 'trader-edit', component: TraderEditComponent, data: { title: 'Edit Trader' } },
   { path: 'trader-details', component: TraderDetailsComponent},
-  
+
   { path: 'reports', component: ReportComponent, data: { title: 'Reports' } },
 ];
 

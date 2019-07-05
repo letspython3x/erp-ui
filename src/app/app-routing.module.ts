@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
+import { AccountsComponent } from './modules/accounts/accounts.component';
+
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ProductsComponent } from './modules/product/products/products.component';
 import { ProductDetailComponent } from './modules/product/product-detail/product-detail.component';
@@ -27,6 +29,9 @@ import { ReportComponent} from './modules/report/report.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
+
+  { path: 'accounts', component: AccountsComponent, data: { title: 'Accounts' } },
+
   { path: 'dashboard', component: DashboardComponent },
   { path: 'products', component: ProductsComponent },
   { path: 'product-details', component: ProductDetailComponent },

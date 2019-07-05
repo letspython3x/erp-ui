@@ -17,15 +17,12 @@ export class CustomerEditComponent {
   last_name: string;
   gender: string;
   category: string;
-  dob: string;
   membership: string;
-  home: string;
-  work: string;
-  mobile: string;
+  primary_phone: string;
+  secondary_phone: string;
   email: string;
-  address_1: string;
-  address_2: string;
-  postcode: string;
+  address: string;
+  postal_code: string;
   state: string;
   city: string;
   country: string;
@@ -33,7 +30,7 @@ export class CustomerEditComponent {
   constructor(private formBuilder: FormBuilder,
     private api: CustomerService) {
     this.searchCustomerForm = this.formBuilder.group({
-      id: new FormControl(),
+      customer_id: new FormControl(),
       email: new FormControl(),
       phone: new FormControl(),
     })
@@ -43,15 +40,12 @@ export class CustomerEditComponent {
       last_name: new FormControl(),
       gender: new FormControl(),
       category: new FormControl(),
-      dob: new FormControl(),
       membership: new FormControl(),
-      home: new FormControl(),
-      work: new FormControl(),
-      mobile: new FormControl(),
+      primary_phone: new FormControl(),
+      secondary_phone: new FormControl(),
       email: new FormControl(),
-      address_1: new FormControl(),
-      address_2: new FormControl(),
-      postcode: new FormControl(),
+      address: new FormControl(),
+      postal_code: new FormControl(),
       state: new FormControl(),
       city: new FormControl(),
       country: new FormControl(),
@@ -61,34 +55,27 @@ export class CustomerEditComponent {
   onSearchFormSubmit(form: any) {
     alert('Searching...');
     console.log(form);
-    let id = form.id;
+    let customer_id = form.customer_id;
     let phone = form.phone;
     let email = form.email;
     this.isLoadingResults = true;
-    this.api.getCustomer(id, phone, email).subscribe(res => {
-      console.log(res);
-      // let customer_id = res['customer_id'];
-      alert(`Customer Fetched: ${res}`);
-      // console.log("Customer ID: " + id);
-      this.first_name='value';
-      this.middle_name='value';
-      this.last_name='value';
-      this.gender='Female';
-      this.category='Ad-Hoc';
-      this.membership='value';
-      this.home='value';
-      this.work='value';
-      this.mobile='value';
-      this.email='value';
-      this.address_1='value';
-      this.address_2='value';
-      this.postcode='value';
-      this.state='value';
-      this.city='value';
-      this.country='value';
+    this.api.getCustomer(customer_id, phone, email).subscribe(res => {
+      let customer = res[0];
+      this.first_name=customer['first_name'];
+      this.middle_name=customer['middle_name'];
+      this.last_name=customer['last_name'];
+      this.gender=customer['gender'];
+      this.membership=customer['membership'];
+      this.primary_phone=customer['primary_phone'];
+      this.secondary_phone=customer['secondary_phone'];
+      this.email=customer['email'];
+      this.address=customer['address'];
+      this.postal_code=customer['postal_code'];
+      this.state=customer['state'];
+      this.city=customer['city'];
+      this.country=customer['country'];
 
       this.isLoadingResults = true;
-      // this.router.navigate(['/product-details', id]);
     }, (err) => {
       console.log(err);
       this.isLoadingResults = false;

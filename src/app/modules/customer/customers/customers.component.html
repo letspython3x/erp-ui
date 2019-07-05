@@ -18,7 +18,7 @@
           <h4>Search & Edit Customer</h4>
           <p>Lorem Ipsum</p>
         </div>
-        <img class="img-thumbnail rounded-circle" src="assets/images/menu_icons/edit_customer.jpeg" alt="Add Customer"
+        <img class="img-thumbnail rounded-circle" src="assets/images/menu_icons/edit_customer.jpeg" alt="Edit Customer"
           style="width:80px;height:80px">
       </a>
     </div>
@@ -30,8 +30,8 @@
           <h4>Details Customer</h4>
           <p>Lorem Ipsum</p>
         </div>
-        <img class="img-thumbnail rounded-circle" src="assets/images/menu_icons/customer_detail.png" alt="Add Customer"
-          style="width:80px;height:80px">
+        <img class="img-thumbnail rounded-circle" src="assets/images/menu_icons/customer_detail.png"
+          alt="Details Customer" style="width:80px;height:80px">
       </a>
     </div>
   </div>
@@ -51,39 +51,42 @@
 
 
 <div class="row">
-  <div class="col-sm-12 d-flex align-items-stretch grid-margin">
+  <div class="col-sm-8 d-flex align-items-stretch grid-margin">
     <div class="row flex-grow">
-      <div class="col-sm-12 grid-margin">
+      <div class="col-sm-8 grid-margin">
         <div class="card">
           <div class="card-body">
             <h4 class="card-title">Existing Customers</h4>
-              <p class="card-description">
-                Below are all available Customers!!
-              </p>
-              <div *ngIf="customerList" class="table-responsive">
-                <table class="table table-bordered">
-                  <thead>
-                    <tr>
-                      <th> Customer ID </th>
-                      <th> Name </th>
-                      <th> Primary Phone </th>
-                      <th> Email </th>
-                      <th> City </th>
-                      <th> Country </th>
-                    </tr>
-                  </thead>
-                  <tbody *ngFor="let cl of customerList">
-                    <tr>
-                      <td class="font-weight-medium"> {{ cl.id }} </td>
-                      <td>{{ cl.serial_no }} </td>
-                      <td>{{ cl.first_name }} </td>
-                      <td>{{ cl.work }} </td>
-                      <td>{{ cl.email }} </td>
-                      <td>{{ cl.city }} </td>
-                      <td>{{ cl.country }} </td>
-                  </tbody>
-                </table>
-              </div>
+            <p class="card-description">
+              Below are all available Customers!!
+            </p>
+            <div *ngIf="customerList" class="table-responsive">
+              <table class="table table-bordered">
+                <thead>
+                  <tr>
+                    <th> Customer ID </th>
+                    <th> Name </th>
+                    <th> Gender </th>
+                    <th> Phone </th>
+                    <th> Email </th>
+                    <th> Membership </th>
+                    <th> State </th>
+                    <th> Country </th>
+                  </tr>
+                </thead>
+                <tbody *ngFor="let cl of customerList">
+                  <tr>
+                    <td class="font-weight-medium"> {{ cl.pk }} </td>
+                    <td>{{ cl.first_name + ' ' }} {{ cl.middle_name + ' '}} {{ cl.last_name }} </td>
+                    <td>{{ cl.gender }} </td>
+                    <td>{{ cl.primary_phone }} </td>
+                    <td>{{ cl.email }} </td>
+                    <td>{{ cl.membership }} </td>
+                    <td>{{ cl.state }} </td>
+                    <td>{{ cl.country }} </td>
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       </div>

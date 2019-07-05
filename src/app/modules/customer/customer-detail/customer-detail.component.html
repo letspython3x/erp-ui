@@ -31,77 +31,89 @@
         </div>
       </div>
       <div *ngIf="customer">
-      <div class="col-12 grid-margin">
-        <div class="card">
-          <div class="card-body">
-            <div *ngIf="customer" class="table-responsive">
-              <p class="card-description">
-                Below is the Customer details !!
-              </p>
-              <table class="table table-bordered">
-                <tbody>
-                  <tr>
-                    <th> Customer ID </th>
-                    <td class="font-weight-medium"> {{ customer.customer_id }} </td>
-                  </tr>                  
-                  <tr>
-                    <th> Customer Name </th>
-                    <td>{{ customer.first_name + ' ' }} {{ customer.middle_name + ' '}} {{ customer.last_name }} </td>
-                  </tr>
-                  <tr>
-                    <th> Gender </th>
-                    <td> {{ customer.gender }} </td>
-                  </tr>
-                  <tr>
-                    <th>Registered Phone </th>
-                    <td>{{ customer.phone }} </td>
-                  </tr>
-                  <tr>
-                    <th> Registered Email </th>
-                    <td>{{ customer.email }} </td>
-                  </tr>
-                  <tr>
-                    <th> Category </th>
-                    <td>{{ customer.category }} </td>
-                  </tr>
-                  <tr>
-                    <th> Date of Birth </th>
-                    <td>{{ customer.dob }} </td>
-                  </tr>
-                  <tr>
-                    <th> Membership </th>
-                    <td>{{ customer.membership }} </td>
-                  </tr>
-                  <tr>
-                    <th> Address 1</th>
-                    <td>{{ customer.address[0] }} </td>
-                  </tr>
-                  <tr>
-                    <th> Address 2</th>
-                    <td>{{ customer.address[1] }} </td>
-                  </tr>
-                  <tr>
-                    <th> Postcode </th>
-                    <td>{{ customer.postcode }} </td>
-                  </tr>
-                  <tr>
-                    <th> State </th>
-                    <td>{{ customer.state }} </td>
-                  </tr>
-                  <tr>
-                    <th> City </th>
-                    <td>{{ customer.city }} </td>
-                  </tr>
-                  <tr>
-                    <th> Country </th>
-                    <td>{{ customer.country }} </td>
-                  </tr>
-                </tbody>
-              </table>
+        <div class="col-12 grid-margin">
+          <div class="card">
+            <div class="card-body">
+              <div *ngIf="customer" class="table-responsive">
+                <p class="card-description">
+                  Below is the Customer details !!
+                </p>
+                <table class="table table-bordered">
+                  <tbody>
+                    <tr>
+                      <th> Customer ID </th>
+                      <td class="font-weight-medium"> {{ customer.customer_id }} </td>
+                    </tr>
+                    <tr>
+                      <th> Customer Name </th>
+                      <td>{{ customer.first_name + ' ' }} {{ customer.middle_name + ' '}} {{ customer.last_name }} </td>
+                    </tr>
+                    <tr>
+                      <th> Gender </th>
+                      <td> {{ customer.gender }} </td>
+                    </tr>
+                    <tr>
+                      <th> Customer Title </th>
+                      <td>{{ customer.contatct_title }} </td>
+                    </tr>
+                    <tr>
+                      <th>Primary Phone </th>
+                      <td>{{ customer.primary_phone }} </td>
+                    </tr>
+                    <tr>
+                      <th>Secondary Phone </th>
+                      <td>{{ customer.secondary_phone }} </td>
+                    </tr>
+                    <tr>
+                      <th> Registered Email </th>
+                      <td>{{ customer.email }} </td>
+                    </tr>
+                    <tr>
+                      <th> Fax </th>
+                      <td>{{ customer.fax }} </td>
+                    </tr>
+                    <tr>
+                      <th> Membership </th>
+                      <td>{{ customer.membership }} </td>
+                    </tr>
+                    <tr>
+                      <th> Address</th>
+                      <td>{{ customer.address }} </td>
+                    </tr>
+                    <tr>
+                      <th> Postal Code </th>
+                      <td>{{ customer.postal_code }} </td>
+                    </tr>
+                    <tr>
+                      <th> State </th>
+                      <td>{{ customer.state }} </td>
+                    </tr>
+                    <tr>
+                      <th> City </th>
+                      <td>{{ customer.city }} </td>
+                    </tr>
+                    <tr>
+                      <th> Country </th>
+                      <td>{{ customer.country }} </td>
+                    </tr>
+                    <tr>
+                      <th> Contact Via Email </th>
+                      <td>{{ customer.contact_via_email ? "Yes":"No" }} </td>
+                    </tr>
+                    <tr>
+                      <th> Contact Via Primary Phone </th>
+                      <td>{{ customer.contact_via_primary_phone ? "Yes":"No" }} </td>
+                    </tr>
+                    <tr>
+                      <th> Contact Via Secondary Phone </th>
+                      <td>{{ customer.contact_via_secondary_phone ? "Yes":"No" }} </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
         </div>
-      </div>
       </div>
     </div>
   </div>

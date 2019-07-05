@@ -24,18 +24,20 @@
             </div>
           </div>
           <div class="form-group row">
+            <label class="col-sm-4 col-form-label">Contact Title</label>
+            <div class="col-sm-8">
+              <input type="text" class="form-control" formControlName="contact_title" />
+            </div>
+          </div>
+          <div class="form-group row">
             <label class="col-sm-4 col-form-label">Gender</label>
             <div class="col-sm-8">
               <select class="form-control" formControlName="gender">
                 <option>Male</option>
                 <option>Female</option>
+                <option>Transgender</option>
+                <option>Not To say</option>
               </select>
-            </div>
-          </div>
-          <div class="form-group row">
-            <label class="col-sm-4 col-form-label">Date of Birth</label>
-            <div class="col-sm-8">
-              <input type="Date" class="form-control" placeholder="dd/mm/yyyy" formControlName="dob" />
             </div>
           </div>
         </div>
@@ -44,27 +46,27 @@
         <div class="card-header"> Phones </div>
         <div class="card-body">
           <div class="form-group row">
-            <label class="col-sm-3 col-form-label">Home</label>
+            <label class="col-sm-3 col-form-label">Primary Phone</label>
             <div class="col-sm-9">
-              <input type="text" class="form-control" formControlName="home" />
+              <input type="text" class="form-control" formControlName="primary_phone" />
             </div>
           </div>
           <div class="form-group row">
-            <label class="col-sm-3 col-form-label">Work</label>
+            <label class="col-sm-3 col-form-label">Secondary phone</label>
             <div class="col-sm-9">
-              <input type="text" class="form-control" formControlName="work" />
-            </div>
-          </div>
-          <div class="form-group row">
-            <label class="col-sm-3 col-form-label">Mobile</label>
-            <div class="col-sm-9">
-              <input type="text" class="form-control" formControlName="mobile" />
+              <input type="text" class="form-control" formControlName="secondary_phone" />
             </div>
           </div>
           <div class="form-group row">
             <label class="col-sm-3 col-form-label">Email</label>
             <div class="col-sm-9">
               <input type="text" class="form-control" formControlName="email" />
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-3 col-form-label">Fax</label>
+            <div class="col-sm-9">
+              <input type="text" class="form-control" formControlName="fax" />
             </div>
           </div>
         </div>
@@ -79,15 +81,9 @@
             </div>
           </div>
           <div class="form-group row">
-            <label class="col-sm-4 col-form-label">Address 1</label>
+            <label class="col-sm-4 col-form-label">Address</label>
             <div class="col-sm-8">
-              <input type="text" class="form-control" formControlName="address_1" />
-            </div>
-          </div>
-          <div class="form-group row">
-            <label class="col-sm-4 col-form-label">Address 2</label>
-            <div class="col-sm-8">
-              <input type="text" class="form-control" formControlName="address_2" />
+              <input type="text" class="form-control" formControlName="address" />
             </div>
           </div>
           <div class="form-group row">
@@ -103,9 +99,9 @@
             </div>
           </div>
           <div class="form-group row">
-            <label class="col-sm-4 col-form-label">Post Code</label>
+            <label class="col-sm-4 col-form-label">Postal Code</label>
             <div class="col-sm-8">
-              <input type="text" class="form-control" formControlName="postcode" />
+              <input type="text" class="form-control" formControlName="postal_code" />
             </div>
           </div>
         </div>
@@ -114,41 +110,21 @@
         <div class="card-header"> Others </div>
         <div class="card-body">
           <div class="form-group row">
-            <label class="col-sm-4 col-form-label">Category</label>
+            <label class="col-sm-4 col-form-label">Membership</label>
             <div class="col-sm-8">
-              <select class="form-control" formControlName="category">
-                <option>Premium</option>
-                <option>Ad-Hoc</option>
-                <option>Category3</option>
-                <option>Category4</option>
+              <select class="form-control" formControlName="membership">
+                  <option value="default">Default</option>
+                  <option value="silver">Silver</option>
+                  <option value="gold">Gold</option>
+                  <option value="platinum">Platinum</option>
               </select>
             </div>
           </div>
-          <div class="form-group row">
-            <label class="col-sm-5 col-form-label">Membership</label>
-            <div class="col-sm-3">
-              <div class="form-radio">
-                <label class="form-check-label">
-                  <input type="radio" class="form-check-input" id="membershipRadios1" value="Free"
-                    formControlName="membership" checked>
-                  Free
-                </label>
-              </div>
-            </div>
-            <div class="col-sm-3">
-              <div class="form-radio">
-                <label class="form-check-label">
-                  <input type="radio" class="form-check-input" id="membershipRadios2" value="Professional"
-                    formControlName="membership">
-                  Professional
-                </label>
-              </div>
-            </div>
-          </div>
+
         </div>
       </div>
       <div class="card">
-        <div class="card-header"> Contact </div>
+        <div class="card-header"> Contact Via</div>
         <div class="card-body">
           <p class="card-text">You must have explicit customer consent before changing
             this customer's contact settings.
@@ -159,20 +135,26 @@
               <div class="form-check-box">
                 <label class="form-check-label">
                   <input type="checkbox" class="form-check-input" id="contact_via_email" value="Email"
-                    formControlName="membership" checked> Email
+                    formControlName="contact_via_email" checked> Email
                 </label>
               </div>
             </div>
             <div class="col-sm-8 offset-sm-4 ">
               <div class="form-check-box">
                 <label class="form-check-label">
-                  <input type="checkbox" class="form-check-input" id="contact_via_phone" value="Professional"
-                    formControlName="membership">Call
+                  <input type="checkbox" class="form-check-input" id="contact_via_primary_phone" value="Professional"
+                    formControlName="contact_via_primary_phone">Primary Phone
                 </label>
-
               </div>
             </div>
-
+            <div class="col-sm-8 offset-sm-4 ">
+              <div class="form-check-box">
+                <label class="form-check-label">
+                  <input type="checkbox" class="form-check-input" id="contact_via_secondary_phone" value="Professional"
+                    formControlName="contact_via_secondary_phone">Secondary Phone
+                </label>
+              </div>
+            </div>
           </div>
         </div>
       </div>

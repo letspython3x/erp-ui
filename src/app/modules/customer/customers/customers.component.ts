@@ -18,8 +18,7 @@ export class CustomersComponent implements OnInit {
       .subscribe(res => {
         this.customerList = res;
         console.log(this.customerList);
-        console.log('hi');
-        this.isLoadingResults = false;
+        this.isLoadingResults = true;
       }, err => {
         console.log(err);
         this.isLoadingResults = false;

@@ -10,16 +10,16 @@ import { FormControl, FormGroupDirective, FormBuilder, FormGroup, NgForm, Valida
 })
 export class ProductAddComponent {
   productForm: FormGroup;
-  name: string = '';
+  product_name: string = '';
   serial_no: string = '';
   store_id:number;
-  category: string = '';
+  category_id: string = '';
   sub_category: string = '';
   description: string = '';
-  distributor: string = '';
-  cost_price: number = 0;
+  supplier_id: string = '';
+  unit_price: number = 0;
   sell_price: number = 0;
-  quantity: number = 0;
+  units_in_stock: number = 0;
   is_active: number = 0;
   updated_at: Date = null;
   isLoadingResults = false;
@@ -27,18 +27,18 @@ export class ProductAddComponent {
   constructor(private router: Router, private api: ProductService,
     private formBuilder: FormBuilder) {
     this.productForm = this.formBuilder.group({
-      name: new FormControl(),
-      serial_no: new FormControl(),
-      description: new FormControl(),
-      category: new FormControl(),
+      product_name: new FormControl(),
+      serial_no: new FormControl(),      
+      category_id: new FormControl(),
       sub_category: new FormControl(),
-      membership: new FormControl(),
-      distributor: new FormControl(),
-      cost_price: new FormControl(),
+      description: new FormControl(),
       store_id: new FormControl(),
+      unit_price: new FormControl(),
       sell_price: new FormControl(),
-      quantity: new FormControl(),
+      units_in_stock: new FormControl(),      
+      supplier_id: new FormControl(),      
       is_active: new FormControl(),
+      membership: new FormControl(),
     });
   }
 
@@ -46,19 +46,19 @@ export class ProductAddComponent {
     // this.isLoadingResults = true;
     console.log("Sending request to add the product");
     console.log(productForm);
-    this.name = productForm.pname;
+    this.product_name = productForm.product_name;
     this.serial_no = productForm.serial_no;
     this.store_id = productForm.store_id;
     this.description = productForm.description;
-    this.category = productForm.category;
+    this.category_id = productForm.category_id;
     this.sub_category = productForm.sub_category;
-    this.distributor = productForm.distributor;
-    this.cost_price = productForm.cost_price;
+    this.supplier_id = productForm.supplier_id;
+    this.unit_price = productForm.unit_price;
     this.sell_price = productForm.sell_price;
-    this.quantity = productForm.quantity;
+    this.units_in_stock = productForm.units_in_stock;
     this.is_active = productForm.is_active;
 
-    console.log('name' + this.name);
+    console.log('name' + this.product_name);
 
 
     this.api.addProduct(productForm)

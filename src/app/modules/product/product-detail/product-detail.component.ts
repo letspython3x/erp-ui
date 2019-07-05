@@ -31,7 +31,8 @@ export class ProductDetailComponent {
     this.api.getProduct(this.product_id, this.serial_no , this.name ).
         subscribe(data => {
           if (data) {
-            this.product = data;
+            this.product = data[0];
+            console.log(data);
           }
           else {
             this.product = null;

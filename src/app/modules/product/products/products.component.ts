@@ -11,15 +11,15 @@ export class ProductsComponent implements OnInit {
   productList:any = [];
   isLoadingResults = true;
 
+
   constructor(private api: ProductService) { }
 
   ngOnInit() {
     this.api.getProducts()
       .subscribe(res => {
         this.productList = res;
-        console.log(this.productList);
-        console.log('hi');
-        this.isLoadingResults = false;
+        console.log(this.productList);        
+        this.isLoadingResults = true;
       }, err => {
         console.log(err);
         this.isLoadingResults = false;

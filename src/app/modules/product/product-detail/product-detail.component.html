@@ -9,7 +9,7 @@
               <div class="form-group row">
                 <label for="product_id" class="col-sm-3 col-form-label">Product ID</label>
                 <div class="col-sm-9">
-                  <input type="text" class="form-control" formControlName="product_id" placeholder="Product ID">
+                  <input type="text" class="form-control" formControlName="product_id" placeholder="Product ID" >
                 </div>
               </div>
               <div class="form-group row">
@@ -42,7 +42,7 @@
                 <tbody>
                   <tr>
                     <th> Product ID </th>
-                    <td class="font-weight-medium"> {{ product.product_id }} </td>
+                    <td class="font-weight-medium"> {{ product.pk | slice:8}} </td>
                   </tr>
                   <tr>
                     <th> Product Name </th>
@@ -58,11 +58,11 @@
                   </tr>
                   <tr>
                     <th> Cost Price </th>
-                    <td>{{ product.unit_price }} </td>
+                    <td>{{ product.unit_price | currency:'CAD':'symbol-narrow' }} </td>
                   </tr>
                   <tr>
                     <th> Selling Price </th>
-                    <td>{{ product.sell_price }} </td>
+                    <td>{{ product.sell_price | currency:'CAD':'symbol-narrow' }} </td>
                   </tr>
                   <tr>
                     <th> Quantity </th>

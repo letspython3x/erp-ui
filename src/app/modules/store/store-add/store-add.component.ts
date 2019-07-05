@@ -11,30 +11,42 @@ import { FormControl, FormGroupDirective, FormBuilder, FormGroup, NgForm, Valida
 })
 export class StoreAddComponent {
   storeForm: FormGroup;
-  name: string = '';
-  country: string = '';
-  category: string = '';
+  store_name: string = '';
+  category_id: string = '';
+  store_admin: string = '';
   address: string = '';
+  phone: string = '';
+  city: string = '';
+  country: string = '';
+  postal_code: string = '';
   isLoadingResults = true;
 
   constructor(private router: Router, private api: StoreService,
     private formBuilder: FormBuilder) {
     this.storeForm = this.formBuilder.group({
-      name: new FormControl(),
-      country: new FormControl(),
+      store_name: new FormControl(),
+      category_id: new FormControl(),
+      store_admin: new FormControl(),
       address: new FormControl(),
-      category: new FormControl(),
+      phone: new FormControl(),
+      city: new FormControl(),
+      country: new FormControl(),
+      postal_code: new FormControl(),
     });
   }
 
   onFormSubmit(storeForm: any) {
     console.log("Sending request to add the Store");
     console.log(storeForm);
-    this.name = storeForm.name;
-    this.category = storeForm.category;
-    this.country = storeForm.country;
+    this.store_name = storeForm.store_name;    
+    this.category_id = storeForm.category_id;
+    this.store_admin = storeForm.store_admin;
     this.address = storeForm.address;
-    console.log('name' + this.name);
+    this.phone= storeForm.phone;
+    this.city= storeForm.city;
+    this.country= storeForm.country;
+    this.postal_code= storeForm.postal_code;
+    console.log('Store Name: ' + this.store_name);
 
     this.api.addStore(storeForm)
       .subscribe(res => {

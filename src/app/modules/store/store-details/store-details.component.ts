@@ -8,27 +8,31 @@ import { FormControl, FormGroupDirective, FormBuilder, FormGroup, NgForm, Valida
 })
 export class StoreDetailsComponent {
   store:any;
-  store_id: number;
-  name: string;
-  address: string;
-  country: string;
+  // store_name: string = '';
+  // category_id: string = '';
+  // store_admin: string = '';
+  // address: string = '';
+  // phone: string = '';
+  // city: string = '';
+  // country: string = '';
+  // postal_code: string = '';
   storeDetailForm: FormGroup;
 
   constructor(private api: StoreService, private formBuilder: FormBuilder) {
     this.storeDetailForm = this.formBuilder.group({
       store_id: new FormControl(),
+      store_name: new FormControl(),
     });
   }
 
-
   onFormSubmit(storeDetailForm: any) {
-    this.store_id = storeDetailForm.store_id;    
-    console.log(`Fetching product data for ${this.store_id}`);
-    this.api.getStore(this.store_id).
-      subscribe(data => {
-        if (data) {
-          console.log(data);
-          this.store = data['data']['store'];
+    let store_id = storeDetailForm.store_id;    
+    console.log(`Fetching product data for ${store_id}`);
+    this.api.getStore(store_id).
+      subscribe(res => {
+        if (res) {
+          console.log(res);
+          this.store = res[0];
         }
         else {
           this.store = null;

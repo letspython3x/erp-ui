@@ -1,53 +1,53 @@
 <div class="row">
-    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 grid-margin">
-      <div class="thumbnail">
-        <a class="nav-link" routerLink="/store-add/" routerLinkActive="active">
-          <div class="caption">
-            <h4>Add Store</h4>
-            <p>Lorem Ipsum</p>
-          </div>
-          <img class="img-thumbnail rounded-circle" src="assets/images/menu_icons/purchase_1.jpg" alt="Add Customer"
-            style="width:80px;height:80px">
-        </a>
-      </div>
-    </div>
-    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 grid-margin">
-      <div class="thumbnail">
-        <a class="nav-link" routerLink="/store-edit/" routerLinkActive="active">
-          <div class="caption">
-            <h4>Edit Stores</h4>
-            <p>Lorem Ipsum</p>
-          </div>
-          <img class="img-thumbnail rounded-circle" src="assets/images/menu_icons/purchase_1.jpg" alt="Add Customer"
-            style="width:80px;height:80px">
-        </a>
-      </div>
-    </div>
-    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 grid-margin">
-      <div class="thumbnail">
-        <a class="nav-link" routerLink="/store-details/" routerLinkActive="active">
-          <div class="caption">
-            <h4>Details Stores</h4>
-            <p>Lorem Ipsum</p>
-          </div>
-          <img class="img-thumbnail rounded-circle" src="assets/images/menu_icons/purchase_1.jpg" alt="Add Customer"
-            style="width:80px;height:80px">
-        </a>
-      </div>
-    </div>
-    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 grid-margin">
-      <div class="thumbnail">
-        <a class="nav-link" routerLink="/stores/" routerLinkActive="active">
-          <div class="caption">
-            <h4>View Stores</h4>
-            <p>Lorem Ipsum</p>
-          </div>
-          <img class="img-thumbnail rounded-circle" src="assets/images/menu_icons/purchase_1.jpg" alt="View Customers"
-            style="width:80px;height:80px">
-        </a>
-      </div>
+  <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 grid-margin">
+    <div class="thumbnail">
+      <a class="nav-link" routerLink="/store-add/" routerLinkActive="active">
+        <div class="caption">
+          <h4>Add Store</h4>
+          <p>Lorem Ipsum</p>
+        </div>
+        <img class="img-thumbnail rounded-circle" src="assets/images/menu_icons/purchase_1.jpg" alt="Add Store"
+          style="width:80px;height:80px">
+      </a>
     </div>
   </div>
+  <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 grid-margin">
+    <div class="thumbnail">
+      <a class="nav-link" routerLink="/store-edit/" routerLinkActive="active">
+        <div class="caption">
+          <h4>Edit Stores</h4>
+          <p>Lorem Ipsum</p>
+        </div>
+        <img class="img-thumbnail rounded-circle" src="assets/images/menu_icons/purchase_1.jpg" alt="Add Store"
+          style="width:80px;height:80px">
+      </a>
+    </div>
+  </div>
+  <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 grid-margin">
+    <div class="thumbnail">
+      <a class="nav-link" routerLink="/store-details/" routerLinkActive="active">
+        <div class="caption">
+          <h4>Details Stores</h4>
+          <p>Lorem Ipsum</p>
+        </div>
+        <img class="img-thumbnail rounded-circle" src="assets/images/menu_icons/purchase_1.jpg" alt="Add Store"
+          style="width:80px;height:80px">
+      </a>
+    </div>
+  </div>
+  <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 grid-margin">
+    <div class="thumbnail">
+      <a class="nav-link" routerLink="/stores/" routerLinkActive="active">
+        <div class="caption">
+          <h4>View Stores</h4>
+          <p>Lorem Ipsum</p>
+        </div>
+        <img class="img-thumbnail rounded-circle" src="assets/images/menu_icons/purchase_1.jpg" alt="View Store"
+          style="width:80px;height:80px">
+      </a>
+    </div>
+  </div>
+</div>
 <div class="row">
   <div class="col-md-8 d-flex align-items-stretch grid-margin">
     <div class="row flex-grow">
@@ -63,19 +63,21 @@
                 <thead>
                   <tr>
                     <th> Store ID</th>
+                    <th> Store Admin </th>
                     <th> Store Name </th>
                     <th> Category </th>
-                    <th> Address </th>
                     <th> Country </th>
+                    <th> Phone </th>
                   </tr>
                 </thead>
                 <tbody *ngFor="let sl of storeList">
                   <tr>
-                    <td class="font-weight-medium"> {{ sl.store_id }} </td>
-                    <td>{{ sl.name }} </td>
-                    <td>{{ sl.category }} </td>
-                    <td>{{ sl.address }} </td>
+                    <td class="font-weight-medium"> {{ sl.pk }} </td>
+                    <td>{{ sl.store_admin }} </td>
+                    <td>{{ sl.store_name }} </td>
+                    <td>{{ sl.category_id }} </td>
                     <td>{{ sl.country }} </td>
+                    <td>{{ sl.phone }} </td>
                 </tbody>
               </table>
             </div>

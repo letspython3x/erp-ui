@@ -1,6 +1,8 @@
 export interface IStore {
-  name: string;
-  category: string;
+  store_id: string;
+  store_admin: string;
+  store_name: string;
+  category_id: string;
   country: string;
-  address: number;
+  phone: number;
 }

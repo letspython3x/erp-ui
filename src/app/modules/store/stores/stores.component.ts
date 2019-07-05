@@ -16,9 +16,8 @@ export class StoresComponent implements OnInit {
     this.api.getStores()
       .subscribe(res => {
         console.log(res);        
-        this.storeList = res['data']['store'];
-        console.log(this.storeList);
-        this.isLoadingResults = false;
+        this.storeList = res;        
+        this.isLoadingResults = true;
       }, err => {
         console.log(err);
         this.isLoadingResults = false;

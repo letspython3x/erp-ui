@@ -6,7 +6,7 @@
           <h4>Add Quotation</h4>
           <p>Lorem Ipsum</p>
         </div>
-        <img class="img-thumbnail rounded-circle" src="assets/images/menu_icons/add_customer.ico" alt="Add Quotation"
+        <img class="img-thumbnail rounded-circle" src="assets/images/menu_icons/add_customer.ico" alt="Create Quotation"
           style="width:100px;height:100px">
       </a>
     </div>
@@ -40,10 +40,10 @@
 </div>
 
 <!-- Quotation Form -->
-<form [formGroup]="quotationForm" (ngSubmit)="onFormSubmit()">
+<!-- <form [formGroup]="quotationForm" (ngSubmit)="onFormSubmit()"> -->
+<form novalidate [formGroup]="quotation_form_group" (ngSubmit)="onFormSubmit()">
   <div class="row">
     <div class="col-sm-6 grid-margin">
-
       <!-- Card 1 -->
       <div class="card">
         <div class="card-header">Heading 1</div>
@@ -51,7 +51,7 @@
           <div class="form-group row">
             <label class="col-sm-4 col-form-label">Customer ID : </label>
             <div class="col-sm-8">
-              <input type="number" formControlName="customer_id" class="form-control">
+              <input formControlName="customer_id" class="form-control">
             </div>
           </div>
           <div class="form-group row">
@@ -61,6 +61,7 @@
                 <option>Invoice</option>
                 <option>Quotation</option>
                 <option>Bill</option>
+                <option>Receipt</option>
               </select>
             </div>
           </div>
@@ -86,32 +87,37 @@
             <label class="col-sm-1 col-form-label">Sub-Total</label>
             <label class="col-sm-1 col-form-label">New row</label>
           </div>
-          <div formArrayName="products" *ngFor="let pd of quotationForm.get('products').controls; let i=index">
-            <div [formGroupName]="i">
-              <div class="form-group row">
-                <div class="col-sm-1"> <input type="number" value={{i+1}} class="form-control"> </div>
-                <div class="col-sm-2"><input type="text" formControlName="name" class="form-control"></div>
-                <div class="col-sm-2"><input type="text" formControlName="category" class="form-control"></div>
-                <div class="col-sm-1"><input type="number" formControlName="quantity" class="form-control"></div>
-                <div class="col-sm-1"><input type="number" formControlName="quoted_price" class="form-control"></div>
-                <div class="col-sm-1"><input type="number" formControlName="discount" class="form-control"></div>
-                <div class="col-sm-1"><input type="number" formControlName="tax" class="form-control"></div>
-                <div class="col-sm-1"><input formControlName="sub_total" [value]="calculateSubTotal(pd)"
-                    class="form-control">
-                </div>
-                <div class="col-sm-1">
-                  <button type="button" class="btn btn-danger">-</button>
+          <ng-container *ngIf="quotation_form_group.controls.item_rows!=null">
+            <div formArrayName="item_rows">
+              <div *ngFor="let itemrow of quotation_form_group.controls.item_rows.controls; let i=index"
+                [formGroupName]="i">
+                <div class="form-group row">
+                  <div class="col-sm-1"> <input value="{{i+1}}" class="form-control" disabled> </div>
+                  <div class="col-sm-2"><input type="text" formControlName="product_name" class="form-control"></div>
+                  <div class="col-sm-2"><input type="text" formControlName="category" class="form-control"></div>
+                  <div class="col-sm-1"><input type="number" formControlName="quantity" class="form-control"></div>
+                  <div class="col-sm-1"><input type="number" formControlName="quoted_price" class="form-control"></div>
+                  <div class="col-sm-1"><input type="number" formControlName="item_discount" class="form-control"></div>
+                  <div class="col-sm-1"><input type="number" formControlName="tax" class="form-control"></div>
+                  <div class="col-sm-1"><input formControlName="line_item_total" [value]="calculateLineItemSubTotal(itemrow)"
+                      class="form-control"> </div>
+                  <div class="col-sm-1">
+                    <button type="button" (click)="deleteRow(i)"> <i class="fa fa-trash"></i>
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div class="col-sm-3">
-            <button type="button" class="btn btn-light" (click)="addProductRow()">Add Row</button>
-          </div>
+          </ng-container>
         </div>
       </div>
     </div>
+
+    <div class="col-sm-3">
+      <button type="button" class="btn btn-light" (click)="addNewRow()">Add Row</button>
+    </div>
   </div>
+
   <!-- Card 3 -->
   <div class="row">
     <div class="col-sm-6 grid-margin">
@@ -121,27 +127,26 @@
           <div class="form-group row">
             <label class="col-sm-4 col-form-label">Sub-Total</label>
             <div class="col-sm-4">
-              <input type="number" formControlName="discount_total" [value]="calculateTotal(products)"
+              <input type="number" formControlName="discounted_sub_total" [value]="calculateSubTotal(quotation_form_group.controls.item_rows.controls)"
                 class="form-control">
             </div>
           </div>
           <div class="form-group row">
             <label class="col-sm-4 col-form-label">Discount : </label>
             <div class="col-sm-4">
-              <input type="number" formControlName="total_discount" [value]="calculateTotal(products)"
-                class="form-control">
+              <input type="number" formControlName="discount_on_total" class="form-control">
             </div>
           </div>
           <div class="form-group row">
             <label class="col-sm-4 col-form-label">Tax : </label>
             <div class="col-sm-4">
-              <input type="number" formControlName="total" [value]="calculateTotal(products)" class="form-control">
+              <input type="number" formControlName="tax_on_total" class="form-control">
             </div>
           </div>
           <div class="form-group row">
             <label class="col-sm-4 col-form-label">Total : </label>
             <div class="col-sm-4">
-              <input type="number" formControlName="total" [value]="calculateTotal(products)" class="form-control">
+              <input type="number" formControlName="total" [value]="calculateTotal(quotation_form_group.controls.item_rows.controls)" class="form-control">
             </div>
           </div>
           <div class="form-group row">
@@ -157,3 +162,5 @@
     </div>
   </div>
 </form>
+
+{{ this.quotation_form_group.value | json }}

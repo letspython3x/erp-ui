@@ -8,9 +8,9 @@ import { QuotationService } from '../quotation.service';
   styleUrls: ['./quotation-add.component.scss']
 })
 export class QuotationAddComponent implements OnInit {
-  quotationForm: FormGroup;
+  quotation_form_group: FormGroup;
   products: FormArray;
-
+  total_row: number;
   customer_id: string;
   product_name: string;
   product_sale_price: number;
@@ -20,39 +20,58 @@ export class QuotationAddComponent implements OnInit {
   total: number;
 
   constructor(private api: QuotationService,
-    private formBuilder: FormBuilder) { }
+    private _fb: FormBuilder) { }
 
   ngOnInit() {
-    this.quotationForm = this.formBuilder.group({
+    this.quotation_form_group = this._fb.group({
       customer_id: '',
-      products: this.formBuilder.array([this.createProductRow()]),
-      total: 0
+      type: '',
+      discount_on_total: 0,
+      tax_on_total: 0,
+      discounted_sub_total: new FormControl({ value: 0, disabled: true }, Validators.required),
+      total: new FormControl({ value: 0, disabled: true }, Validators.required),
+      item_rows: this._fb.array([this.initItemRow()])
     });
   }
 
-  createProductRow(): FormGroup {
-    return this.formBuilder.group({
-      name: '',//new FormControl({value: '', disabled: true}, Validators.required),
+  initItemRow(): FormGroup {
+    return this._fb.group({
+      product_name: '',
       category: '',
       quantity: 0,
       quoted_price: 0,
-      discount: 0,
-      sub_total: new FormControl({ value: '', disabled: true }, Validators.required),
+      item_discount: 0,
+      tax: 0,
+      line_item_total: new FormControl({ value: 0, disabled: true }, Validators.required),
     });
   }
 
-  addProductRow(): void {
+  addNewRow() {
     console.log('Add a new row');
-    (<FormArray>this.quotationForm.get('products')).push(this.createProductRow());
+    const control = <FormArray>this.quotation_form_group.controls['item_rows'];
+    control.push(this.initItemRow());
+  }
+
+  deleteRow(index: number) {
+    const control = <FormArray>this.quotation_form_group.controls['item_rows'];
+    if (control != null) {
+      this.total_row = control.value.length;
+    }
+    if (this.total_row > 1) {
+      control.removeAt(index);
+    } else {
+      alert('Atleast one line item is mandatory');
+      return false;
+    }
   }
 
   onFormSubmit() {
     // this.isLoadingResults = true;
     console.log("Sending request to add the quotation");
-    console.log(this.quotationForm);
-    this.customer_id = this.quotationForm.controls.customer_id.value;
-    this.products = this.quotationForm.controls.products.value;
-    let json_quotationForm = JSON.stringify(this.quotationForm.value);
+    console.log(this.quotation_form_group);
+    this.customer_id = this.quotation_form_group.controls.customer_id.value;
+    this.products = this.quotation_form_group.controls.products.value;
+    let json_quotationForm = JSON.stringify(this.quotation_form_group.value);
     console.log(json_quotationForm);
 
     this.api.addQuotation(json_quotationForm)
@@ -64,28 +83,51 @@ export class QuotationAddComponent implements OnInit {
         console.log(err);
       });
   }
-  calculateSubTotal(row) {
-    let sub_total = 0;
-    if (row) {
-      let discount = row.controls.discount.value;
-      let quantity = row.controls.quantity.value;
-      let quoted_price = row.controls.quoted_price.value;;
-      sub_total = quantity * quoted_price * (1 - discount * 0.01);
+
+  calculateLineItemSubTotal(item) {
+    let total = 0;
+    if (item) {
+      let discount = item.controls.item_discount.value;
+      let quantity = item.controls.quantity.value;
+      let quoted_price = item.controls.quoted_price.value;;
+      let tax = item.controls.tax.value;
+      total = quoted_price * quantity * (1 - discount * 0.01);
+      total = total * (1 + tax * 0.01);
     }
-    console.log('Row Sub Total: ' + sub_total);
-    return sub_total;
+    console.log('Line Item Total: ' + total);
+    return total;
+
   }
 
-  calculateTotal(products) {
-    let total = 0;
-    if (products) {
-      products.forEach(product => {
-        let discount = product['discount']
-        let sub_total = product['quantity'] * product['quoted_price']
-        total = total + sub_total - sub_total * discount * 0.01
+  calculateSubTotal(item_rows) {
+    let sub_total = 0;
+    if (item_rows) {
+      item_rows.forEach(row => {        
+        // sub_total += row.controls.line_item_total.value;
+        sub_total += this.calculateLineItemSubTotal(row);
+        console.log('Row Sub Total: ' + sub_total);
+        // console.log(row);
       });
-      console.log('Quotation Total: ' + total);
+      return sub_total;
     }
+  }
+
+  calculateTotal(item_rows) {
+    let sub_total = 0;
+    let discount_on_total = this.quotation_form_group.controls.discount_on_total.value;
+    let tax_on_total = this.quotation_form_group.controls.tax_on_total.value;
+    let total = 0;
+    if (item_rows) {
+      item_rows.forEach(row => {
+        sub_total += this.calculateLineItemSubTotal(row);
+        // sub_total += row.controls.line_item_total.value;
+        console.log('TOTAL ROW SUB Total: ' + sub_total);
+      });
+    }
+    total = sub_total * (1 - discount_on_total * 0.01);
+    total = total * (1 + tax_on_total * 0.01);
+
+    console.log('Quotation Total: ' + total);
     return total;
   }
 }

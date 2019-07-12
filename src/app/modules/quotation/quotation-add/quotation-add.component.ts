@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, FormArray, Validators } from '@angular/forms';
 import { QuotationService } from '../quotation.service';
+import { Htmltopdf } from '../../../shared/html_to_pdf';
+
+
 
 @Component({
   selector: 'app-quotation-add',
@@ -18,6 +21,9 @@ export class QuotationAddComponent implements OnInit {
   category: string;
   sub_total: number;
   total: number;
+  line_items:any;
+  quotation_submitted:boolean=false;
+  isLoadingResults :boolean= true;
 
   constructor(private api: QuotationService,
     private _fb: FormBuilder) { }
@@ -25,9 +31,10 @@ export class QuotationAddComponent implements OnInit {
   ngOnInit() {
     this.quotation_form_group = this._fb.group({
       customer_id: '',
-      type: '',
+      quotation_type: '',
+      payment_type:'',
       discount_on_total: 0,
-      tax_on_total: 0,
+      total_tax: 0,
       discounted_sub_total: new FormControl({ value: 0, disabled: true }, Validators.required),
       total: new FormControl({ value: 0, disabled: true }, Validators.required),
       item_rows: this._fb.array([this.initItemRow()])
@@ -41,7 +48,7 @@ export class QuotationAddComponent implements OnInit {
       quantity: 0,
       quoted_price: 0,
       item_discount: 0,
-      tax: 0,
+      tax: new FormControl({ value: 7, disabled: true }, Validators.required),
       line_item_total: new FormControl({ value: 0, disabled: true }, Validators.required),
     });
   }
@@ -66,22 +73,24 @@ export class QuotationAddComponent implements OnInit {
   }
 
   onFormSubmit() {
-    // this.isLoadingResults = true;
-    console.log("Sending request to add the quotation");
-    console.log(this.quotation_form_group);
-    this.customer_id = this.quotation_form_group.controls.customer_id.value;
-    this.products = this.quotation_form_group.controls.products.value;
-    let json_quotationForm = JSON.stringify(this.quotation_form_group.value);
-    console.log(json_quotationForm);
+    this.isLoadingResults = false;
+    this.quotation_submitted = true;    
+    console.log("Sending request to add the quotation");    
+    this.line_items = this.quotation_form_group.controls.item_rows;
+    console.log(this.line_items);
+    // this.customer_id = this.quotation_form_group.controls.customer_id.value;
+    // this.products = this.quotation_form_group.controls.products.value;
+    // let json_quotationForm = JSON.stringify(this.quotation_form_group.value);
+    // console.log(json_quotationForm);
 
-    this.api.addQuotation(json_quotationForm)
-      .subscribe(res => {
-        let quotation_id = res['quotation_id'];
-        alert(`Quotation Saved: ${quotation_id}`);
-        console.log("Quotation ID: " + quotation_id);
-      }, (err) => {
-        console.log(err);
-      });
+    // this.api.addQuotation(json_quotationForm)
+    //   .subscribe(res => {
+    //     let quotation_id = res['quotation_id'];
+    //     alert(`Quotation Saved: ${quotation_id}`);
+    //     console.log("Quotation ID: " + quotation_id);
+    //   }, (err) => {
+    //     console.log(err);
+    //   });
   }
 
   calculateLineItemSubTotal(item) {
@@ -89,45 +98,53 @@ export class QuotationAddComponent implements OnInit {
     if (item) {
       let discount = item.controls.item_discount.value;
       let quantity = item.controls.quantity.value;
-      let quoted_price = item.controls.quoted_price.value;;
-      let tax = item.controls.tax.value;
-      total = quoted_price * quantity * (1 - discount * 0.01);
-      total = total * (1 + tax * 0.01);
-    }
-    console.log('Line Item Total: ' + total);
+      let quoted_price = item.controls.quoted_price.value;;      
+      total = quoted_price * quantity * (1 - discount * 0.01);      
+    }    
     return total;
-
   }
 
   calculateSubTotal(item_rows) {
     let sub_total = 0;
     if (item_rows) {
       item_rows.forEach(row => {        
-        // sub_total += row.controls.line_item_total.value;
         sub_total += this.calculateLineItemSubTotal(row);
-        console.log('Row Sub Total: ' + sub_total);
-        // console.log(row);
       });
       return sub_total;
     }
   }
 
+  calculateTotalTax(item_rows) {
+    let total_tax = 0;
+    if (item_rows) {
+      item_rows.forEach(row => {
+        let tax = row.controls.tax.value * 0.01;
+        let line_total = this.calculateLineItemSubTotal(row);
+        total_tax += tax * line_total;
+      });      
+      return total_tax;
+    }
+  }
+
+
   calculateTotal(item_rows) {
     let sub_total = 0;
-    let discount_on_total = this.quotation_form_group.controls.discount_on_total.value;
-    let tax_on_total = this.quotation_form_group.controls.tax_on_total.value;
+    let discount_on_total = this.quotation_form_group.controls.discount_on_total.value;    
     let total = 0;
     if (item_rows) {
       item_rows.forEach(row => {
-        sub_total += this.calculateLineItemSubTotal(row);
-        // sub_total += row.controls.line_item_total.value;
-        console.log('TOTAL ROW SUB Total: ' + sub_total);
+        sub_total += this.calculateLineItemSubTotal(row);        
       });
     }
     total = sub_total * (1 - discount_on_total * 0.01);
-    total = total * (1 + tax_on_total * 0.01);
-
-    console.log('Quotation Total: ' + total);
+    let total_tax = this.calculateTotalTax(item_rows);
+    total = total + total_tax;
+    this.total = total;
     return total;
   }
+
+  capture(){
+    let obj = new Htmltopdf();
+    obj.captureScreen();
+    }
 }

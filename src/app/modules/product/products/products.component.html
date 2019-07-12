@@ -52,7 +52,7 @@
 <div class="row">
   <div class="col-md-10 d-flex align-items-stretch grid-margin">
     <div class="row flex-grow">
-      <div class="col-md-10">
+      <div class="col-md-12">
         <div class="card">
           <div class="card-body">
             <h4 class="card-title">Existing Products</h4>
@@ -64,14 +64,13 @@
                 <thead>
                   <tr>
                     <th> Product ID </th>
-                    <th> Serial No </th>
+                    <th> Serial Code </th>
                     <th> Product Name </th>
                     <th> Category </th>
                     <th> Unit Price </th>
                     <th> Selling Price </th>
                     <th> Units In Stock </th>
-                    <th> quantity Per Unit </th>
-                    <th> Description </th>
+                    <th> quantity Per Unit </th>                    
                     <th> Supplier ID </th>
                   </tr>
                 </thead>
@@ -84,8 +83,7 @@
                     <td>{{ pd.unit_price | currency:'CAD':'symbol-narrow' }} </td>
                     <td>{{ pd.sell_price | currency:'CAD':'symbol-narrow' }} </td>
                     <td>{{ pd.units_in_stock }} </td>
-                    <td>{{ pd.quantity_per_unit}} </td>
-                    <td>{{ pd.description }} </td>
+                    <td>{{ pd.quantity_per_unit}} </td>                    
                     <td>{{ pd.supplier_id }} </td>
                 </tbody>
               </table>

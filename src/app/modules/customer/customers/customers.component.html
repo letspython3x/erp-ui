@@ -48,12 +48,10 @@
     </div>
   </div>
 </div>
-
-
 <div class="row">
-  <div class="col-sm-8 d-flex align-items-stretch grid-margin">
+  <div class="col-sm-12 d-flex align-items-stretch grid-margin">
     <div class="row flex-grow">
-      <div class="col-sm-8 grid-margin">
+      <div class="col-sm-12 grid-margin">
         <div class="card">
           <div class="card-body">
             <h4 class="card-title">Existing Customers</h4>
@@ -64,26 +62,20 @@
               <table class="table table-bordered">
                 <thead>
                   <tr>
-                    <th> Customer ID </th>
+                    <th> ID </th>
                     <th> Name </th>
-                    <th> Gender </th>
                     <th> Phone </th>
                     <th> Email </th>
-                    <th> Membership </th>
-                    <th> State </th>
-                    <th> Country </th>
+                    <th> Location </th>
                   </tr>
                 </thead>
                 <tbody *ngFor="let cl of customerList">
                   <tr>
-                    <td class="font-weight-medium"> {{ cl.pk }} </td>
+                    <td class="font-weight-medium"> {{ cl.customer_id }} </td>
                     <td>{{ cl.first_name + ' ' }} {{ cl.middle_name + ' '}} {{ cl.last_name }} </td>
-                    <td>{{ cl.gender }} </td>
                     <td>{{ cl.primary_phone }} </td>
                     <td>{{ cl.email }} </td>
-                    <td>{{ cl.membership }} </td>
-                    <td>{{ cl.state }} </td>
-                    <td>{{ cl.country }} </td>
+                    <td>{{ cl.state }}, {{ cl.country }}</td>
                 </tbody>
               </table>
             </div>
@@ -93,3 +85,4 @@
     </div>
   </div>
 </div>
+

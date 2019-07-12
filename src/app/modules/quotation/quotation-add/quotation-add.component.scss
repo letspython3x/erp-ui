@@ -1,0 +1,70 @@
+
+.form-control {    
+    padding-right: 0;  
+    padding-left: 0; 
+    padding: 0.25rem 0.25rem;   
+    border-left: 2px solid #42A948; /* green */
+  }
+  
+div.col-sm-1, div.col-sm-2 {
+    padding-right: 2px;  
+    padding-left: 2px;
+    
+  }
+
+  .num-field{
+    width:70px;
+    margin: 0px;
+  }
+//   .form-group {
+//     margin-bottom: 0px!important;
+//  }
+
+table.quotation {
+  font-family: "Times New Roman", Times, serif;
+  border: 1px solid #FFFFFF;
+  width: 80%;
+  height: 60%;
+  text-align: center;
+  border-collapse: collapse;
+}
+table.quotation td, table.quotation th {
+  border: 1px solid #FFFFFF;
+  padding: 3px 2px;
+}
+table.quotation tbody td {
+  font-size: 13px;
+}
+table.quotation tr:nth-child(even) {
+  background: #D0E4F5;
+}
+table.quotation thead {
+  background: #0B6FA4;
+  border-bottom: 5px solid #FFFFFF;
+}
+table.quotation thead th {
+  font-size: 17px;
+  font-weight: bold;
+  color: #FFFFFF;
+  text-align: center;
+  border-left: 2px solid #FFFFFF;
+}
+table.quotation thead th:first-child {
+  border-left: none;
+}
+
+table.quotation tfoot {
+  font-size: 14px;
+  font-weight: bold;
+  color: #333333;
+  background: #D0E4F5;
+  border-top: 3px solid #444444;
+}
+table.quotation tfoot td {
+  font-size: 14px;
+}
+
+.quotation_print {
+  position: relative;
+  align-content: center;
+}

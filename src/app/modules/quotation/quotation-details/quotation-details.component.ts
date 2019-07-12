@@ -15,7 +15,10 @@ export class QuotationDetailsComponent {
 
   constructor(private api: QuotationService, private formBuilder: FormBuilder) {
     this.quotationDetailForm = this.formBuilder.group({
-      quotation_id: new FormControl()
+      quotation_type: new FormControl(),
+      quotation_id: new FormControl(),
+      customer_id: new FormControl(),
+      quotation_date: new FormControl()
     });
   }
 

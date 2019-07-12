@@ -7,7 +7,7 @@
           <p>Lorem Ipsum</p>
         </div>
         <img class="img-thumbnail rounded-circle" src="assets/images/menu_icons/add_customer.ico" alt="Create Quotation"
-          style="width:100px;height:100px">
+          style="width:70px;height:70px">
       </a>
     </div>
   </div>
@@ -38,129 +38,268 @@
     </div>
   </div>
 </div>
-
-<!-- Quotation Form -->
-<!-- <form [formGroup]="quotationForm" (ngSubmit)="onFormSubmit()"> -->
-<form novalidate [formGroup]="quotation_form_group" (ngSubmit)="onFormSubmit()">
-  <div class="row">
-    <div class="col-sm-6 grid-margin">
-      <!-- Card 1 -->
-      <div class="card">
-        <div class="card-header">Heading 1</div>
-        <div class="card-body">
-          <div class="form-group row">
-            <label class="col-sm-4 col-form-label">Customer ID : </label>
-            <div class="col-sm-8">
-              <input formControlName="customer_id" class="form-control">
+<div *ngIf="isLoadingResults">
+  <!-- Quotation Form -->
+  <form novalidate [formGroup]="quotation_form_group" (ngSubmit)="onFormSubmit()">
+    <div class="row">
+      <div class="col-sm-4 grid-margin">
+        <!-- Card 1 -->
+        <div class="card">
+          <div class="card-header">Heading 1</div>
+          <div class="card-body">
+            <div class="form-group row">
+              <label class="col-sm-4 col-form-label">Customer ID : </label>
+              <div class="col-sm-4">
+                <input formControlName="customer_id" class="form-control">
+              </div>
             </div>
-          </div>
-          <div class="form-group row">
-            <label class="col-sm-4 col-form-label">Type </label>
-            <div class="col-sm-8">
-              <select class="form-control" formControlName="type">
-                <option>Invoice</option>
-                <option>Quotation</option>
-                <option>Bill</option>
-                <option>Receipt</option>
-              </select>
+            <div class="form-group row">
+              <label class="col-sm-4 col-form-label">Type </label>
+              <div class="col-sm-4">
+                <select class="form-control" formControlName="quotation_type">
+                  <option>Invoice</option>
+                  <option>Quotation</option>
+                  <option>Bill</option>
+                  <option>Receipt</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-4 col-form-label">Payment Type </label>
+              <div class="col-sm-4">
+                <select class="form-control" formControlName="payment_type">
+                  <option>Cash</option>
+                  <option>Credit</option>
+                </select>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <!-- Card 2 -->
-  <div class="row">
-    <div class="col-sm-12 grid-margin">
-      <div class="card">
-        <div class="card-header">Products Detail</div>
-        <div class="card-body">
-          <div class="form-group row">
-            <label class="col-sm-1 col-form-label">#</label>
-            <label class="col-sm-2 col-form-label">Product Name</label>
-            <label class="col-sm-2 col-form-label">Category</label>
-            <label class="col-sm-1 col-form-label">Quantity</label>
-            <label class="col-sm-1 col-form-label">Price</label>
-            <label class="col-sm-1 col-form-label">Discount</label>
-            <label class="col-sm-1 col-form-label">Tax</label>
-            <label class="col-sm-1 col-form-label">Sub-Total</label>
-            <label class="col-sm-1 col-form-label">New row</label>
-          </div>
-          <ng-container *ngIf="quotation_form_group.controls.item_rows!=null">
-            <div formArrayName="item_rows">
-              <div *ngFor="let itemrow of quotation_form_group.controls.item_rows.controls; let i=index"
-                [formGroupName]="i">
-                <div class="form-group row">
-                  <div class="col-sm-1"> <input value="{{i+1}}" class="form-control" disabled> </div>
-                  <div class="col-sm-2"><input type="text" formControlName="product_name" class="form-control"></div>
-                  <div class="col-sm-2"><input type="text" formControlName="category" class="form-control"></div>
-                  <div class="col-sm-1"><input type="number" formControlName="quantity" class="form-control"></div>
-                  <div class="col-sm-1"><input type="number" formControlName="quoted_price" class="form-control"></div>
-                  <div class="col-sm-1"><input type="number" formControlName="item_discount" class="form-control"></div>
-                  <div class="col-sm-1"><input type="number" formControlName="tax" class="form-control"></div>
-                  <div class="col-sm-1"><input formControlName="line_item_total" [value]="calculateLineItemSubTotal(itemrow)"
-                      class="form-control"> </div>
-                  <div class="col-sm-1">
-                    <button type="button" (click)="deleteRow(i)"> <i class="fa fa-trash"></i>
-                    </button>
+    <!-- Card 2 -->
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="card">
+          <div class="card-header">Products Detail</div>
+          <div class="card-body">
+            <div class="form-group row">
+              <label class="col-sm-1 col-form-label num-field">#</label>
+              <label class="col-sm-2 col-form-label">Product Name</label>
+              <label class="col-sm-2 col-form-label">Category</label>
+              <label class="col-sm-1 col-form-label num-field">Quantity</label>
+              <label class="col-sm-1 col-form-label num-field">Price</label>
+              <label class="col-sm-1 col-form-label num-field">Discount</label>
+              <label class="col-sm-1 col-form-label num-field">Tax</label>
+              <label class="col-sm-1 col-form-label num-field">Sub-Total</label>
+              <label class="col-sm-1 col-form-label">New row</label>
+            </div>
+            <ng-container *ngIf="quotation_form_group.controls.item_rows!=null">
+              <div formArrayName="item_rows">
+                <div *ngFor="let itemrow of quotation_form_group.controls.item_rows.controls; let i=index"
+                  [formGroupName]="i">
+                  <div class="row">
+                    <div class="col-sm-1 "> <input type="number" value="{{i+1}}" class="form-control num-field"
+                        disabled>
+                    </div>
+                    <div class="col-sm-2 "><input type="text" formControlName="product_name" class="form-control"></div>
+                    <div class="col-sm-2"><input type="text" formControlName="category" class="form-control"></div>
+                    <div class="col-sm-1 num-field"><input type="number" formControlName="quantity"
+                        class="form-control num-field">
+                    </div>
+                    <div class="col-sm-1"><input type="number" formControlName="quoted_price"
+                        class="form-control num-field"></div>
+                    <div class="col-sm-1"><input type="number" formControlName="item_discount"
+                        class="form-control num-field"></div>
+                    <div class="col-sm-1"><input type="number" formControlName="tax" class="form-control num-field">
+                    </div>
+                    <div class="col-sm-1"><input formControlName="line_item_total"
+                        [value]="calculateLineItemSubTotal(itemrow)" class="form-control num-field"> </div>
+                    <div class="col-sm-1">
+                      <button type="button" (click)="deleteRow(i)"> <i class="fa fa-trash"></i>
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          </ng-container>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-sm-3">
-      <button type="button" class="btn btn-light" (click)="addNewRow()">Add Row</button>
-    </div>
-  </div>
-
-  <!-- Card 3 -->
-  <div class="row">
-    <div class="col-sm-6 grid-margin">
-      <div class="card">
-        <div class="card-header">Final Details</div>
-        <div class="card-body">
-          <div class="form-group row">
-            <label class="col-sm-4 col-form-label">Sub-Total</label>
-            <div class="col-sm-4">
-              <input type="number" formControlName="discounted_sub_total" [value]="calculateSubTotal(quotation_form_group.controls.item_rows.controls)"
-                class="form-control">
-            </div>
-          </div>
-          <div class="form-group row">
-            <label class="col-sm-4 col-form-label">Discount : </label>
-            <div class="col-sm-4">
-              <input type="number" formControlName="discount_on_total" class="form-control">
-            </div>
-          </div>
-          <div class="form-group row">
-            <label class="col-sm-4 col-form-label">Tax : </label>
-            <div class="col-sm-4">
-              <input type="number" formControlName="tax_on_total" class="form-control">
-            </div>
-          </div>
-          <div class="form-group row">
-            <label class="col-sm-4 col-form-label">Total : </label>
-            <div class="col-sm-4">
-              <input type="number" formControlName="total" [value]="calculateTotal(quotation_form_group.controls.item_rows.controls)" class="form-control">
-            </div>
-          </div>
-          <div class="form-group row">
-            <div class="col-sm-4">
-              <button type="submit" class="btn btn-success mr-2">Submit</button>
-            </div>
-            <div class="col-sm-4">
-              <button class="btn btn-light">Cancel</button>
-            </div>
+            </ng-container>
           </div>
         </div>
       </div>
+
+      <div class="col-sm-2">
+        <button type="button" class="btn btn-light" (click)="addNewRow()">Add Row</button>
+      </div>
     </div>
-  </div>
-</form>
+
+    <!-- Card 3 -->
+    <div class="row">
+      <div class="col-sm-3 grid-margin">
+        <div class="card">
+          <div class="card-header">Final Details</div>
+          <div class="card-body">
+            <div class="form-group row">
+              <label class="col-sm-4 col-form-label">Sub-Total</label>
+              <div class="col-sm-4">
+                <input type="number" formControlName="discounted_sub_total"
+                  [value]="calculateSubTotal(quotation_form_group.controls.item_rows.controls)"
+                  class="form-control num-field">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-4 col-form-label">Discount : </label>
+              <div class="col-sm-4">
+                <input type="number" formControlName="discount_on_total" class="form-control num-field">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-4 col-form-label">Tax : </label>
+              <div class="col-sm-4">
+                <input type="number" formControlName="total_tax"
+                  [value]="calculateTotalTax(quotation_form_group.controls.item_rows.controls)"
+                  class="form-control num-field">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-4 col-form-label">Total : </label>
+              <div class="col-sm-4">
+                <input type="number" formControlName="total"
+                  [value]="calculateTotal(quotation_form_group.controls.item_rows.controls)"
+                  class="form-control num-field">
+              </div>
+            </div>
+            <div class="form-group row">
+              <div class="col-sm-4">
+                <button type="submit" class="btn btn-success mr-2">Submit</button>
+              </div>
+
+              <div class="col-sm-4">
+                <button class="btn btn-light">Cancel</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
 
 {{ this.quotation_form_group.value | json }}
+
+<div *ngIf="quotation_submitted">
+  <div class="container" id="contentToConvert" #contentToConvert>
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="store_details">
+          <h2>store Name {{store_name}}</h2>
+          <h4>store Address {{store_address}} {{store_city_zip_state}}
+            Phone: {{store_phone}}
+            Email: {{store_email_web}}
+            Web:</h4>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6 payment_details">
+        <p>Payment info
+          Type: {{payment_type}} Cash or Credit
+        </p>
+      </div>
+      <div class="col-sm-6 invoice_details">
+        <h2>Invoice info</h2>
+        <p>Date: {{issue_date_label}} : {{issue_date}}</p>
+        {{net_term_label}}
+        {{net_term}}
+        {{due_date_label}}
+        {{due_date}}
+        {{currency_label}}
+        {{currency}}
+        {{po_number_label}}
+        {{po_number}}
+        <h2>Invoice title and number</h2>
+        <p>Title: {{invoice_title}}</p>
+        <p>Number: {{invoice_number}}</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12 client_details">
+        <p>Client info
+          {{bill_to_label}}
+          {{client_name}}
+          {{client_address}}
+          {{client_city_zip_state}}
+          {{client_phone}}
+          {{client_email}}
+          {{client_other}}
+        </p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-10">
+        <table class="quotation">
+          <thead>
+            <tr>
+              <th>S.No.</th>
+              <th>Product Name</th>
+              <th>Category</th>
+              <th>Unit Price</th>
+              <th>Quantity</th>
+              <th>Discount</th>
+              <th>Tax</th>
+              <th>Sub-Total</th>
+            </tr>
+          </thead>
+          <tfoot>
+            <tr>
+              <td>foot1</td>
+              <td>foot2</td>
+              <td>foot3</td>
+              <td>foot4</td>
+              <td>foot5</td>
+              <td>foot6</td>
+              <td>foot7</td>
+              <td>foot8</td>
+            </tr>
+          </tfoot>
+          <tbody>
+            <tr *ngFor="let item of line_items.controls; let i=index">
+              <td>{{ i }}</td>
+              <td>{{ item.controls.product_name.value }}</td>
+              <td>{{ item.controls.category.value }}</td>
+              <td>{{ item.controls.quantity.value }}</td>
+              <td>{{ item.controls.quoted_price.value }}</td>
+              <td>{{ item.controls.item_discount.value }}</td>
+              <td>{{ item.controls.tax.value }}</td>
+              <td>{{ item.controls.line_item_total.value }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-6 invoice_sums">
+      Invoice sums
+      {{amount_subtotal_label}}
+      {{amount_subtotal}}
+      {{tax_name}}
+      {{tax_value}}
+      {{amount_total_label}}
+      {{amount_total}}
+      {{amount_paid_label}}
+      {{amount_paid}}
+      {{amount_due_label}}
+      {{amount_due}}
+      Invoice terms
+      {{terms_label}}
+      {{terms}}
+      Custom fields (more info)
+      {{document_custom_[name]}}
+      {{client_custom_[name]}}
+    </div>
+  </div>
+  <div class="col-sm-2">
+    <button type="button" (click)="capture()" class="btn btn-success">Save PDF</button>
+  </div>
+</div>

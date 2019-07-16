@@ -18,7 +18,7 @@ export class QuotationAddComponent implements OnInit {
   product_name: string;
   product_sale_price: number;
   quantity: string;
-  category: string;
+  category_name: string;
   sub_total: number;
   total: number;
   line_items:any;
@@ -30,13 +30,15 @@ export class QuotationAddComponent implements OnInit {
 
   ngOnInit() {
     this.quotation_form_group = this._fb.group({
-      customer_id: '',
+      customer_id: -999,
+      employee_id: -999,
+      store_id: -999,
       quotation_type: '',
       payment_type:'',
       discount_on_total: 0,
       total_tax: 0,
       discounted_sub_total: new FormControl({ value: 0, disabled: true }, Validators.required),
-      total: new FormControl({ value: 0, disabled: true }, Validators.required),
+      quotation_total: new FormControl({ value: 0, disabled: true }, Validators.required),
       item_rows: this._fb.array([this.initItemRow()])
     });
   }
@@ -44,7 +46,7 @@ export class QuotationAddComponent implements OnInit {
   initItemRow(): FormGroup {
     return this._fb.group({
       product_name: '',
-      category: '',
+      category_name: '',
       quantity: 0,
       quoted_price: 0,
       item_discount: 0,
@@ -78,19 +80,24 @@ export class QuotationAddComponent implements OnInit {
     console.log("Sending request to add the quotation");    
     this.line_items = this.quotation_form_group.controls.item_rows;
     console.log(this.line_items);
-    // this.customer_id = this.quotation_form_group.controls.customer_id.value;
-    // this.products = this.quotation_form_group.controls.products.value;
-    // let json_quotationForm = JSON.stringify(this.quotation_form_group.value);
-    // console.log(json_quotationForm);
+    
+    let formObj = this.quotation_form_group.getRawValue();
+    let serializedForm = JSON.stringify(formObj);
+    console.log(serializedForm);
+    //console.log(this.quotation_form_group);
+    
+    //let json_quotationForm = JSON.stringify(this.quotation_form_group.value);
+    //console.log(json_quotationForm);
 
-    // this.api.addQuotation(json_quotationForm)
-    //   .subscribe(res => {
-    //     let quotation_id = res['quotation_id'];
-    //     alert(`Quotation Saved: ${quotation_id}`);
-    //     console.log("Quotation ID: " + quotation_id);
-    //   }, (err) => {
-    //     console.log(err);
-    //   });
+    this.api.addQuotation(serializedForm)
+      .subscribe(res => {
+        console.log(res);
+        let quotation_id = res['quotation_id'];
+        alert(`Quotation Saved: ${quotation_id}`);
+        console.log("Quotation ID: " + quotation_id);
+      }, (err) => {
+        console.log(err);
+      });
   }
 
   calculateLineItemSubTotal(item) {

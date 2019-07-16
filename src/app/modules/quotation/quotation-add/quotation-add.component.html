@@ -50,7 +50,19 @@
             <div class="form-group row">
               <label class="col-sm-4 col-form-label">Customer ID : </label>
               <div class="col-sm-4">
-                <input formControlName="customer_id" class="form-control">
+                <input type="number" formControlName="customer_id" class="form-control">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-4 col-form-label">Store ID : </label>
+              <div class="col-sm-4">
+                <input type="number" formControlName="store_id" class="form-control">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-4 col-form-label">Employee ID : </label>
+              <div class="col-sm-4">
+                <input type="number" formControlName="employee_id" class="form-control">
               </div>
             </div>
             <div class="form-group row">
@@ -104,7 +116,7 @@
                         disabled>
                     </div>
                     <div class="col-sm-2 "><input type="text" formControlName="product_name" class="form-control"></div>
-                    <div class="col-sm-2"><input type="text" formControlName="category" class="form-control"></div>
+                    <div class="col-sm-2"><input type="text" formControlName="category_name" class="form-control"></div>
                     <div class="col-sm-1 num-field"><input type="number" formControlName="quantity"
                         class="form-control num-field">
                     </div>
@@ -135,7 +147,7 @@
 
     <!-- Card 3 -->
     <div class="row">
-      <div class="col-sm-3 grid-margin">
+      <div class="col-sm-4 grid-margin">
         <div class="card">
           <div class="card-header">Final Details</div>
           <div class="card-body">
@@ -164,7 +176,7 @@
             <div class="form-group row">
               <label class="col-sm-4 col-form-label">Total : </label>
               <div class="col-sm-4">
-                <input type="number" formControlName="total"
+                <input type="number" formControlName="quotation_total"
                   [value]="calculateTotal(quotation_form_group.controls.item_rows.controls)"
                   class="form-control num-field">
               </div>
@@ -173,7 +185,6 @@
               <div class="col-sm-4">
                 <button type="submit" class="btn btn-success mr-2">Submit</button>
               </div>
-
               <div class="col-sm-4">
                 <button class="btn btn-light">Cancel</button>
               </div>
@@ -190,53 +201,41 @@
 <div *ngIf="quotation_submitted">
   <div class="container" id="contentToConvert" #contentToConvert>
     <div class="row">
-      <div class="col-sm-12">
-        <div class="store_details">
-          <h2>store Name {{store_name}}</h2>
-          <h4>store Address {{store_address}} {{store_city_zip_state}}
-            Phone: {{store_phone}}
-            Email: {{store_email_web}}
-            Web:</h4>
-        </div>
+      <div class="col-sm-12 store_details">
+        <h2>Store Name {{store_name}}</h2>
+        <p>Store Address: {{store_address}}</p>
+        <p>State: {{store_city_zip_state}}</p>
+        <p>Phone: {{store_phone}}</p>
+        <p>Email: {{store_email_web}}</p>
+        <p>Web: </p>
       </div>
     </div>
     <div class="row">
-      <div class="col-sm-6 payment_details">
-        <p>Payment info
-          Type: {{payment_type}} Cash or Credit
-        </p>
+      <div class="col-sm-6 client_details">
+        <h4>Client info</h4>
+        <p> Bill label: {{bill_to_label}}</p>
+        <p>Name : {{client_name}}</p>
+        <p>Address: {{client_address}}</p>
+        <p>City: {{client_city_zip_state}}</p>
+        <p>State:</p>
+        <p>Postal_code:</p>
+        <p>Phone: {{client_phone}}</p>
+        <p>Email: {{client_email}}</p>
       </div>
       <div class="col-sm-6 invoice_details">
-        <h2>Invoice info</h2>
+        <h4>Invoice info</h4>
         <p>Date: {{issue_date_label}} : {{issue_date}}</p>
-        {{net_term_label}}
-        {{net_term}}
-        {{due_date_label}}
-        {{due_date}}
-        {{currency_label}}
-        {{currency}}
-        {{po_number_label}}
+        {{net_term_label}} {{net_term}} {{due_date_label}}
+        {{due_date}} {{currency_label}} {{currency}} {{po_number_label}}
         {{po_number}}
-        <h2>Invoice title and number</h2>
+        <h4>Invoice title and number</h4>
         <p>Title: {{invoice_title}}</p>
         <p>Number: {{invoice_number}}</p>
       </div>
     </div>
+
     <div class="row">
-      <div class="col-sm-12 client_details">
-        <p>Client info
-          {{bill_to_label}}
-          {{client_name}}
-          {{client_address}}
-          {{client_city_zip_state}}
-          {{client_phone}}
-          {{client_email}}
-          {{client_other}}
-        </p>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-sm-10">
+      <div class="col-sm-12 quotation_table">
         <table class="quotation">
           <thead>
             <tr>
@@ -277,28 +276,35 @@
         </table>
       </div>
     </div>
-  </div>
-  <div class="row">
-    <div class="col-sm-6 invoice_sums">
-      Invoice sums
-      {{amount_subtotal_label}}
-      {{amount_subtotal}}
-      {{tax_name}}
-      {{tax_value}}
-      {{amount_total_label}}
-      {{amount_total}}
-      {{amount_paid_label}}
-      {{amount_paid}}
-      {{amount_due_label}}
-      {{amount_due}}
-      Invoice terms
-      {{terms_label}}
-      {{terms}}
-      Custom fields (more info)
-      {{document_custom_[name]}}
-      {{client_custom_[name]}}
+
+    <div class="row">
+      <div class="col-sm-6 payment_details">
+        <h4>Payment info</h4>
+        <p>Type: {{payment_type}} Cash or Credit</p>
+      </div>
+      <div class="col-sm-6 invoice_sums">
+        Invoice sums
+        <p>Sub Total : {{amount_subtotal_label}}</p>
+        <p>{{amount_subtotal}}</p>
+        <p>Tax Name: {{tax_name}}</p>
+        <p>Tax Value:{{tax_value}}</p>
+        <p>Amount Total Label: {{amount_total_label}}</p>
+        <p>Amount Total: {{amount_total}}</p>
+        <p>Amount Paid Label: {{amount_paid_label}}</p>
+        <p>Amount Paid: {{amount_paid}}</p>
+        <p>Amount Due Label: {{amount_due_label}}</p>
+        <p>Amount Due: {{amount_due}}</p>
+        <h4>Invoice terms</h4>
+        <p>Terms Label: {{terms_label}}</p>
+        <p>Terms: {{terms}}</p>
+        Custom fields (more info)
+        {{document_custom_[name]}}
+        {{client_custom_[name]}}
+      </div>
     </div>
   </div>
+</div>
+<div class="row">
   <div class="col-sm-2">
     <button type="button" (click)="capture()" class="btn btn-success">Save PDF</button>
   </div>

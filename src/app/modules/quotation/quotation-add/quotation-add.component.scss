@@ -16,14 +16,12 @@ div.col-sm-1, div.col-sm-2 {
     width:70px;
     margin: 0px;
   }
-//   .form-group {
-//     margin-bottom: 0px!important;
-//  }
-
+  
 table.quotation {
+  position: center;
   font-family: "Times New Roman", Times, serif;
   border: 1px solid #FFFFFF;
-  width: 80%;
+  width: 100%;
   height: 60%;
   text-align: center;
   border-collapse: collapse;
@@ -68,3 +66,29 @@ table.quotation tfoot td {
   position: relative;
   align-content: center;
 }
+
+.store_details{
+  position: center;
+  text-align: center;
+  width:50px;
+  border:1px solid;
+  padding:20px;
+}
+
+.payment_details, .client_details, .invoice_details, .quotation_table{
+  position: left;
+  text-align: left;
+  width:30px;
+  border:1px solid;
+  padding:10px;
+  // margin:10px;
+}
+
+.invoice_sums{
+  position: right;
+  text-align: right;
+  width:50px;
+  border:1px solid;
+  padding:20px;
+}
+

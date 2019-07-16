@@ -54,14 +54,14 @@
                   </tr>
                   <tr>
                       <th> Barcode Number </th>
-                      <td>In progress </td>
+                      <td>{{ product.barcode_number }}  </td>
                     </tr>
                   <tr>
                     <th> Category </th>
-                    <td>{{ product.category_id }} </td>
+                    <td>{{ product.category_name }} </td>
                   </tr>
                   <tr>
-                    <th> Cost Price </th>
+                    <th> Unit Price </th>
                     <td>{{ product.unit_price | currency:'CAD':'symbol-narrow' }} </td>
                   </tr>
                   <tr>
@@ -77,7 +77,7 @@
                     <td>{{ product.description }} </td>
                   </tr>
                   <tr>
-                    <th> Distributor </th>
+                    <th> Supplier </th>
                     <td>{{ product.supplier_id }} </td>
                   </tr>
                 </tbody>

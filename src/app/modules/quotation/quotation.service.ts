@@ -35,26 +35,26 @@ export class QuotationService {
 
     addQuotation(quotation): Observable<IQuotation> {
         console.log(quotation)
-        return this.api.post<IQuotation>(apiUrl, quotation, httpOptions);
+        return this.api.post<any>(apiUrl, quotation, httpOptions);
         // .pipe(            tap((quotation: IQuotation) => console.log(`Added quotation`)),
         //     catchError(this.handleError<IQuotation>('addProduct')));
     }
 
-    getQuotations(): Observable<IQuotation[]> {
-        const url = `${apiUrl}`;
-        return this.api.get<IQuotation[]>(apiUrl);
+    getQuotations(params_url: string): Observable<any> {
+        const url = `${apiUrl}${params_url}`;
+        return this.api.get<any>(url);
         // .pipe(
         //   tap(heroes => console.log('fetched products below')),
         //   catchError(this.handleError('getProducts', []))
 
     }
 
-    getQuotation(quotation_id: number): Observable<IQuotation> {
+    getQuotation(quotation_id: number): Observable<any> {
         const url = `${apiUrl}?quotation_id=${quotation_id}`;
-        return this.api.get<IQuotation>(url);
+        return this.api.get<any>(url);
         // .pipe(
         //     tap(_ => console.log(`fetched quotation id=${quotation_id}`)),
         //     catchError(this.handleError<IQuotation>(`getProduct id=${quotation_id}`))
-        
+
     }
 }

@@ -13,7 +13,7 @@ export class ProductAddComponent {
   product_name: string = '';
   serial_no: string = '';
   store_id:number;
-  category_id: string = '';
+  category_name: string = '';
   sub_category: string = '';
   description: string = '';
   supplier_id: string = '';
@@ -29,7 +29,7 @@ export class ProductAddComponent {
     this.productForm = this.formBuilder.group({
       product_name: new FormControl(),
       serial_no: new FormControl(),      
-      category_id: new FormControl(),
+      category_name: new FormControl(),
       sub_category: new FormControl(),
       description: new FormControl(),
       store_id: new FormControl(),
@@ -50,7 +50,7 @@ export class ProductAddComponent {
     this.serial_no = productForm.serial_no;
     this.store_id = productForm.store_id;
     this.description = productForm.description;
-    this.category_id = productForm.category_id;
+    this.category_name = productForm.category_name;
     this.sub_category = productForm.sub_category;
     this.supplier_id = productForm.supplier_id;
     this.unit_price = productForm.unit_price;

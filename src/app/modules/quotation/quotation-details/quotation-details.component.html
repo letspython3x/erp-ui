@@ -8,7 +8,7 @@
             <p class="card-description">
               Get the quotation by Quotation ID.
             </p>
-            <form [formGroup]="quotationDetailForm" (ngSubmit)="onFormSubmit(quotationDetailForm.value)">
+            <form [formGroup]="quotationByIdForm" (ngSubmit)="onQidFormSubmit(quotationByIdForm.value)">
               <div class="form-group row">
                 <label for="quotation_id" class="col-sm-4 col-form-label">Quotation ID</label>
                 <div class="col-sm-5">
@@ -29,11 +29,11 @@
       <div class="col-10 grid-margin">
         <div class="card">
           <div class="card-body">
-            <h4 class="card-title">Fetch Quotation</h4>
+            <h4 class="card-title">Fetch Quotations</h4>
             <p class="card-description">
-              Got it.
+              Fetch quotations depending on below selections.
             </p>
-            <form [formGroup]="quotationDetailForm" (ngSubmit)="onFormSubmit(quotationDetailForm.value)">
+            <form [formGroup]="quotationByEntityForm" (ngSubmit)="onQbeFormSubmit(quotationByEntityForm.value)">
               <div class="form-group row">
                 <label for="quotation_type" class="col-sm-4 col-form-label">Quotation Type</label>
                 <div class="col-sm-6">
@@ -52,9 +52,25 @@
                 </div>
               </div>
               <div class="form-group row">
-                <label for="quotation_id" class="col-sm-4 col-form-label">Quotation Date</label>
+                <label for="quotation_id" class="col-sm-4 col-form-label">Employee ID</label>
                 <div class="col-sm-6">
-                  <input type="date" class="form-control" formControlName="quotation_date" placeholder="Quotation Date">
+                  <input type="number" class="form-control" formControlName="employee_id" placeholder="Employee ID">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="quotation_id" class="col-sm-4 col-form-label">Store ID</label>
+                <div class="col-sm-6">
+                  <input type="number" class="form-control" formControlName="store_id" placeholder="Store ID">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="quotation_id" class="col-sm-4 col-form-label">From Date</label>
+                <div class="col-sm-6">
+                  <input type="date" class="form-control" formControlName="start_date">
+                </div>
+                <label for="quotation_id" class="col-sm-4 col-form-label">End Date</label>
+                <div class="col-sm-6">
+                  <input type="date" class="form-control" formControlName="end_date">
                 </div>
               </div>
               <button type="submit" class="btn btn-success mr-2">Search</button>
@@ -66,102 +82,116 @@
     </div>
   </div>
 </div>
-<!-- <div *ngIf="quotationList"> -->
-<div class="row">
-  <div class="col-md-10 d-flex align-items-stretch grid-margin">
-    <div class="row flex-grow">
-      <div class="col-12 grid-margin">
-        <div class="card">
-          <div class="card-body">
-            <h4 class="card-title">Quotations</h4>
-            <p class="card-description">
-              List of matching quotations.
-            </p>
-            <table class="table table-condensed table-responsive" border="1">
-              <thead>
-                <tr>
-                  <th> # </th>
-                  <th> Quotation ID </th>
-                  <th> Type </th>
-                  <th> Customer ID </th>
-                  <th> Customer Name </th>
-                  <th> Date </th>
-                  <th> Quotation Total </th>
-                </tr>
-              </thead>
-              <tbody *ngFor="let ql of quotationList">
-                <tr>
-                  <td class="font-weight-medium"> {{ ql.serial_no }} </td>
-                  <td class="font-weight-medium"> {{ ql.quotation_id }} </td>
-                  <td>{{ ql.quotation_type }} </td>
-                  <td>{{ ql.customer_id }} </td>
-                  <td>{{ ql.customer_name }} </td>
-                  <td>{{ ql.quotation_date }} </td>
-                  <td>{{ ql.quotation_total | currency:'CAD':'symbol-narrow' }} </td>
-              </tbody>
-            </table>
+<div *ngIf="quotationList">
+  <div class="row">
+    <div class="col-md-10 d-flex align-items-stretch grid-margin">
+      <div class="row flex-grow">
+        <div class="col-12 grid-margin">
+          <div class="card">
+            <div class="card-body">
+              <h4 class="card-title">Quotations</h4>
+              <p class="card-description">
+                List of matching quotations.
+              </p>
+              <table class="table table-condensed table-responsive" border="1">
+                <thead>
+                  <tr>
+                    <th> # </th>
+                    <th> Quotation ID </th>
+                    <th> Type </th>
+                    <th> Customer ID </th>
+                    <th> Employee ID </th>
+                    <th> Date </th>
+                    <th> Quotation Total </th>
+                  </tr>
+                </thead>
+                <tbody *ngFor="let ql of quotationList">
+                  <tr>
+                    <td class="font-weight-medium"> {{ ql.serial_no }} </td>
+                    <td>{{ ql.order_id }} </td>
+                    <td>{{ ql.quotation_type }} </td>
+                    <td>{{ ql.customer_id }} </td>
+                    <td>{{ ql.employee_id }} </td>
+                    <td>{{ ql.created_at }} </td>
+                    <td>{{ ql.quotation_total | currency:'CAD':'symbol-narrow' }} </td>
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
 </div>
-<!-- </div> -->
-<!-- <div *ngIf="quotation"> -->
-<div class="row">
-  <div class="col-md-10 d-flex align-items-stretch grid-margin">
-    <div class="row flex-grow">
-      <div class="col-12 grid-margin">
-        <div class="card">
-          <div class="card-body">
-            <h4 class="card-title">Quotation Below</h4>
-            <p class="card-description">
-              Got it.
-            </p>
-            <table class="table table-responsive" border="1">
-              <tr>
-                <th>Customer ID</th>
-                <td>{{ quotation.customer_id }}</td>
-              </tr>
-              <tr>
-                <th>Store ID</th>
-                <td>{{ quotation.store_id }}</td>
-              </tr>
-              <tr>
-                <th>Quotation Total</th>
-                <td>{{ quotation.total }}</td>
-              </tr>
-              <tr>
-                <th>Invoice Date</th>
-                <td>{{ quotation.created_at }}</td>
-              </tr>
-            </table>
-            <table class="table table-condensed" border="2">
-              <thead>
+<div *ngIf="quotation">
+  <div class="row">
+    <div class="col-md-10 d-flex align-items-stretch grid-margin">
+      <div class="row flex-grow">
+        <div class="col-12 grid-margin">
+          <div class="card">
+            <div class="card-body">
+              <h4 class="card-title">Quotation Below</h4>
+              <p class="card-description">
+                Quotation Found
+              </p>
+              <table class="table table-responsive" border="1">
                 <tr>
-                  <th>Product Description</th>
-                  <th>Category</th>
-                  <th>Price</th>
-                  <th>Quantity</th>
+                  <th>Customer ID</th>
+                  <td>{{ quotation.customer_id }}</td>
+                </tr>
+                <tr>
+                  <th>Store ID</th>
+                  <td>{{ quotation.store_id }}</td>
+                </tr>
+                <tr>
+                  <th>Quotation Type</th>
+                  <td>{{ quotation.quotation_type }}</td>
+                </tr>
+                <tr>
                   <th>Discount</th>
-                  <th>Sub-Total</th>
+                  <td>{{ quotation.discount_on_total }}</td>
                 </tr>
-              </thead>
-              <tbody>
-                <tr *ngFor="let product of products">
-                  <td>{{ product.name }}</td>
-                  <td>{{ product.category }}</td>
-                  <td>{{ product.quoted_price }}</td>
-                  <td>{{ product.quantity }}</td>
-                  <td>{{ product.discount }}</td>
-                  <td>{{ product.sub_total }}</td>
+                <tr>
+                  <th>Tax</th>
+                  <td>{{ quotation.total_tax | currency:'CAD':'symbol-narrow' }} </td>
                 </tr>
-              </tbody>
-            </table>
+                <tr>
+                  <th>Quotation Total</th>
+                  <td>{{ quotation.quotation_total | currency:'CAD':'symbol-narrow' }}</td>
+                </tr>
+                <tr>
+                  <th>Invoice Date</th>
+                  <td>{{ quotation.created_at }}</td>
+                </tr>
+              </table>
+              <table class="table table-condensed" border="2">
+                <thead>
+                  <tr>
+                    <th>Product Name</th>
+                    <th>Category</th>
+                    <th>Quantity</th>
+                    <th>Quoted Price</th>                    
+                    <th>Discount</th>
+                    <th>Tax</th>
+                    <th>Sub-Total</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let pd of products">
+                    <td>{{ pd.product_name }}</td>
+                    <td>{{ pd.category_name }}</td>                    
+                    <td>{{ pd.quantity }}</td>
+                    <td>{{ pd.quoted_price  | currency:'CAD':'symbol-narrow' }} </td>
+                    <td>{{ pd.item_discount }} %</td>
+                    <td>{{ pd.tax  | currency:'CAD':'symbol-narrow' }} </td>
+                    <td>{{ pd.line_item_total  | currency:'CAD':'symbol-narrow' }}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
 </div>
-<!-- </div> -->

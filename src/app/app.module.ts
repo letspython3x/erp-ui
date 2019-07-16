@@ -3,14 +3,23 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
-
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { FooterComponent } from './footer/footer.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { fakeBackendProvider } from '../app/_helpers/fake-backend';
+
+
+//import { routing }        from './app.routing';
+
+import { AlertComponent } from '../app/_components/alert.component';
+import { ErrorInterceptor } from '../app/_helpers/error.interceptor';
+import { JwtInterceptor } from '../app/_helpers/jwt.interceptor';
+import { HomeComponent } from '../app/home/home.component';
+
+
 // import { FormsComponent } from './forms/forms.component';
 // import { ButtonsComponent } from './buttons/buttons.component';
 // import { TablesComponent } from './tables/tables.component';
@@ -27,7 +36,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 // import { CarouselComponent } from './carousel/carousel.component';
 // import { TabsComponent } from './tabs/tabs.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ProductsComponent } from './modules/product/products/products.component';
 import { ProductDetailComponent } from './modules/product/product-detail/product-detail.component';
 import { ProductAddComponent } from './modules/product/product-add/product-add.component';
@@ -50,6 +59,8 @@ import { TraderDetailsComponent } from './modules/trader/trader-details/trader-d
 import { StoreDetailsComponent } from './modules/store/store-details/store-details.component';
 import { ReportComponent} from './modules/report/report.component';
 import { AccountsComponent } from './modules/accounts/accounts.component';
+import { RegisterComponent } from './register/register.component';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
@@ -92,7 +103,12 @@ import { AccountsComponent } from './modules/accounts/accounts.component';
     TraderDetailsComponent,
     TraderEditComponent,
     ReportComponent,
-    AccountsComponent,    
+    AccountsComponent,
+    AlertComponent,
+    HomeComponent,
+    RegisterComponent,
+    LoginComponent,    
+    //routing,
   ],
   imports: [
     BrowserModule,
@@ -103,7 +119,13 @@ import { AccountsComponent } from './modules/accounts/accounts.component';
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+
+    // provider used to create fake backend
+    fakeBackendProvider
+],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

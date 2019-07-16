@@ -25,13 +25,24 @@ import { TraderAddComponent } from './modules/trader/trader-add/trader-add.compo
 import { TraderEditComponent } from './modules/trader/trader-edit/trader-edit.component';
 import { TraderDetailsComponent } from './modules/trader/trader-details/trader-details.component';
 
-import { ReportComponent} from './modules/report/report.component';
+import { ReportComponent } from './modules/report/report.component';
+
+import { HomeComponent } from '../app/home/home.component';
+import { LoginComponent } from '../app/login/login.component';
+import { RegisterComponent } from '../app/register/register.component';
+import { AuthGuard } from '../app/_guards/auth.gaurd';
+
 
 const routes: Routes = [
   { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
+  // { path: '', component: HomeComponent, canActivate: [AuthGuard] },
+  // { path: 'login', component: LoginComponent, data: { title: 'Login' } },
+  // { path: 'register', component: RegisterComponent, data: { title: 'User Registration' } },
+  // // otherwise redirect to home
+  // { path: '**', redirectTo: '' },
 
+  // {path:  'auth', loadChildren:  './auth/auth.module#AuthModule'}, // PATH -> /auth/register and /auth/login routes.
   { path: 'accounts', component: AccountsComponent, data: { title: 'Accounts' } },
-
   { path: 'dashboard', component: DashboardComponent },
   { path: 'products', component: ProductsComponent },
   { path: 'product-details', component: ProductDetailComponent },
@@ -44,16 +55,16 @@ const routes: Routes = [
   { path: 'customer-add', component: CustomerAddComponent },
   { path: 'customer-edit', component: CustomerEditComponent, data: { title: 'Edit Customer' } },
 
-  { path: 'stores', component: StoresComponent },  
+  { path: 'stores', component: StoresComponent },
   { path: 'store-add', component: StoreAddComponent },
   { path: 'store-edit', component: StoreEditComponent, data: { title: 'Edit Store' } },
-  { path: 'store-details', component: StoreDetailsComponent},
+  { path: 'store-details', component: StoreDetailsComponent },
 
 
   { path: 'traders', component: TradersComponent, data: { title: 'Traders' } },
   { path: 'trader-add', component: TraderAddComponent },
   { path: 'trader-edit', component: TraderEditComponent, data: { title: 'Edit Trader' } },
-  { path: 'trader-details', component: TraderDetailsComponent},
+  { path: 'trader-details', component: TraderDetailsComponent },
 
   { path: 'reports', component: ReportComponent, data: { title: 'Reports' } },
 ];

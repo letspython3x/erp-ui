@@ -1,13 +1,14 @@
 import { Component, OnInit, ElementRef ,ViewChild} from '@angular/core';  
 import * as jspdf from 'jspdf';  
-import html2canvas from 'html2canvas';  
+import * as html2canvas from 'html2canvas';  
   
 
 export class Htmltopdf{  
 
-  captureScreen()  
+  captureScreen(capture_id:string)
   {  
-    var data = document.getElementById('contentToConvert');  
+    var data = document.getElementById(capture_id);
+    console.log(`INSIDE HTML TO PDF: ${data}`);
     html2canvas(data).then(canvas => {  
       // Few necessary setting options  
       var imgWidth = 208;   

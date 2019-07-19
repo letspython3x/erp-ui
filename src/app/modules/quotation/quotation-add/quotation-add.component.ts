@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, FormArray, Validators } from '@angular/forms';
 import { QuotationService } from '../quotation.service';
-import { Htmltopdf } from '../../../shared/html_to_pdf';
-
-
+import { CategoryService } from '../../category/category.service';
+import { StoreService } from '../../store/store.service';
+import { CustomerService } from '../../customer/customer.service';
+import { ProductsComponent } from '@/modules/product/products/products.component';
+import { ICategory } from '@/shared/models/category.model';
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-quotation-add',
@@ -12,46 +15,63 @@ import { Htmltopdf } from '../../../shared/html_to_pdf';
 })
 export class QuotationAddComponent implements OnInit {
   quotation_form_group: FormGroup;
-  products: FormArray;
-  total_row: number;
-  customer_id: string;
-  product_name: string;
-  product_sale_price: number;
-  quantity: string;
-  category_name: string;
-  sub_total: number;
-  total: number;
-  line_items:any;
-  quotation_submitted:boolean=false;
-  isLoadingResults :boolean= true;
+  quotation: any;
+  store: any;
+  customer: any;
 
-  constructor(private api: QuotationService,
-    private _fb: FormBuilder) { }
+  filteredProducts: any;
+  _listFilter: string;
+  categories: any;
+  products: any;
+
+  total: number;
+  currency: 'US Dollars';
+  quotation_id: number;
+  total_row: number;
+  line_items: any;
+  employee_id: number;
+  quotation_type: string;
+  payment_type: string;
+  discount_on_total: 0;
+  total_tax: 0;
+  discounted_sub_total: 0;
+  quotation_total: 0;
+  quotation_submitted: boolean = false;
+  isLoadingResults: boolean = true;
+
+  constructor(private qsApi: QuotationService,
+    private ssApi: StoreService,
+    private csApi: CustomerService,
+    private caApi: CategoryService,
+    private _fb: FormBuilder,
+    private router: Router) { }
 
   ngOnInit() {
     this.quotation_form_group = this._fb.group({
-      customer_id: -999,
-      employee_id: -999,
-      store_id: -999,
-      quotation_type: '',
-      payment_type:'',
-      discount_on_total: 0,
-      total_tax: 0,
-      discounted_sub_total: new FormControl({ value: 0, disabled: true }, Validators.required),
-      quotation_total: new FormControl({ value: 0, disabled: true }, Validators.required),
+      customer_id: new FormControl(999, Validators.required),
+      employee_id: new FormControl(999, Validators.required),
+      store_id: new FormControl(999, Validators.required),
+      quotation_type: new FormControl('', Validators.required),
+      payment_type: new FormControl('', Validators.required),
+      discount_on_total: new FormControl(0, Validators.required),
+      total_tax: new FormControl(0, Validators.required),
+      discounted_sub_total: new FormControl(0, Validators.required),
+      quotation_total: new FormControl(0, Validators.required),
       item_rows: this._fb.array([this.initItemRow()])
     });
+    //this.categories =['Accessories', 'Apparels', 'Clothes', 'Electronics'];
+    this.getCategories();
   }
 
   initItemRow(): FormGroup {
     return this._fb.group({
-      product_name: '',
-      category_name: '',
-      quantity: 0,
-      quoted_price: 0,
-      item_discount: 0,
-      tax: new FormControl({ value: 7, disabled: true }, Validators.required),
-      line_item_total: new FormControl({ value: 0, disabled: true }, Validators.required),
+      product_name: new FormControl('', Validators.required),
+      category_name: new FormControl('', Validators.required),
+      quantity: new FormControl(0, Validators.required),
+      quoted_price: new FormControl(0, Validators.required),
+      item_discount: new FormControl(0, Validators.required),
+      tax: new FormControl(7, Validators.required),
+      line_item_total: new FormControl(0, Validators.required),
     });
   }
 
@@ -76,25 +96,19 @@ export class QuotationAddComponent implements OnInit {
 
   onFormSubmit() {
     this.isLoadingResults = false;
-    this.quotation_submitted = true;    
-    console.log("Sending request to add the quotation");    
-    this.line_items = this.quotation_form_group.controls.item_rows;
-    console.log(this.line_items);
-    
+    this.quotation_submitted = true;
+    console.log("Sending request to add the quotation");
+    // console.log(this.line_items);
     let formObj = this.quotation_form_group.getRawValue();
     let serializedForm = JSON.stringify(formObj);
     console.log(serializedForm);
-    //console.log(this.quotation_form_group);
-    
-    //let json_quotationForm = JSON.stringify(this.quotation_form_group.value);
-    //console.log(json_quotationForm);
-
-    this.api.addQuotation(serializedForm)
+    this.qsApi.addQuotation(serializedForm)
       .subscribe(res => {
         console.log(res);
-        let quotation_id = res['quotation_id'];
-        alert(`Quotation Saved: ${quotation_id}`);
-        console.log("Quotation ID: " + quotation_id);
+        this.quotation_id = res['quotation_id'];
+        alert(`Quotation Saved: ${this.quotation_id}`);
+        this.quotation_form_group.reset();
+        this.router.navigate([`/quotation-details/${this.quotation_id}`]);
       }, (err) => {
         console.log(err);
       });
@@ -105,16 +119,16 @@ export class QuotationAddComponent implements OnInit {
     if (item) {
       let discount = item.controls.item_discount.value;
       let quantity = item.controls.quantity.value;
-      let quoted_price = item.controls.quoted_price.value;;      
-      total = quoted_price * quantity * (1 - discount * 0.01);      
-    }    
+      let quoted_price = item.controls.quoted_price.value;;
+      total = quoted_price * quantity * (1 - discount * 0.01);
+    }
     return total;
   }
 
   calculateSubTotal(item_rows) {
     let sub_total = 0;
     if (item_rows) {
-      item_rows.forEach(row => {        
+      item_rows.forEach(row => {
         sub_total += this.calculateLineItemSubTotal(row);
       });
       return sub_total;
@@ -128,7 +142,7 @@ export class QuotationAddComponent implements OnInit {
         let tax = row.controls.tax.value * 0.01;
         let line_total = this.calculateLineItemSubTotal(row);
         total_tax += tax * line_total;
-      });      
+      });
       return total_tax;
     }
   }
@@ -136,11 +150,11 @@ export class QuotationAddComponent implements OnInit {
 
   calculateTotal(item_rows) {
     let sub_total = 0;
-    let discount_on_total = this.quotation_form_group.controls.discount_on_total.value;    
+    let discount_on_total = this.quotation_form_group.controls.discount_on_total.value;
     let total = 0;
     if (item_rows) {
       item_rows.forEach(row => {
-        sub_total += this.calculateLineItemSubTotal(row);        
+        sub_total += this.calculateLineItemSubTotal(row);
       });
     }
     total = sub_total * (1 - discount_on_total * 0.01);
@@ -150,8 +164,36 @@ export class QuotationAddComponent implements OnInit {
     return total;
   }
 
-  capture(){
-    let obj = new Htmltopdf();
-    obj.captureScreen();
-    }
+  createQuotationHtml() {
+    this.quotation_id = 2;
+    this.qsApi.getQuotation(this.quotation_id)
+      .subscribe(res => {
+        this.quotation = res["data"];
+        console.log(this.quotation);
+      });
+  }
+
+  getProductNameListFilter() {
+    return this._listFilter;
+  }
+  setProductNameListFilter(value: string) {
+    this._listFilter = value;
+    this.filteredProducts = this._listFilter ? this.performFilter(this._listFilter) : this.products;
+  }
+
+  performFilter(filterBy: any) {
+    console.log(`filterby 1 ${filterBy.target.value}`);
+    filterBy = filterBy.target.value.toLocaleLowerCase();
+    console.log(`filterby 2 ${filterBy}`);
+    this.filteredProducts = this.products.filter((product: any) =>
+      product.product_name.toLocaleLowerCase().indexOf(filterBy) !== -1);
+    console.log(this.filteredProducts);
+  }
+
+  getCategories() {
+    this.caApi.getCategories().subscribe(res => {
+      console.log(res);
+      this.categories = res
+    });
+  }
 }

@@ -115,8 +115,19 @@
                     <div class="col-sm-1 "> <input type="number" value="{{i+1}}" class="form-control num-field"
                         disabled>
                     </div>
-                    <div class="col-sm-2 "><input type="text" formControlName="product_name" class="form-control"></div>
-                    <div class="col-sm-2"><input type="text" formControlName="category_name" class="form-control"></div>
+                    <div class="col-sm-2 "><input type="text" formControlName="product_name" class="form-control"
+                        (keyup)="performFilter($event)">
+                      <select *ngIf="filteredProducts && filteredProducts.length">
+                        <option *ngFor="let pd of filteredProducts">{{ pd.product_name }}</option>
+                      </select>
+                    </div>
+                    <div class="col-sm-2">
+                      <select *ngIf="categories && categories.length" formControlName="category_name"
+                        class="form-control">
+                        <option *ngFor="let category of categories">
+                          {{ category.category_name }}</option>
+                      </select>
+                    </div>
                     <div class="col-sm-1 num-field"><input type="number" formControlName="quantity"
                         class="form-control num-field">
                     </div>
@@ -124,10 +135,10 @@
                         class="form-control num-field"></div>
                     <div class="col-sm-1"><input type="number" formControlName="item_discount"
                         class="form-control num-field"></div>
-                    <div class="col-sm-1"><input type="number" formControlName="tax" class="form-control num-field">
+                    <div class="col-sm-1"><input type="number" formControlName="tax" class="form-control num-field" [attr.disabled]="true">
                     </div>
                     <div class="col-sm-1"><input formControlName="line_item_total"
-                        [value]="calculateLineItemSubTotal(itemrow)" class="form-control num-field"> </div>
+                      [value]="calculateLineItemSubTotal(itemrow)" class="form-control num-field" [attr.disabled]="true"> </div>
                     <div class="col-sm-1">
                       <button type="button" (click)="deleteRow(i)"> <i class="fa fa-trash"></i>
                       </button>
@@ -185,7 +196,7 @@
               <div class="col-sm-4">
                 <button type="submit" class="btn btn-success mr-2">Submit</button>
               </div>
-              <div class="col-sm-4">
+              <div class="col-sm-2">
                 <button class="btn btn-light">Cancel</button>
               </div>
             </div>
@@ -198,114 +209,3 @@
 
 {{ this.quotation_form_group.value | json }}
 
-<div *ngIf="quotation_submitted">
-  <div class="container" id="contentToConvert" #contentToConvert>
-    <div class="row">
-      <div class="col-sm-12 store_details">
-        <h2>Store Name {{store_name}}</h2>
-        <p>Store Address: {{store_address}}</p>
-        <p>State: {{store_city_zip_state}}</p>
-        <p>Phone: {{store_phone}}</p>
-        <p>Email: {{store_email_web}}</p>
-        <p>Web: </p>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-sm-6 client_details">
-        <h4>Client info</h4>
-        <p> Bill label: {{bill_to_label}}</p>
-        <p>Name : {{client_name}}</p>
-        <p>Address: {{client_address}}</p>
-        <p>City: {{client_city_zip_state}}</p>
-        <p>State:</p>
-        <p>Postal_code:</p>
-        <p>Phone: {{client_phone}}</p>
-        <p>Email: {{client_email}}</p>
-      </div>
-      <div class="col-sm-6 invoice_details">
-        <h4>Invoice info</h4>
-        <p>Date: {{issue_date_label}} : {{issue_date}}</p>
-        {{net_term_label}} {{net_term}} {{due_date_label}}
-        {{due_date}} {{currency_label}} {{currency}} {{po_number_label}}
-        {{po_number}}
-        <h4>Invoice title and number</h4>
-        <p>Title: {{invoice_title}}</p>
-        <p>Number: {{invoice_number}}</p>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col-sm-12 quotation_table">
-        <table class="quotation">
-          <thead>
-            <tr>
-              <th>S.No.</th>
-              <th>Product Name</th>
-              <th>Category</th>
-              <th>Unit Price</th>
-              <th>Quantity</th>
-              <th>Discount</th>
-              <th>Tax</th>
-              <th>Sub-Total</th>
-            </tr>
-          </thead>
-          <tfoot>
-            <tr>
-              <td>foot1</td>
-              <td>foot2</td>
-              <td>foot3</td>
-              <td>foot4</td>
-              <td>foot5</td>
-              <td>foot6</td>
-              <td>foot7</td>
-              <td>foot8</td>
-            </tr>
-          </tfoot>
-          <tbody>
-            <tr *ngFor="let item of line_items.controls; let i=index">
-              <td>{{ i }}</td>
-              <td>{{ item.controls.product_name.value }}</td>
-              <td>{{ item.controls.category.value }}</td>
-              <td>{{ item.controls.quantity.value }}</td>
-              <td>{{ item.controls.quoted_price.value }}</td>
-              <td>{{ item.controls.item_discount.value }}</td>
-              <td>{{ item.controls.tax.value }}</td>
-              <td>{{ item.controls.line_item_total.value }}</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col-sm-6 payment_details">
-        <h4>Payment info</h4>
-        <p>Type: {{payment_type}} Cash or Credit</p>
-      </div>
-      <div class="col-sm-6 invoice_sums">
-        Invoice sums
-        <p>Sub Total : {{amount_subtotal_label}}</p>
-        <p>{{amount_subtotal}}</p>
-        <p>Tax Name: {{tax_name}}</p>
-        <p>Tax Value:{{tax_value}}</p>
-        <p>Amount Total Label: {{amount_total_label}}</p>
-        <p>Amount Total: {{amount_total}}</p>
-        <p>Amount Paid Label: {{amount_paid_label}}</p>
-        <p>Amount Paid: {{amount_paid}}</p>
-        <p>Amount Due Label: {{amount_due_label}}</p>
-        <p>Amount Due: {{amount_due}}</p>
-        <h4>Invoice terms</h4>
-        <p>Terms Label: {{terms_label}}</p>
-        <p>Terms: {{terms}}</p>
-        Custom fields (more info)
-        {{document_custom_[name]}}
-        {{client_custom_[name]}}
-      </div>
-    </div>
-  </div>
-</div>
-<div class="row">
-  <div class="col-sm-2">
-    <button type="button" (click)="capture()" class="btn btn-success">Save PDF</button>
-  </div>
-</div>

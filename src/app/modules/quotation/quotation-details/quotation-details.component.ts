@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { QuotationService } from '../quotation.service';
 import { FormControl, FormGroupDirective, FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
+import { Htmltopdf } from '../../../shared/html_to_pdf';
 
 @Component({
   selector: 'app-quotation-details',
@@ -8,9 +9,13 @@ import { FormControl, FormGroupDirective, FormBuilder, FormGroup, NgForm, Valida
   styleUrls: ['./quotation-details.component.scss']
 })
 export class QuotationDetailsComponent {
-  quotation_id: number;
   quotation: any;
-  products: any;
+  quotation_id: number;
+  store: any;
+  customer: any;
+  metadata: any;
+  line_items: any;
+
   quotationList: any;
   quotationByIdForm: FormGroup;
   quotationByEntityForm: FormGroup;
@@ -31,17 +36,21 @@ export class QuotationDetailsComponent {
 
   onQidFormSubmit(quotationByIdForm: any) {
     let qid = quotationByIdForm.quotation_id;
-    console.log(`Fetching quotation data for ${qid}`);
+    console.log(`Fetching quotation data for ID: ${qid}`);
     if (qid) {
       this.api.getQuotation(qid).
         subscribe(res => {
-          if (res) {
-            console.log(res);
-            this.quotation = res["data"][0];
-            this.products = res["data"].slice(1);
-            console.log(this.quotation);
-            console.log(this.products);
+          if (res) {            
+            this.quotation = res["data"];
+            this.metadata = this.quotation["metadata"];
+            this.store = this.quotation["store"];
+            this.customer = this.quotation["customer"];
+            this.line_items = this.quotation["line_items"];
+            this.quotation_id = this.metadata["order_id"];
+            this.quotationByIdForm.reset();
+            this.quotationList = null;
           } else {
+            this.quotationList = null;
             this.quotation = null;
           }
         });
@@ -52,12 +61,12 @@ export class QuotationDetailsComponent {
     console.log(`Fetching quotation data by URL ${apiUrl}`);
     this.api.getQuotations(apiUrl).
       subscribe(res => {
-        if (res) {
-          console.log(res);
-          this.quotationList = res["data"];
-          console.log(this.quotationList);
+        if (res) {          
+          this.quotationList = res["data"];          
+          this.quotationByEntityForm.reset();
+          this.quotation = null;
         } else {
-          this.quotationList = null;
+          this.quotationList = null;          
         }
       });
   }
@@ -85,5 +94,11 @@ export class QuotationDetailsComponent {
     if (end_date) { apiUrl += `&end_date=${end_date}`; }
 
     return apiUrl;
+  }
+
+  capture() {
+    // this.createQuotationHtml();
+    let obj = new Htmltopdf();
+    obj.captureScreen("quotationPdf");
   }
 }

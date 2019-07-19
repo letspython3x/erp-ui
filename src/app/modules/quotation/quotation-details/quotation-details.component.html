@@ -83,39 +83,45 @@
   </div>
 </div>
 <div *ngIf="quotationList">
-  <div class="row">
-    <div class="col-md-10 d-flex align-items-stretch grid-margin">
-      <div class="row flex-grow">
-        <div class="col-12 grid-margin">
-          <div class="card">
-            <div class="card-body">
-              <h4 class="card-title">Quotations</h4>
-              <p class="card-description">
-                List of matching quotations.
-              </p>
-              <table class="table table-condensed table-responsive" border="1">
-                <thead>
-                  <tr>
-                    <th> # </th>
-                    <th> Quotation ID </th>
-                    <th> Type </th>
-                    <th> Customer ID </th>
-                    <th> Employee ID </th>
-                    <th> Date </th>
-                    <th> Quotation Total </th>
-                  </tr>
-                </thead>
-                <tbody *ngFor="let ql of quotationList">
-                  <tr>
-                    <td class="font-weight-medium"> {{ ql.serial_no }} </td>
-                    <td>{{ ql.order_id }} </td>
-                    <td>{{ ql.quotation_type }} </td>
-                    <td>{{ ql.customer_id }} </td>
-                    <td>{{ ql.employee_id }} </td>
-                    <td>{{ ql.created_at }} </td>
-                    <td>{{ ql.quotation_total | currency:'CAD':'symbol-narrow' }} </td>
-                </tbody>
-              </table>
+  <div class="contatiner">
+    <div class="row">
+      <div class="col-md-10 d-flex align-items-stretch grid-margin">
+        <div class="row flex-grow">
+          <div class="col-10 grid-margin">
+            <div class="card">
+              <div class="card-body">
+                <h4 class="card-title">Quotations</h4>
+                <p class="card-description">
+                  List of matching quotations.
+                </p>
+                <table class="table table-condensed table-responsive" border="1">
+                  <thead>
+                    <tr>
+                      <th><span> # </span></th>
+                      <th><span> Quotation ID </span></th>
+                      <th><span> Quotation Type </span></th>
+                      <th><span> Payment Type </span></th>
+                      <th><span> Created Date </span></th>
+                      <th><span> Customer ID </span></th>
+                      <th><span> Employee ID </span></th>
+                      <th><span> Store ID </span></th>
+                      <th><span> Quotation Total </span></th>
+                    </tr>
+                  </thead>
+                  <tbody *ngFor="let ql of quotationList; let i=index">
+                    <tr>
+                      <td class="font-weight-medium"><span> {{ i+1 }} </span></td>
+                      <td><span>{{ ql.order_id }} </span></td>
+                      <td><span>{{ ql.quotation_type }} </span></td>
+                      <td><span>{{ ql.payment_type }} </span></td>
+                      <td><span>{{ ql.created_at }} </span></td>
+                      <td><span>{{ ql.customer_id }} </span></td>
+                      <td><span>{{ ql.employee_id }} </span></td>
+                      <td><span>{{ ql.store_id }} </span></td>
+                      <td><span>{{ ql.quotation_total | currency:'CAD':'symbol-narrow' }} </span></td>
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
         </div>
@@ -123,7 +129,117 @@
     </div>
   </div>
 </div>
+
+
 <div *ngIf="quotation">
+  <div class="container quotation_print" id="quotationPdf" #quotationPdf>
+    <div class="row">
+      <div class="col-sm-12 header store_details">
+        <h1>{{ metadata.quotation_type }}</h1>
+        <address>
+          <h3>Store Name {{store.store_name}}</h3>
+          <p>Store Address: {{store.address}}</p>
+          <p>City: {{store.city}}</p>
+          <p>Phone: {{store.phone}}</p>
+          <p>Postal Code: {{store.postal_code}}</p>
+          <!-- <p>{{store.email}} || {{store.web}}</p> -->
+        </address>
+      </div>
+      <div class="row">
+        <div class="col-sm-6 client_details">
+          <h4>Customer info</h4>
+          <address>
+            <p> Bill label: {{ metadata.quotation_type }}</p>
+            <p>Name : {{customer.first_name}} {{customer.middle_name}} {{customer.last_name}}</p>
+            <p>Address: {{customer.address}}</p>
+            <p>City: {{customer.city}}</p>
+            <p>State:{{customer.state}}</p>
+            <p>Country:{{customer.country}}</p>
+            <p>Postal_code:{{customer.postal_code}}</p>
+            <p>Phone: {{customer.primary_phone}}, {{customer.secondary_phone}} </p>
+            <p>Email: {{customer.email}}</p>
+          </address>
+        </div>
+        <div class="col-sm-6 invoice_details">
+          <h4>Invoice info</h4>
+          <p>Quotation Type: {{ metadata.quotation_type }}</p>
+          <p>Date: {{ metadata.created_at }}</p>
+          <p>Currency: </p>
+          <!-- {{net_term_label}} {{net_term}} {{due_date_label}}
+        {{due_date}} {{currency_label}} {{currency}} {{po_number_label}}
+        {{po_number}} -->
+          <h4>Invoice title and number</h4>
+          <p>Title: {{ metadata.quotation_type }}</p>
+          <p>Number: {{ metadata.order_id }}</p>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-12 quotation_table">
+          <table class="inventory">
+            <thead>
+              <tr>
+                <th><span>S.No.</span></th>
+                <th><span>Product Name</span></th>
+                <th><span>Category Name</span></th>
+                <th><span>Unit Price</span></th>
+                <th><span>Quantity</span></th>
+                <th><span>Discount</span></th>
+                <th><span>Tax</span></th>
+                <th><span>Sub-Total</span></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of line_items; let i=index">
+                <td><span>{{ i+1 }}</span></td>
+                <td><span>{{ item.product_name }}</span></td>
+                <td><span>{{ item.category_name }}</span></td>
+                <td><span>{{ item.quantity }}</span></td>
+                <td><span>{{ item.quoted_price }}</span></td>
+                <td><span>{{ item.item_discount }}</span></td>
+                <td><span>{{ item.tax }}</span></td>
+                <td><span>{{ item.line_item_total }}</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-6 payment_details">
+          <h4>Payment info</h4>
+          <p>Type: {{metadata.payment_type}} Cash or Credit</p>
+        </div>
+        <div class="col-sm-6 invoice_sums">
+          Invoice sums
+          <p>Sub Total : {{ metadata.discounted_sub_total }}</p>
+          <p>Tax Name: </p>
+          <p>Tax Value:{{metadata.total_tax}}</p>
+          <p>Amount Total Label: </p>
+          <p>Amount Total: {{metadata.quotation_total}}</p>
+          <!-- <p>Amount Paid Label: {{amount_paid_label}}</p>
+        <p>Amount Paid: {{amount_paid}}</p>
+        <p>Amount Due Label: {{amount_due_label}}</p>
+        <p>Amount Due: {{amount_due}}</p>
+        <h4>Invoice terms</h4>
+        <p>Terms Label: {{terms_label}}</p>
+         <p>Terms: {{terms}}</p>
+        Custom fields (more info)
+        {{document_custom_[name]}}
+        {{client_custom_[name]}} -->
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-3">
+        <button type="button" (click)="capture()" class="btn btn-success">Save PDF</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- <div *ngIf="quotation">
   <div class="row">
     <div class="col-md-10 d-flex align-items-stretch grid-margin">
       <div class="row flex-grow">
@@ -137,11 +253,11 @@
               <table class="table table-responsive" border="1">
                 <tr>
                   <th>Customer ID</th>
-                  <td>{{ quotation.customer_id }}</td>
+                  <td>{{ quotation.customer_id }}</span></td>
                 </tr>
                 <tr>
                   <th>Store ID</th>
-                  <td>{{ quotation.store_id }}</td>
+                  <td>{{ quotation.store_id }}</span></td>
                 </tr>
                 <tr>
                   <th>Quotation Type</th>
@@ -170,7 +286,7 @@
                     <th>Product Name</th>
                     <th>Category</th>
                     <th>Quantity</th>
-                    <th>Quoted Price</th>                    
+                    <th>Quoted Price</th>
                     <th>Discount</th>
                     <th>Tax</th>
                     <th>Sub-Total</th>
@@ -179,7 +295,7 @@
                 <tbody>
                   <tr *ngFor="let pd of products">
                     <td>{{ pd.product_name }}</td>
-                    <td>{{ pd.category_name }}</td>                    
+                    <td>{{ pd.category_name }}</td>
                     <td>{{ pd.quantity }}</td>
                     <td>{{ pd.quoted_price  | currency:'CAD':'symbol-narrow' }} </td>
                     <td>{{ pd.item_discount }} %</td>
@@ -194,4 +310,4 @@
       </div>
     </div>
   </div>
-</div>
+</div> -->

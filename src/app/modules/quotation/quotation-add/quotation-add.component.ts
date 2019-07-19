@@ -16,6 +16,7 @@ import { Router } from "@angular/router";
 export class QuotationAddComponent implements OnInit {
   quotation_form_group: FormGroup;
   quotation: any;
+  quotation_id: any;
   store: any;
   customer: any;
 
@@ -23,19 +24,8 @@ export class QuotationAddComponent implements OnInit {
   _listFilter: string;
   categories: any;
   products: any;
-
   total: number;
-  currency: 'US Dollars';
-  quotation_id: number;
   total_row: number;
-  line_items: any;
-  employee_id: number;
-  quotation_type: string;
-  payment_type: string;
-  discount_on_total: 0;
-  total_tax: 0;
-  discounted_sub_total: 0;
-  quotation_total: 0;
   quotation_submitted: boolean = false;
   isLoadingResults: boolean = true;
 

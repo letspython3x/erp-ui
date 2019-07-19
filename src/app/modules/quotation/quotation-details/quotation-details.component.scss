@@ -1,22 +1,83 @@
-// Table
+/* reset */
 
-.table {
-    width: 80%;
-    margin-bottom: 10px;
-    // color: $table-color;
-    // background-color: $table-bg; // Reset for nesting within parents with `background-color`.
-  
-    th,
-    td {
-      padding: 10px 10px;
-      vertical-align: top;
-    //   border-top: $table-border-width solid $table-border-color;
-    }
-  
-    thead th {
-      vertical-align: bottom;
-    //   border-bottom: (2 * $table-border-width) solid $table-border-color;
-    }
-  
-  }
-  
+div.quotation_print
+{
+	border: 2px solid;
+	// width:50%;
+	// box-sizing: content-box;
+	background-color: #FFF;
+	font-family: inherit;
+	font-size: inherit;
+	font-style: inherit;
+	font-weight: inherit;
+	line-height: inherit;
+	margin: 10px;
+	padding: 10px;
+	vertical-align: top;
+}
+
+/* heading */
+
+h1 { font: bold 100% sans-serif; letter-spacing: 0.5em; text-align: center; text-transform: uppercase; }
+
+/* table */
+
+table { font-size: 75%; table-layout: fixed; width: 100%; }
+table { border-collapse: separate; border-spacing: 2px; }
+th, td { border-width: 1px; padding: 0.5em; position: relative; text-align: left; }
+th, td { border-radius: 0.25em; border-style: solid; }
+th { background: #EEE; border-color: #BBB; }
+td { border-color: #DDD; }
+
+/* header */
+
+// header { margin: 0 0 3em; }
+// header:after { clear: both; content: ""; display: table; }
+
+header h1 { background: #000; border-radius: 0.25em; color: #FFF; margin: 0 0 1em; padding: 0.5em 0; }
+header address { float: left; font-size: 75%; font-style: normal; line-height: 1.25; margin: 0 1em 1em 0; }
+header address p { margin: 0 0 0.25em; }
+header span, header img { display: block; float: right; }
+
+
+/* table items */
+
+table.inventory { clear: both; width: 100%; }
+table.inventory th { font-weight: bold; text-align: center; }
+
+table.inventory td:nth-child(1) { width: 26%; }
+table.inventory td:nth-child(2) { width: 38%; }
+table.inventory td:nth-child(3) { text-align: right; width: 12%; }
+table.inventory td:nth-child(4) { text-align: right; width: 12%; }
+table.inventory td:nth-child(5) { text-align: right; width: 12%; }
+
+/* table balance */
+
+table.balance th, table.balance td { width: 50%; }
+table.balance td { text-align: right; }
+
+
+div.client_details, div.store_details, div.invoice_details, div.payment_details, div.invoice_sums
+{
+	border: 2px solid;
+	border-width: 2px;
+	display: block;
+	font-size: .8rem;
+	padding: 0.25em 0.5em;	
+	float: left;
+	text-align: left;
+	width: 50%;
+}
+
+ .store_details
+{
+	background: #9AF;
+	box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+	background-image: -moz-linear-gradient(#00ADEE 5%, #0078A5 100%);
+	background-image: -webkit-linear-gradient(#00ADEE 5%, #0078A5 100%);
+	border-radius: 0.5em;
+	border-color: #0076A3;
+	color: #FFF;
+	font-weight: bold;
+	text-shadow: 0 -1px 2px rgba(0,0,0,0.333);
+}

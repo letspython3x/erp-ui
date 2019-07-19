@@ -61,34 +61,3 @@ table.quotation tfoot {
 table.quotation tfoot td {
   font-size: 14px;
 }
-
-.quotation_print {
-  position: relative;
-  align-content: center;
-}
-
-.store_details{
-  position: center;
-  text-align: center;
-  width:50px;
-  border:1px solid;
-  padding:20px;
-}
-
-.payment_details, .client_details, .invoice_details, .quotation_table{
-  position: left;
-  text-align: left;
-  width:30px;
-  border:1px solid;
-  padding:10px;
-  // margin:10px;
-}
-
-.invoice_sums{
-  position: right;
-  text-align: right;
-  width:50px;
-  border:1px solid;
-  padding:20px;
-}
-

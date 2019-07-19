@@ -61,6 +61,7 @@ import { ReportComponent} from './modules/report/report.component';
 import { AccountsComponent } from './modules/accounts/accounts.component';
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
+import { CategoryComponent } from './modules/category/category.component';
 
 @NgModule({
   declarations: [
@@ -107,7 +108,8 @@ import { LoginComponent } from './login/login.component';
     AlertComponent,
     HomeComponent,
     RegisterComponent,
-    LoginComponent,    
+    LoginComponent,
+    CategoryComponent,    
     //routing,
   ],
   imports: [

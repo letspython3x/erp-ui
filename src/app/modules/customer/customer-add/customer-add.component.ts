@@ -48,6 +48,7 @@ export class CustomerAddComponent {
         console.log("Customer ID: " + customer_id);
         this.isLoadingResults = false;
         // this.router.navigate(['/product-details', id]);
+        this.customerForm.reset();
       }, (err) => {
         console.log(err);
         this.isLoadingResults = false;

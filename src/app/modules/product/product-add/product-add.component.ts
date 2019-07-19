@@ -68,6 +68,7 @@ export class ProductAddComponent {
         console.log("Product ID: " + product_id);
         this.isLoadingResults = false;
         // this.router.navigate(['/product-details', id]);
+        this.productForm.reset();
       }, (err) => {
         console.log(err);
         this.isLoadingResults = false;

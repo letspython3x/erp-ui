@@ -63,9 +63,9 @@
               <table class="table table-bordered">
                 <thead>
                   <tr>
-                    <th> Product ID </th>
-                    <th> Serial Code </th>
                     <th> Product Name </th>
+                    <th> Serial Code </th>
+                    <th> SKU Code </th>
                     <th> Category </th>
                     <th> Unit Price </th>
                     <th> Selling Price </th>
@@ -76,9 +76,9 @@
                 </thead>
                 <tbody *ngFor="let pd of productList">
                   <tr>
-                    <td class="font-weight-medium"> {{ pd.pk | slice:8}} </td>
+                    <td class="font-weight-medium">{{ pd.product_name }} </td>
                     <td>{{ pd.serial_no }} </td>
-                    <td>{{ pd.product_name }} </td>
+                    <td>{{ pd.product_id }} </td>
                     <td>{{ pd.category_name }} </td>
                     <td>{{ pd.unit_price | currency:'CAD':'symbol-narrow' }} </td>
                     <td>{{ pd.sell_price | currency:'CAD':'symbol-narrow' }} </td>

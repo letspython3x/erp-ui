@@ -56,6 +56,7 @@ export class StoreAddComponent {
         console.log("Store ID: " + store_id);
         this.isLoadingResults = false;
         // this.router.navigate(['/store-details', store_id]);
+        this.storeForm.reset();
       }, (err) => {
         console.log(err);
         this.isLoadingResults = false;

@@ -62,9 +62,9 @@
               <table class="table table-bordered">
                 <thead>
                   <tr>
-                    <th> Store ID</th>
+                    <th> Store Name</th>
                     <th> Store Admin </th>
-                    <th> Store Name </th>
+                    <th> Store ID </th>
                     <th> Category </th>
                     <th> Country </th>
                     <th> Phone </th>
@@ -72,9 +72,9 @@
                 </thead>
                 <tbody *ngFor="let sl of storeList">
                   <tr>
-                    <td class="font-weight-medium"> {{ sl.pk }} </td>
+                    <td class="font-weight-medium"> {{ sl.store_name }} </td>
                     <td>{{ sl.store_admin }} </td>
-                    <td>{{ sl.store_name }} </td>
+                    <td>{{ sl.store_id }} </td>
                     <td>{{ sl.category_id }} </td>
                     <td>{{ sl.country }} </td>
                     <td>{{ sl.phone }} </td>

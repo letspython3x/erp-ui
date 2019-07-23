@@ -56,11 +56,19 @@ export class ProductService {
     );
   }
 
-  updateProduct(id, product): Observable<any> {
-    const url = `${apiUrl}${id}`;
+  updateProduct(product): Observable<any> {
+    const url = `${apiUrl}`;
     return this.http.put(url, product, httpOptions).pipe(
-      tap(_ => console.log(`updated product id=${id}`)),
+      tap(_ => console.log(`updated product id=${product}`)),
       catchError(this.handleError<any>('updateProduct'))
+    );
+  }
+
+  updateProductQuantity(product): Observable<any> {
+    const url = `${apiUrl}`;
+    return this.http.patch(url, product, httpOptions).pipe(
+    tap(res => console.log(`updated product id=${res}`)),
+    catchError(this.handleError<any>('updateProduct'))
     );
   }
 
@@ -68,7 +76,7 @@ export class ProductService {
     const url = `${apiUrl}?product_id=${id}`;
     console.log(url);
     return this.http.delete<IProduct>(url, httpOptions).pipe(
-      tap(_ => console.log(`deleted product id=${id}`)),
+      tap(res => console.log(`deleted product id=${res}`)),
       catchError(this.handleError<IProduct>('deleteProduct'))
     );
   }

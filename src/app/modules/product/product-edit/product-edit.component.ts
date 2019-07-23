@@ -9,34 +9,25 @@ import { FormControl, FormBuilder, FormGroup } from '@angular/forms';
 export class ProductEditComponent {
   searchProductForm: FormGroup;
   updateProductForm: FormGroup;
+
   isLoadingResults = false;
-  product_name: string = '';
-  serial_no: string = '';
-  category_id: string = '';
-  sub_category: string = '';
-  membership: string = '';
-  description: string = '';
-  supplier_id: string = '';
-  unit_price: number = 0;
-  sell_price: number = 0;
-  units_in_stock: number = 0;
-  is_active: number = 0;
-  store_id: number;
-  product_id: string;
+  product: any;
+  product_id: number;
   updated_at: Date = null;
 
   constructor(private formBuilder: FormBuilder,
     private api: ProductService) {
     this.searchProductForm = this.formBuilder.group({
-      id: new FormControl(),
-      name: new FormControl(),
+      product_id: new FormControl(),
+      product_name: new FormControl(),
       serial_no: new FormControl(),
     })
+
     this.updateProductForm = this.formBuilder.group({
       product_name: new FormControl(),
       serial_no: new FormControl(),
       store_id: new FormControl(),
-      category_id: new FormControl(),
+      category_name: new FormControl(),
       sub_category: new FormControl(),
       membership: new FormControl(),
       description: new FormControl(),
@@ -46,45 +37,42 @@ export class ProductEditComponent {
       units_in_stock: new FormControl(),
       is_active: new FormControl(),
     })
+    
   }
 
   onSearchFormSubmit(form: any) {
-    // console.log(form);
-    let id = form.id;
-    let name = form.name;
+    let product_id = form.product_id;
+    let product_name = form.product_name;
     let serial_no = form.serial_no;
     this.isLoadingResults = false;
-    this.api.getProduct(id, serial_no, name).subscribe(res => {
-      console.log(res[0]);
-      // alert(`Product Fetched: ${res}`);
-      // console.log("product ID: " + id);
-      this.product_name = res[0]['product_name'];
-      this.serial_no = res[0]['serial_no'];
-      this.category_id = res[0]['category_id'];
-      this.description = res[0]['description'];
-      this.supplier_id = res[0]['supplier_id'];
-      this.store_id = res[0]['store_id'];
-      this.unit_price = res[0]['unit_price'];
-      this.sell_price = res[0]['sell_price'];
-      this.units_in_stock = res[0]['units_in_stock'];
-      this.is_active = res[0]['is_active'];
+    this.api.getProduct(product_id, serial_no, product_name).subscribe(res => {
+      console.log(`Searching product ID: ${product_id} SERIAL: ${serial_no} NAME:${product_name} `);
+      this.product = res[0];
+      this.product_id = this.product.product_id;
+      console.log(this.product);
       this.isLoadingResults = true;
-      this.product_id = res[0]['pk'].split("#")[1];
+      this.searchProductForm.reset();
     }, (err) => {
       console.log(err);
       this.isLoadingResults = false;
     });
   }
   onUpdateFormSubmit(form: any) {
-    alert('Updating...');
-    // this.api.updateProduct();
+    alert('Updating Product...');
     console.log(form);
+    let product = form.value;    
+    this.api.updateProduct(product);
+    console.log(form);
+    this.updateProductForm.reset();
   }
+
 
   onDelete() {
     alert(`Deleting Product: ${this.product_id}`);
-    this.api.deleteProduct(this.product_id).subscribe((data) => {
-      console.log("success");
+    this.api.deleteProduct(this.product_id).subscribe(data => {
+      let res = data;
+      console.log(`DELETE ${res}`);
+      console.log("DELETE success");
     });
   }
 }

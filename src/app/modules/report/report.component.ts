@@ -12,6 +12,28 @@ export class ReportComponent implements OnInit {
   products_count: number = 0;
   isLoadingResults: Boolean = false;
 
+  accounts_overdue = [{
+    'account_name': 'Account 1',
+    'credit_limit': '$1000',
+    'invoices': '$500',
+    'balance': '$250',
+    'last_payment_date': 'July 21, 2019',
+  },
+  {
+    'account_name': 'Account 1',
+    'credit_limit': '$1000',
+    'invoices': '$500',
+    'balance': '$250',
+    'last_payment_date': 'Mar 21, 2019',
+  },
+  {
+    'account_name': 'Account 1',
+    'credit_limit': '$1000',
+    'invoices': '$500',
+    'balance': '$250',
+    'last_payment_date': 'Apr 21, 2019',
+  }]
+
   constructor(private api: ReportService) { }
 
   ngOnInit() {

@@ -1,38 +1,45 @@
-<div class="row">
-  <form class="form-sample" [formGroup]="searchProductForm" (ngSubmit)="onSearchFormSubmit(searchProductForm.value)">
-    <div class="card">
-      <div class="card-header"> Search Product by Either </div>
-      <div class="card-body">
-        <div class="form-group row">
-          <label class="col-sm-4 col-form-label">Product ID</label>
-          <div class="col-sm-8">
-            <input type="text" class="form-control" formControlName="id" />
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12 col-md-6">
+      <form class="form-sample" [formGroup]="searchProductForm"
+        (ngSubmit)="onSearchFormSubmit(searchProductForm.value)">
+        <div class="card">
+          <div class="card-header"> Search Product by Either </div>
+          <div class="card-body">
+            <div class="form-group row">
+              <label class="col-sm-4 col-form-label">Product ID</label>
+              <div class="col-sm-8">
+                <input type="number" class="form-control" formControlName="product_id" />
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-4 col-form-label">Serial No</label>
+              <div class="col-sm-8">
+                <input type="text" class="form-control" formControlName="serial_no" />
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-4 col-form-label">Product Name</label>
+              <div class="col-sm-8">
+                <input type="text" class="form-control" formControlName="product_name" />
+              </div>
+            </div>
+            <div class="form-group row">
+              <button type="submit" class="col-sm-4 btn btn-success mr-2">Search</button>
+            </div>
           </div>
         </div>
-        <div class="form-group row">
-          <label class="col-sm-4 col-form-label">Serial No</label>
-          <div class="col-sm-8">
-            <input type="text" class="form-control" formControlName="serial_no" />
-          </div>
-        </div>
-        <div class="form-group row">
-          <label class="col-sm-4 col-form-label">Product Name</label>
-          <div class="col-sm-8">
-            <input type="text" class="form-control" formControlName="name" />
-          </div>
-        </div>
-        <div class="form-group row">
-          <button type="submit" class="col-sm-4 btn btn-success mr-2">Search</button>
-        </div>
-      </div>
+      </form>
     </div>
-  </form>
+    <div class="col-sm-12 col-md-6">
+      <!-- <product-update-quantity></product-update-quantity> -->
+    </div>
+  </div>
 </div>
 
-<div *ngIf="isLoadingResults">
+<div class="container" *ngIf="isLoadingResults">
   <div class="row">
     <h5 align="center">Update Product details Below</h5>
-
     <form class="form-sample" [formGroup]="updateProductForm" (ngSubmit)="onUpdateFormSubmit(updateProductForm.value)">
       <div class="card-columns">
         <!-- Card 1 -->
@@ -42,31 +49,34 @@
             <div class="form-group row">
               <label class="col-sm-4 col-form-label">Name</label>
               <div class="col-sm-8">
-                <input type="text" class="form-control" formControlName="product_name" value="{{ product_name }}" />
+                <input type="text" class="form-control" formControlName="product_name"
+                  value="{{ product.product_name }}" />
               </div>
             </div>
             <div class="form-group row">
               <label for="serial_no" class="col-sm-4 col-form-label">Serial No</label>
               <div class="col-sm-8">
-                <input type="text" class="form-control" formControlName="serial_no" value="{{ serial_no }}" />
+                <input type="text" class="form-control" formControlName="serial_no" value="{{ product.serial_no }}" />
               </div>
             </div>
             <div class="form-group row">
               <label class="col-sm-4 col-form-label">Category</label>
               <div class="col-sm-8">
-                <input type="text" class="form-control" formControlName="category_id" value="{{ category_id }}" />
+                <input type="text" class="form-control" formControlName="category_name"
+                  value="{{ product.category_name }}" />
               </div>
             </div>
             <div class="form-group row">
               <label class="col-sm-4 col-form-label">Sub-Category</label>
               <div class="col-sm-8">
-                <input type="text" class="form-control" formControlName="sub_category" value="sub_category" />
+                <input type="text" class="form-control" formControlName="sub_category" value="IN PROGRESS" />
               </div>
             </div>
             <div class="form-group row">
               <label for="description" class="col-sm-4 col-form-label">Description</label>
               <div class="col-sm-8">
-                <input type="text" class="form-control" formControlName="description" value="{{ description }}" />
+                <input type="text" class="form-control" formControlName="description"
+                  value="{{ product.description }}" />
               </div>
             </div>
           </div>
@@ -77,25 +87,26 @@
             <div class="form-group row">
               <label class="col-sm-4 col-form-label">Store ID</label>
               <div class="col-sm-8">
-                <input type="text" class="form-control" formControlName="store_id" value="{{ store_id }}" />
+                <input type="text" class="form-control" formControlName="store_id" value="{{ product.store_id }}" />
               </div>
             </div>
             <div class="form-group row">
               <label class="col-sm-4 col-form-label">Unit Price</label>
               <div class="col-sm-8">
-                <input type="text" class="form-control" formControlName="unit_price" value="{{ unit_price }}" />
+                <input type="text" class="form-control" formControlName="unit_price" value="{{ product.unit_price }}" />
               </div>
             </div>
             <div class="form-group row">
               <label class="col-sm-4 col-form-label">Sell Price</label>
               <div class="col-sm-8">
-                <input type="text" class="form-control" formControlName="sell_price" value="{{ sell_price }}" />
+                <input type="text" class="form-control" formControlName="sell_price" value="{{ product.sell_price }}" />
               </div>
             </div>
             <div class="form-group row">
               <label class="col-sm-4 col-form-label">Units in Stock</label>
               <div class="col-sm-8">
-                <input type="text" class="form-control" formControlName="units_in_stock" value="{{ units_in_stock }}" />
+                <input type="text" class="form-control" formControlName="units_in_stock"
+                  value="{{ product.units_in_stock }}" />
               </div>
             </div>
           </div>
@@ -107,7 +118,7 @@
               <label for="distributor" class="col-sm-4 col-form-label">Supplier</label>
               <div class="col-sm-8">
                 <input type="text" class="form-control" formControlName="supplier_id" placeholder="Supplier"
-                  value="{{ supplier_id }}" />
+                  value="{{ product.supplier_id }}" />
               </div>
             </div>
           </div>
@@ -118,13 +129,14 @@
             <div class="form-group row">
               <label for="is_active" class="col-sm-4 col-form-label">Is Available</label>
               <div class="col-sm-2">
-                <input type="checkbox" class="form-control" formControlName="is_active" checked="{{ is_active }}" />
+                <input type="checkbox" class="form-control" formControlName="is_active"
+                  checked="{{ product.is_active }}" />
               </div>
             </div>
             <div class="form-group row">
               <label class="col-sm-4 col-form-label">Attributes</label>
               <div class="col-sm-8">
-                <select class="form-control" formControlName="category_id">
+                <select class="form-control" formControlName="category_name">
                   <option>Premium</option>
                   <option>Ad-Hoc</option>
                   <option>Category4</option>

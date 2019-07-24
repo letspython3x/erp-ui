@@ -8,7 +8,7 @@ import { Htmltopdf } from '../../../shared/html_to_pdf';
   templateUrl: './quotation-details.component.html',
   styleUrls: ['./quotation-details.component.scss']
 })
-export class QuotationDetailsComponent {
+export class QuotationsComponent {
   quotation: any;
   quotation_id: number;
   store: any;

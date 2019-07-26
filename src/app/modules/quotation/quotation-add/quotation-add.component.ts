@@ -7,6 +7,7 @@ import { CustomerService } from '../../customer/customer.service';
 import { ProductsComponent } from '@/modules/product/products/products.component';
 import { ICategory } from '@/shared/models/category.model';
 import { Router } from "@angular/router";
+import { ProductService } from '@/modules/product/product.service';
 
 @Component({
   selector: 'app-quotation-add',
@@ -32,7 +33,8 @@ export class QuotationAddComponent implements OnInit {
   constructor(private qsApi: QuotationService,
     private ssApi: StoreService,
     private csApi: CustomerService,
-    private caApi: CategoryService,
+    private categoryApi: CategoryService,
+    private productApi: ProductService,
     private _fb: FormBuilder,
     private router: Router) { }
 
@@ -51,11 +53,13 @@ export class QuotationAddComponent implements OnInit {
     });
     //this.categories =['Accessories', 'Apparels', 'Clothes', 'Electronics'];
     this.getCategories();
+    this.getProductNames();
   }
 
   initItemRow(): FormGroup {
     return this._fb.group({
       product_name: new FormControl('', Validators.required),
+      barcode_number: new FormControl('', Validators.required),
       category_name: new FormControl('', Validators.required),
       quantity: new FormControl(0, Validators.required),
       quoted_price: new FormControl(0, Validators.required),
@@ -181,9 +185,15 @@ export class QuotationAddComponent implements OnInit {
   }
 
   getCategories() {
-    this.caApi.getCategories().subscribe(res => {
+    this.categoryApi.getCategories().subscribe(res => {
       console.log(res);
       this.categories = res
+    });
+  }
+  getProductNames(){
+    this.productApi.getProducts().subscribe(res=>{
+      console.log(res);
+      this.products = res;
     });
   }
 }

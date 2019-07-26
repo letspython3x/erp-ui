@@ -19,7 +19,7 @@ import { ProductRoutingModule } from './product-routing.module';
   declarations: [
     ProductAddComponent,
     ProductEditComponent,
-    // ProductUpdateQuantityComponent,    
+    ProductUpdateQuantityComponent,    
     ProductsComponent
   ],
   // exports: [

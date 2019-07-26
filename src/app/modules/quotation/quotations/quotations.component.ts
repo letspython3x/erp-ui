@@ -4,9 +4,9 @@ import { FormControl, FormGroupDirective, FormBuilder, FormGroup, NgForm, Valida
 import { Htmltopdf } from '../../../shared/html_to_pdf';
 
 @Component({
-  selector: 'app-quotation-details',
-  templateUrl: './quotation-details.component.html',
-  styleUrls: ['./quotation-details.component.scss']
+  selector: 'app-quotations',
+  templateUrl: './quotations.component.html',
+  styleUrls: ['./quotations.component.scss']
 })
 export class QuotationsComponent {
   quotation: any;
@@ -40,7 +40,7 @@ export class QuotationsComponent {
     if (qid) {
       this.api.getQuotation(qid).
         subscribe(res => {
-          if (res) {            
+          if (res) {
             this.quotation = res["data"];
             this.metadata = this.quotation["metadata"];
             this.store = this.quotation["store"];
@@ -61,12 +61,12 @@ export class QuotationsComponent {
     console.log(`Fetching quotation data by URL ${apiUrl}`);
     this.api.getQuotations(apiUrl).
       subscribe(res => {
-        if (res) {          
-          this.quotationList = res["data"];          
+        if (res) {
+          this.quotationList = res["data"];
           this.quotationByEntityForm.reset();
           this.quotation = null;
         } else {
-          this.quotationList = null;          
+          this.quotationList = null;
         }
       });
   }
@@ -100,5 +100,9 @@ export class QuotationsComponent {
     // this.createQuotationHtml();
     let obj = new Htmltopdf();
     obj.captureScreen("quotationPdf");
+  }
+
+  print(){
+    console.log('Printing IN progress');
   }
 }

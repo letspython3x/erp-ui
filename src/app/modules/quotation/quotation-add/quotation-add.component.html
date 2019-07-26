@@ -1,7 +1,7 @@
 <div class="row">
   <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 grid-margin">
     <div class="thumbnail">
-      <a class="nav-link" routerLink="/quotation-add/" routerLinkActive="active">
+      <a class="nav-link" routerLink="/quotation/add/" routerLinkActive="active">
         <div class="caption">
           <h4>Add Quotation</h4>
           <p>Lorem Ipsum</p>
@@ -13,7 +13,7 @@
   </div>
   <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 grid-margin">
     <div class="thumbnail">
-      <a class="nav-link" routerLink="/quotation-details/" routerLinkActive="active">
+      <a class="nav-link" routerLink="/quotation/" routerLinkActive="active">
         <div class="caption">
           <h4>Search Quotation</h4>
           <p>Lorem Ipsum</p>
@@ -98,11 +98,12 @@
           <div class="card-body">
             <div class="form-group row">
               <label class="col-sm-1 col-form-label num-field">#</label>
+              <label class="col-sm-2 col-form-label">Barcode</label>
               <label class="col-sm-2 col-form-label">Product Name</label>
               <label class="col-sm-2 col-form-label">Category</label>
               <label class="col-sm-1 col-form-label num-field">Quantity</label>
               <label class="col-sm-1 col-form-label num-field">Price</label>
-              <label class="col-sm-1 col-form-label num-field">Discount</label>
+              <label class="col-sm-1 col-form-label num-field">Discount %</label>
               <label class="col-sm-1 col-form-label num-field">Tax</label>
               <label class="col-sm-1 col-form-label num-field">Sub-Total</label>
               <label class="col-sm-1 col-form-label">New row</label>
@@ -115,12 +116,14 @@
                     <div class="col-sm-1 "> <input type="number" value="{{i+1}}" class="form-control num-field"
                         disabled>
                     </div>
-                    <div class="col-sm-2 "><input type="text" formControlName="product_name" class="form-control"
-                        (keyup)="performFilter($event)">
-                      <select *ngIf="filteredProducts && filteredProducts.length">
-                        <option *ngFor="let pd of filteredProducts">{{ pd.product_name }}</option>
-                      </select>
+                    <div class="col-sm-1"><input type="text" formControlName="barcode_number"
+                      class="form-control"></div>
+                    
+                      <div class="col-sm-2 ">
+                      <input type="text"  formControlName="product_name" class="form-control"
+                        [(ngModel)]="selected" [typeahead]="states" [isAnimated]=True >
                     </div>
+
                     <div class="col-sm-2">
                       <select *ngIf="categories && categories.length" formControlName="category_name"
                         class="form-control">
@@ -135,7 +138,7 @@
                         class="form-control num-field"></div>
                     <div class="col-sm-1"><input type="number" formControlName="item_discount"
                         class="form-control num-field"></div>
-                    <div class="col-sm-1"><input type="number" formControlName="tax" class="form-control num-field" [attr.disabled]="true">
+                    <div class="col-sm-1"><input type="number" formControlName="tax" class="form-control num-field" > <!-- [attr.disabled]="true"> -->
                     </div>
                     <div class="col-sm-1"><input formControlName="line_item_total"
                       [value]="calculateLineItemSubTotal(itemrow)" class="form-control num-field" [attr.disabled]="true"> </div>
@@ -171,7 +174,7 @@
               </div>
             </div>
             <div class="form-group row">
-              <label class="col-sm-4 col-form-label">Discount : </label>
+              <label class="col-sm-4 col-form-label">Discount %: </label>
               <div class="col-sm-4">
                 <input type="number" formControlName="discount_on_total" class="form-control num-field">
               </div>

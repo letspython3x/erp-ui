@@ -137,7 +137,8 @@
       <div class="col-sm-12 header store_details">
         <h1>{{ metadata.quotation_type }}</h1>
         <address>
-          <h3>Store Name {{store.store_name}}</h3>
+          <h3>{{store.store_name}}</h3>
+          <p>Store ID {{store.store_id}}</p>
           <p>Store Address: {{store.address}}</p>
           <p>City: {{store.city}}</p>
           <p>Phone: {{store.phone}}</p>
@@ -147,9 +148,10 @@
       </div>
       <div class="row">
         <div class="col-sm-6 client_details">
-          <h4>Customer info</h4>
+          <h4>Client info</h4>
           <address>
             <p> Bill label: {{ metadata.quotation_type }}</p>
+            <p> Client ID: {{ customer.customer_id }}</p>
             <p>Name : {{customer.first_name}} {{customer.middle_name}} {{customer.last_name}}</p>
             <p>Address: {{customer.address}}</p>
             <p>City: {{customer.city}}</p>
@@ -208,7 +210,7 @@
       <div class="row">
         <div class="col-sm-6 payment_details">
           <h4>Payment info</h4>
-          <p>Type: {{metadata.payment_type}} Cash or Credit</p>
+          <p>Type: {{metadata.payment_type}}</p>
         </div>
         <div class="col-sm-6 invoice_sums">
           Invoice sums
@@ -234,6 +236,7 @@
   <div class="row">
     <div class="col-sm-3">
       <button type="button" (click)="capture()" class="btn btn-success">Save PDF</button>
+      <button type="button" (click)="print()" class="btn btn-success">Print - IN Progress</button>
     </div>
   </div>
 </div>

@@ -6,13 +6,18 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { QuotationRoutingModule } from './quotation-routing.module';
 import { QuotationAddComponent } from './quotation-add/quotation-add.component';
 import { QuotationsComponent } from './quotations/quotations.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+// RECOMMENDED
+import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
+    TypeaheadModule.forRoot(),
+    BrowserAnimationsModule,
     ReactiveFormsModule,
-    QuotationRoutingModule
+    QuotationRoutingModule,
   ],
   declarations: [
     QuotationAddComponent,

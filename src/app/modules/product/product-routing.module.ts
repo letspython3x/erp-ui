@@ -5,9 +5,9 @@ import { ProductAddComponent } from "./product-add/product-add.component";
 import { ProductEditComponent } from "./product-edit/product-edit.component";
 
 const routes: Routes = [
-    { path: 'products', component: ProductsComponent },
-    { path: 'product-add', component: ProductAddComponent },
-    { path: 'product-edit', component: ProductEditComponent },
+    { path: '', component: ProductsComponent },
+    { path: 'add', component: ProductAddComponent },
+    { path: 'edit', component: ProductEditComponent },
 ]
 
 @NgModule({

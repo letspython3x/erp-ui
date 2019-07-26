@@ -1,7 +1,7 @@
 <div class="row">
   <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 grid-margin">
     <div class="thumbnail">
-      <a class="nav-link" routerLink="/product-add/" routerLinkActive="active">
+      <a class="nav-link" routerLink="/product/add/" routerLinkActive="active">
         <div class="caption">
           <h4>Add product</h4>
           <p>Lorem Ipsum</p>
@@ -13,7 +13,7 @@
   </div>
   <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 grid-margin">
     <div class="thumbnail">
-      <a class="nav-link" routerLink="/product-edit/" routerLinkActive="active">
+      <a class="nav-link" routerLink="/product/edit/" routerLinkActive="active">
         <div class="caption">
           <h4>Search & Edit product</h4>
           <p>Lorem Ipsum</p>
@@ -23,9 +23,9 @@
       </a>
     </div>
   </div>
-  <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 grid-margin">
+  <!-- <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 grid-margin">
     <div class="thumbnail">
-      <a class="nav-link" routerLink="/product-details/" routerLinkActive="active">
+      <a class="nav-link" routerLink="/details/" routerLinkActive="active">
         <div class="caption">
           <h4>Details product</h4>
           <p>Lorem Ipsum</p>
@@ -34,10 +34,10 @@
           style="width:80px;height:80px">
       </a>
     </div>
-  </div>
+  </div> -->
   <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 grid-margin">
     <div class="thumbnail">
-      <a class="nav-link" routerLink="/products/" routerLinkActive="active">
+      <a class="nav-link" routerLink="/product/" routerLinkActive="active">
         <div class="caption">
           <h4>View products</h4>
           <p>Lorem Ipsum</p>
@@ -65,6 +65,7 @@
                   <tr>
                     <th> Product Name </th>
                     <th> Serial Code </th>
+                    <th> Barcode Number </th>
                     <th> SKU Code </th>
                     <th> Category </th>
                     <th> Unit Price </th>
@@ -78,6 +79,7 @@
                   <tr>
                     <td class="font-weight-medium">{{ pd.product_name }} </td>
                     <td>{{ pd.serial_no }} </td>
+                    <td>{{ pd.barcode_number }} </td>
                     <td>{{ pd.product_id }} </td>
                     <td>{{ pd.category_name }} </td>
                     <td>{{ pd.unit_price | currency:'CAD':'symbol-narrow' }} </td>

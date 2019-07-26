@@ -1,6 +1,6 @@
 import { Component, OnInit, ElementRef ,ViewChild} from '@angular/core';  
 import * as jspdf from 'jspdf';  
-import * as html2canvas from 'html2canvas';  
+import html2canvas from 'html2canvas';  
   
 
 export class Htmltopdf{  

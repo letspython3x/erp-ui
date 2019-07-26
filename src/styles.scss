@@ -1,18 +1,23 @@
 /* You can add global styles to this file, and also import other style files */
 
+@import url('https://netdna.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.css');
+@import url(https://fonts.googleapis.com/css?family=Lato:400,300,700);
+
+/* You can add global styles to this file, and also import other style files */
+
 @import "../node_modules/bootstrap/scss/functions";
 @import "../node_modules/bootstrap/scss/variables";
-@import './assets/styles/variables';
-@import "../node_modules/compass-mixins/lib/compass";
-@import "../node_modules/compass-mixins/lib/animate";
 @import "../node_modules/bootstrap/scss/bootstrap";
 
+@import "../node_modules/compass-mixins/lib/compass";
+@import "../node_modules/compass-mixins/lib/animate";
 // @import "../node_modules/mdi/scss/materialdesignicons";
 // @import "../node_modules/@mdi/font/fonts";
-@import "../node_modules/material-icons/css/material-icons";
+// @import "../node_modules/material-icons/css/material-icons";
+// @import "../node_modules/font-awesome/scss/font-awesome";
+// @import "./assets/styles/bootstrap4";
 
-
-@import "../node_modules/font-awesome/scss/font-awesome";
+@import './assets/styles/variables';
 @import "./assets/styles/fonts";
 @import "./assets/styles/functions";
 @import "./assets/styles/mixins/background";
@@ -54,21 +59,3 @@
 @import "./assets/styles/misc";
 @import "./assets/styles/utilities";
 @import "./assets/styles/demo";
-/* You can add global styles to this file, and also import other style files */
-
-@import url('https://netdna.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.css');
-@import url(https://fonts.googleapis.com/css?family=Lato:400,300,700);
-
-// html {
-//     height: 100%;
-//  }
- 
-//  body {
-//      display: flex;
-//      justify-content: center;
-//      align-items: center;
-//      min-height: 100%;
-//      font-family: 'lato', sans-serif;
-//      color: #fff;
-//      background: rgb(10, 113, 182); 
-//  }

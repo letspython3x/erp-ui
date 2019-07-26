@@ -2,12 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, FormArray, Validators } from '@angular/forms';
 import { QuotationService } from '../quotation.service';
 import { CategoryService } from '../../category/category.service';
-import { StoreService } from '../../store/store.service';
-import { CustomerService } from '../../customer/customer.service';
-import { ProductsComponent } from '@/modules/product/products/products.component';
-import { ICategory } from '@/shared/models/category.model';
 import { Router } from "@angular/router";
 import { ProductService } from '@/modules/product/product.service';
+// import { StoreService } from '../../store/store.service';
+// import { CustomerService } from '../../customer/customer.service';
+// import { ProductsComponent } from '@/modules/product/products/products.component';
+// import { ICategory } from '@/shared/models/category.model';
+
 
 @Component({
   selector: 'app-quotation-add',
@@ -22,17 +23,17 @@ export class QuotationAddComponent implements OnInit {
   customer: any;
 
   filteredProducts: any;
-  _listFilter: string;
+
   categories: any;
-  products: any;
+  product_names: any = [];
   total: number;
   total_row: number;
   quotation_submitted: boolean = false;
   isLoadingResults: boolean = true;
 
   constructor(private qsApi: QuotationService,
-    private ssApi: StoreService,
-    private csApi: CustomerService,
+    // private storeApi: StoreService,
+    // private customerApi: CustomerService,
     private categoryApi: CategoryService,
     private productApi: ProductService,
     private _fb: FormBuilder,
@@ -51,7 +52,7 @@ export class QuotationAddComponent implements OnInit {
       quotation_total: new FormControl(0, Validators.required),
       item_rows: this._fb.array([this.initItemRow()])
     });
-    //this.categories =['Accessories', 'Apparels', 'Clothes', 'Electronics'];
+
     this.getCategories();
     this.getProductNames();
   }
@@ -92,7 +93,6 @@ export class QuotationAddComponent implements OnInit {
     this.isLoadingResults = false;
     this.quotation_submitted = true;
     console.log("Sending request to add the quotation");
-    // console.log(this.line_items);
     let formObj = this.quotation_form_group.getRawValue();
     let serializedForm = JSON.stringify(formObj);
     console.log(serializedForm);
@@ -167,33 +167,18 @@ export class QuotationAddComponent implements OnInit {
       });
   }
 
-  getProductNameListFilter() {
-    return this._listFilter;
-  }
-  setProductNameListFilter(value: string) {
-    this._listFilter = value;
-    this.filteredProducts = this._listFilter ? this.performFilter(this._listFilter) : this.products;
-  }
-
-  performFilter(filterBy: any) {
-    console.log(`filterby 1 ${filterBy.target.value}`);
-    filterBy = filterBy.target.value.toLocaleLowerCase();
-    console.log(`filterby 2 ${filterBy}`);
-    this.filteredProducts = this.products.filter((product: any) =>
-      product.product_name.toLocaleLowerCase().indexOf(filterBy) !== -1);
-    console.log(this.filteredProducts);
-  }
-
   getCategories() {
     this.categoryApi.getCategories().subscribe(res => {
-      console.log(res);
+      console.log("Categories Fetched");
       this.categories = res
     });
   }
-  getProductNames(){
-    this.productApi.getProducts().subscribe(res=>{
-      console.log(res);
-      this.products = res;
+  getProductNames() {
+    this.productApi.getProducts().subscribe(res => {
+      console.log("Products Fetched");
+      res.forEach(p => this.product_names.push(p.product_name));
+      console.log(this.product_names);
     });
+
   }
 }

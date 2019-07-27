@@ -1,12 +1,12 @@
 <div class="row">
-  <form class="form-sample" [formGroup]="searchCustomerForm" (ngSubmit)="onSearchFormSubmit(searchCustomerForm.value)">
+  <form class="form-sample" [formGroup]="searchClientForm" (ngSubmit)="onSearchFormSubmit(searchClientForm.value)">
     <div class="card">
-      <div class="card-header"> Search Customer by Either </div>
+      <div class="card-header"> Search Client by Either </div>
       <div class="card-body">
         <div class="form-group row">
           <label class="col-sm-4 col-form-label">Unique ID</label>
           <div class="col-sm-8">
-            <input type="text" class="form-control" formControlName="customer_id" />
+            <input type="text" class="form-control" formControlName="client_id" />
           </div>
         </div>
         <div class="form-group row">
@@ -31,9 +31,9 @@
 
 <div class="row">
   <div *ngIf="isLoadingResults">
-    <h5 align="center">Update Customer details Below</h5>
-    <form class="form-sample" [formGroup]="updateCustomerForm"
-      (ngSubmit)="onUpdateFormSubmit(updateCustomerForm.value)">
+    <h5 align="center">Update Client details Below</h5>
+    <form class="form-sample" [formGroup]="updateClientForm"
+      (ngSubmit)="onUpdateFormSubmit(updateClientForm.value)">
       <div class="card-columns">
         <!-- Card 1 -->
         <div class="card">
@@ -147,8 +147,8 @@
         <div class="card">
           <div class="card-header"> Contact Via</div>
           <div class="card-body">
-            <p class="card-text">You must have explicit customer consent before changing
-              this customer's contact settings.
+            <p class="card-text">You must have explicit client consent before changing
+              this client's contact settings.
             </p>
             <div class="form-group row">
               <label class="col-sm-5 col-form-label">Contact Via</label>

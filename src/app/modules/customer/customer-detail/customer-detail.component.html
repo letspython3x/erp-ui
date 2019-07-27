@@ -4,24 +4,24 @@
       <div class="col-12 grid-margin">
         <div class="card">
           <div class="card-body">
-            <h4 class="card-title">Fetch Customer</h4>
-            <form [formGroup]="customerDetailForm" (ngSubmit)="onFormSubmit(customerDetailForm.value)">
+            <h4 class="card-title">Fetch Client</h4>
+            <form [formGroup]="clientDetailForm" (ngSubmit)="onFormSubmit(clientDetailForm.value)">
               <div class="form-group row">
-                <label for="customer_id" class="col-sm-3 col-form-label">Customer ID</label>
+                <label for="client_id" class="col-sm-3 col-form-label">Client ID</label>
                 <div class="col-sm-9">
-                  <input type="number" class="form-control" formControlName="customer_id" placeholder="Customer ID">
+                  <input type="number" class="form-control" formControlName="client_id" placeholder="Client ID">
                 </div>
               </div>
               <div class="form-group row">
-                <label for="email" class="col-sm-3 col-form-label">Customer Email</label>
+                <label for="email" class="col-sm-3 col-form-label">Client Email</label>
                 <div class="col-sm-9">
-                  <input type="text" class="form-control" formControlName="email" placeholder="Customer Email">
+                  <input type="text" class="form-control" formControlName="email" placeholder="Client Email">
                 </div>
               </div>
               <div class="form-group row">
-                <label for="phone" class="col-sm-3 col-form-label">Customer Phone</label>
+                <label for="phone" class="col-sm-3 col-form-label">Client Phone</label>
                 <div class="col-sm-9">
-                  <input type="text" class="form-control" formControlName="phone" placeholder="Customer Phone">
+                  <input type="text" class="form-control" formControlName="phone" placeholder="Client Phone">
                 </div>
               </div>
               <button type="submit" class="btn btn-success mr-2">Search</button>
@@ -30,83 +30,83 @@
           </div>
         </div>
       </div>
-      <div *ngIf="customer">
+      <div *ngIf="client">
         <div class="col-12 grid-margin">
           <div class="card">
             <div class="card-body">
-              <div *ngIf="customer" class="table-responsive">
+              <div *ngIf="client" class="table-responsive">
                 <p class="card-description">
-                  Below is the Customer details !!
+                  Below is the Client details !!
                 </p>
                 <table class="table table-bordered">
                   <tbody>
                     <tr>
-                      <th> Customer ID </th>
-                      <td class="font-weight-medium"> {{ customer.customer_id }} </td>
+                      <th> Client ID </th>
+                      <td class="font-weight-medium"> {{ client.client_id }} </td>
                     </tr>
                     <tr>
-                      <th> Customer Name </th>
-                      <td>{{ customer.first_name + ' ' }} {{ customer.middle_name + ' '}} {{ customer.last_name }} </td>
+                      <th> Client Name </th>
+                      <td>{{ client.first_name + ' ' }} {{ client.middle_name + ' '}} {{ client.last_name }} </td>
                     </tr>
                     <tr>
                       <th> Gender </th>
-                      <td> {{ customer.gender }} </td>
+                      <td> {{ client.gender }} </td>
                     </tr>
                     <tr>
-                      <th> Customer Title </th>
-                      <td>{{ customer.contatct_title }} </td>
+                      <th> Client Title </th>
+                      <td>{{ client.contatct_title }} </td>
                     </tr>
                     <tr>
                       <th>Primary Phone </th>
-                      <td>{{ customer.primary_phone }} </td>
+                      <td>{{ client.primary_phone }} </td>
                     </tr>
                     <tr>
                       <th>Secondary Phone </th>
-                      <td>{{ customer.secondary_phone }} </td>
+                      <td>{{ client.secondary_phone }} </td>
                     </tr>
                     <tr>
                       <th> Registered Email </th>
-                      <td>{{ customer.email }} </td>
+                      <td>{{ client.email }} </td>
                     </tr>
                     <tr>
                       <th> Fax </th>
-                      <td>{{ customer.fax }} </td>
+                      <td>{{ client.fax }} </td>
                     </tr>
                     <tr>
                       <th> Membership </th>
-                      <td>{{ customer.membership }} </td>
+                      <td>{{ client.membership }} </td>
                     </tr>
                     <tr>
                       <th> Address</th>
-                      <td>{{ customer.address }} </td>
+                      <td>{{ client.address }} </td>
                     </tr>
                     <tr>
                       <th> Postal Code </th>
-                      <td>{{ customer.postal_code }} </td>
+                      <td>{{ client.postal_code }} </td>
                     </tr>
                     <tr>
                       <th> State </th>
-                      <td>{{ customer.state }} </td>
+                      <td>{{ client.state }} </td>
                     </tr>
                     <tr>
                       <th> City </th>
-                      <td>{{ customer.city }} </td>
+                      <td>{{ client.city }} </td>
                     </tr>
                     <tr>
                       <th> Country </th>
-                      <td>{{ customer.country }} </td>
+                      <td>{{ client.country }} </td>
                     </tr>
                     <tr>
                       <th> Contact Via Email </th>
-                      <td>{{ customer.contact_via_email ? "Yes":"No" }} </td>
+                      <td>{{ client.contact_via_email ? "Yes":"No" }} </td>
                     </tr>
                     <tr>
                       <th> Contact Via Primary Phone </th>
-                      <td>{{ customer.contact_via_primary_phone ? "Yes":"No" }} </td>
+                      <td>{{ client.contact_via_primary_phone ? "Yes":"No" }} </td>
                     </tr>
                     <tr>
                       <th> Contact Via Secondary Phone </th>
-                      <td>{{ customer.contact_via_secondary_phone ? "Yes":"No" }} </td>
+                      <td>{{ client.contact_via_secondary_phone ? "Yes":"No" }} </td>
                     </tr>
                   </tbody>
                 </table>

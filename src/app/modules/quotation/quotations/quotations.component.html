@@ -4,15 +4,15 @@
       <div class="col-10 grid-margin">
         <div class="card">
           <div class="card-body">
-            <h4 class="card-title">Fetch quotation</h4>
+            <h4 class="card-title">Fetch order</h4>
             <p class="card-description">
-              Get the quotation by Quotation ID.
+              Get the order by Order ID.
             </p>
-            <form [formGroup]="quotationByIdForm" (ngSubmit)="onQidFormSubmit(quotationByIdForm.value)">
+            <form [formGroup]="orderByIdForm" (ngSubmit)="onQidFormSubmit(orderByIdForm.value)">
               <div class="form-group row">
-                <label for="quotation_id" class="col-sm-4 col-form-label">Quotation ID</label>
+                <label for="order_id" class="col-sm-4 col-form-label">Order ID</label>
                 <div class="col-sm-5">
-                  <input type="number" class="form-control" formControlName="quotation_id" placeholder="Quotation ID">
+                  <input type="number" class="form-control" formControlName="order_id" placeholder="Order ID">
                 </div>
               </div>
               <button type="submit" class="btn btn-success mr-2">Search</button>
@@ -29,46 +29,46 @@
       <div class="col-10 grid-margin">
         <div class="card">
           <div class="card-body">
-            <h4 class="card-title">Fetch Quotations</h4>
+            <h4 class="card-title">Fetch Orders</h4>
             <p class="card-description">
-              Fetch quotations depending on below selections.
+              Fetch orders depending on below selections.
             </p>
-            <form [formGroup]="quotationByEntityForm" (ngSubmit)="onQbeFormSubmit(quotationByEntityForm.value)">
+            <form [formGroup]="orderByEntityForm" (ngSubmit)="onQbeFormSubmit(orderByEntityForm.value)">
               <div class="form-group row">
-                <label for="quotation_type" class="col-sm-4 col-form-label">Quotation Type</label>
+                <label for="order_type" class="col-sm-4 col-form-label">Order Type</label>
                 <div class="col-sm-6">
-                  <select class="form-control" formControlName="quotation_type">
+                  <select class="form-control" formControlName="order_type">
                     <option>Invoice</option>
-                    <option>Quotation</option>
+                    <option>Order</option>
                     <option>Bill</option>
                     <option>Receipt</option>
                   </select>
                 </div>
               </div>
               <div class="form-group row">
-                <label for="quotation_id" class="col-sm-4 col-form-label">Customer ID</label>
+                <label for="order_id" class="col-sm-4 col-form-label">Client ID</label>
                 <div class="col-sm-6">
-                  <input type="number" class="form-control" formControlName="customer_id" placeholder="Customer ID">
+                  <input type="number" class="form-control" formControlName="client_id" placeholder="Client ID">
                 </div>
               </div>
               <div class="form-group row">
-                <label for="quotation_id" class="col-sm-4 col-form-label">Employee ID</label>
+                <label for="order_id" class="col-sm-4 col-form-label">Employee ID</label>
                 <div class="col-sm-6">
                   <input type="number" class="form-control" formControlName="employee_id" placeholder="Employee ID">
                 </div>
               </div>
               <div class="form-group row">
-                <label for="quotation_id" class="col-sm-4 col-form-label">Store ID</label>
+                <label for="order_id" class="col-sm-4 col-form-label">Store ID</label>
                 <div class="col-sm-6">
                   <input type="number" class="form-control" formControlName="store_id" placeholder="Store ID">
                 </div>
               </div>
               <div class="form-group row">
-                <label for="quotation_id" class="col-sm-4 col-form-label">From Date</label>
+                <label for="order_id" class="col-sm-4 col-form-label">From Date</label>
                 <div class="col-sm-6">
                   <input type="date" class="form-control" formControlName="start_date">
                 </div>
-                <label for="quotation_id" class="col-sm-4 col-form-label">End Date</label>
+                <label for="order_id" class="col-sm-4 col-form-label">End Date</label>
                 <div class="col-sm-6">
                   <input type="date" class="form-control" formControlName="end_date">
                 </div>
@@ -82,7 +82,7 @@
     </div>
   </div>
 </div>
-<div *ngIf="quotationList">
+<div *ngIf="orderList">
   <div class="contatiner">
     <div class="row">
       <div class="col-md-10 d-flex align-items-stretch grid-margin">
@@ -90,35 +90,35 @@
           <div class="col-10 grid-margin">
             <div class="card">
               <div class="card-body">
-                <h4 class="card-title">Quotations</h4>
+                <h4 class="card-title">Orders</h4>
                 <p class="card-description">
-                  List of matching quotations.
+                  List of matching orders.
                 </p>
                 <table class="table table-condensed table-responsive" border="1">
                   <thead>
                     <tr>
                       <th><span> # </span></th>
-                      <th><span> Quotation ID </span></th>
-                      <th><span> Quotation Type </span></th>
+                      <th><span> Order ID </span></th>
+                      <th><span> Order Type </span></th>
                       <th><span> Payment Type </span></th>
                       <th><span> Created Date </span></th>
-                      <th><span> Customer ID </span></th>
+                      <th><span> Client ID </span></th>
                       <th><span> Employee ID </span></th>
                       <th><span> Store ID </span></th>
-                      <th><span> Quotation Total </span></th>
+                      <th><span> Order Total </span></th>
                     </tr>
                   </thead>
-                  <tbody *ngFor="let ql of quotationList; let i=index">
+                  <tbody *ngFor="let ql of orderList; let i=index">
                     <tr>
                       <td class="font-weight-medium"><span> {{ i+1 }} </span></td>
                       <td><span>{{ ql.order_id }} </span></td>
-                      <td><span>{{ ql.quotation_type }} </span></td>
+                      <td><span>{{ ql.order_type }} </span></td>
                       <td><span>{{ ql.payment_type }} </span></td>
                       <td><span>{{ ql.created_at }} </span></td>
-                      <td><span>{{ ql.customer_id }} </span></td>
+                      <td><span>{{ ql.client_id }} </span></td>
                       <td><span>{{ ql.employee_id }} </span></td>
                       <td><span>{{ ql.store_id }} </span></td>
-                      <td><span>{{ ql.quotation_total | currency:'CAD':'symbol-narrow' }} </span></td>
+                      <td><span>{{ ql.order_total | currency:'CAD':'symbol-narrow' }} </span></td>
                   </tbody>
                 </table>
               </div>
@@ -131,11 +131,11 @@
 </div>
 
 
-<div *ngIf="quotation">
-  <div class="container quotation_print" id="quotationPdf" #quotationPdf>
+<div *ngIf="order">
+  <div class="container order_print" id="orderPdf" #orderPdf>
     <div class="row">
       <div class="col-sm-12 header store_details">
-        <h1>{{ metadata.quotation_type }}</h1>
+        <h1>{{ metadata.order_type }}</h1>
         <address>
           <h3>{{store.store_name}}</h3>
           <p>Store ID {{store.store_id}}</p>
@@ -150,34 +150,34 @@
         <div class="col-sm-6 client_details">
           <h4>Client info</h4>
           <address>
-            <p> Bill label: {{ metadata.quotation_type }}</p>
-            <p> Client ID: {{ customer.customer_id }}</p>
-            <p>Name : {{customer.first_name}} {{customer.middle_name}} {{customer.last_name}}</p>
-            <p>Address: {{customer.address}}</p>
-            <p>City: {{customer.city}}</p>
-            <p>State:{{customer.state}}</p>
-            <p>Country:{{customer.country}}</p>
-            <p>Postal_code:{{customer.postal_code}}</p>
-            <p>Phone: {{customer.primary_phone}}, {{customer.secondary_phone}} </p>
-            <p>Email: {{customer.email}}</p>
+            <p> Bill label: {{ metadata.order_type }}</p>
+            <p> Client ID: {{ client.client_id }}</p>
+            <p>Name : {{client.first_name}} {{client.middle_name}} {{client.last_name}}</p>
+            <p>Address: {{client.address}}</p>
+            <p>City: {{client.city}}</p>
+            <p>State:{{client.state}}</p>
+            <p>Country:{{client.country}}</p>
+            <p>Postal_code:{{client.postal_code}}</p>
+            <p>Phone: {{client.primary_phone}}, {{client.secondary_phone}} </p>
+            <p>Email: {{client.email}}</p>
           </address>
         </div>
         <div class="col-sm-6 invoice_details">
           <h4>Invoice info</h4>
-          <p>Quotation Type: {{ metadata.quotation_type }}</p>
+          <p>Order Type: {{ metadata.order_type }}</p>
           <p>Date: {{ metadata.created_at }}</p>
           <p>Currency: </p>
           <!-- {{net_term_label}} {{net_term}} {{due_date_label}}
         {{due_date}} {{currency_label}} {{currency}} {{po_number_label}}
         {{po_number}} -->
           <h4>Invoice title and number</h4>
-          <p>Title: {{ metadata.quotation_type }}</p>
+          <p>Title: {{ metadata.order_type }}</p>
           <p>Number: {{ metadata.order_id }}</p>
         </div>
       </div>
 
       <div class="row">
-        <div class="col-sm-12 quotation_table">
+        <div class="col-sm-12 order_table">
           <table class="inventory">
             <thead>
               <tr>
@@ -218,7 +218,7 @@
           <p>Tax Name: </p>
           <p>Tax Value:{{metadata.total_tax}}</p>
           <p>Amount Total Label: </p>
-          <p>Amount Total: {{metadata.quotation_total}}</p>
+          <p>Amount Total: {{metadata.order_total}}</p>
           <!-- <p>Amount Paid Label: {{amount_paid_label}}</p>
         <p>Amount Paid: {{amount_paid}}</p>
         <p>Amount Due Label: {{amount_due_label}}</p>
@@ -242,45 +242,45 @@
 </div>
 
 
-<!-- <div *ngIf="quotation">
+<!-- <div *ngIf="order">
   <div class="row">
     <div class="col-md-10 d-flex align-items-stretch grid-margin">
       <div class="row flex-grow">
         <div class="col-12 grid-margin">
           <div class="card">
             <div class="card-body">
-              <h4 class="card-title">Quotation Below</h4>
+              <h4 class="card-title">Order Below</h4>
               <p class="card-description">
-                Quotation Found
+                Order Found
               </p>
               <table class="table table-responsive" border="1">
                 <tr>
-                  <th>Customer ID</th>
-                  <td>{{ quotation.customer_id }}</span></td>
+                  <th>Client ID</th>
+                  <td>{{ order.client_id }}</span></td>
                 </tr>
                 <tr>
                   <th>Store ID</th>
-                  <td>{{ quotation.store_id }}</span></td>
+                  <td>{{ order.store_id }}</span></td>
                 </tr>
                 <tr>
-                  <th>Quotation Type</th>
-                  <td>{{ quotation.quotation_type }}</td>
+                  <th>Order Type</th>
+                  <td>{{ order.order_type }}</td>
                 </tr>
                 <tr>
                   <th>Discount</th>
-                  <td>{{ quotation.discount_on_total }}</td>
+                  <td>{{ order.discount_on_total }}</td>
                 </tr>
                 <tr>
                   <th>Tax</th>
-                  <td>{{ quotation.total_tax | currency:'CAD':'symbol-narrow' }} </td>
+                  <td>{{ order.total_tax | currency:'CAD':'symbol-narrow' }} </td>
                 </tr>
                 <tr>
-                  <th>Quotation Total</th>
-                  <td>{{ quotation.quotation_total | currency:'CAD':'symbol-narrow' }}</td>
+                  <th>Order Total</th>
+                  <td>{{ order.order_total | currency:'CAD':'symbol-narrow' }}</td>
                 </tr>
                 <tr>
                   <th>Invoice Date</th>
-                  <td>{{ quotation.created_at }}</td>
+                  <td>{{ order.created_at }}</td>
                 </tr>
               </table>
               <table class="table table-condensed" border="2">

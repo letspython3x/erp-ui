@@ -1,23 +1,23 @@
 import { Component, OnInit } from '@angular/core';
-import {CustomerService} from '../customer.service';
+import {ClientService} from '../client.service';
 @Component({
-  selector: 'app-customers',
-  templateUrl: './customers.component.html',
-  styleUrls: ['./customers.component.scss']
+  selector: 'app-clients',
+  templateUrl: './clients.component.html',
+  styleUrls: ['./clients.component.scss']
 })
-export class CustomersComponent implements OnInit {
+export class ClientsComponent implements OnInit {
   displayedColumns: string[];
-  customerList:any = [];
+  clientList:any = [];
   isLoadingResults = true;
 
-  constructor(private api: CustomerService) { }
+  constructor(private api: ClientService) { }
 
   
   ngOnInit() {
-    this.api.getCustomers()
+    this.api.getClients()
       .subscribe(res => {
-        this.customerList = res;
-        console.log(this.customerList);
+        this.clientList = res;
+        console.log(this.clientList);
         this.isLoadingResults = true;
       }, err => {
         console.log(err);

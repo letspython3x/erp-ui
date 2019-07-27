@@ -1,20 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { CustomerService } from '../customer.service';
+import { ClientService } from '../client.service';
 import { FormControl, FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
-  selector: 'app-customer-add',
-  templateUrl: './customer-add.component.html',
-  styleUrls: ['./customer-add.component.scss']
+  selector: 'app-client-add',
+  templateUrl: './client-add.component.html',
+  styleUrls: ['./client-add.component.scss']
 })
-export class CustomerAddComponent {
-  customerForm: FormGroup;
+export class ClientAddComponent {
+  clientForm: FormGroup;
   isLoadingResults = false;
 
-  constructor(private router: Router, private api: CustomerService,
+  constructor(private router: Router, private api: ClientService,
     private formBuilder: FormBuilder) {
-    this.customerForm = this.formBuilder.group({
+    this.clientForm = this.formBuilder.group({
       first_name: new FormControl(),
       middle_name: new FormControl(),
       last_name: new FormControl(),
@@ -36,19 +36,19 @@ export class CustomerAddComponent {
     });
   }
 
-  onFormSubmit(customerForm: any) {
+  onFormSubmit(clientForm: any) {
     // this.isLoadingResults = true;
-    console.log("Sending request to add the customer");
-    console.log(customerForm);
-    this.api.addCustomer(customerForm)
+    console.log("Sending request to add the client");
+    console.log(clientForm);
+    this.api.addClient(clientForm)
       .subscribe(res => {
         console.log(res);
-        let customer_id = res['customer_id'];
-        alert(`Customer Saved: ${customer_id}`);
-        console.log("Customer ID: " + customer_id);
+        let client_id = res['client_id'];
+        alert(`Client Saved: ${client_id}`);
+        console.log("Client ID: " + client_id);
         this.isLoadingResults = false;
         // this.router.navigate(['/product-details', id]);
-        this.customerForm.reset();
+        this.clientForm.reset();
       }, (err) => {
         console.log(err);
         this.isLoadingResults = false;

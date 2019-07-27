@@ -1,15 +1,15 @@
 import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
-import { QuotationAddComponent } from './quotation-add/quotation-add.component';
-import { QuotationsComponent } from './quotations/quotations.component';
+import { OrderAddComponent } from './order-add/order-add.component';
+import { OrdersComponent } from './orders/orders.component';
 
 const routes: Routes = [
-    { path: '', component: QuotationsComponent },
-    { path: 'add', component: QuotationAddComponent },
+    { path: '', component: OrdersComponent },
+    { path: 'add', component: OrderAddComponent },
 ]
 
 @NgModule({
     imports: [RouterModule.forChild(routes)],
     exports: [RouterModule]
 })
-export class QuotationRoutingModule { }
+export class OrderRoutingModule { }

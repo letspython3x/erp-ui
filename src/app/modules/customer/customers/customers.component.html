@@ -1,48 +1,48 @@
 <div class="row">
   <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 grid-margin">
     <div class="thumbnail">
-      <a class="nav-link" routerLink="/customer-add/" routerLinkActive="active">
+      <a class="nav-link" routerLink="/client-add/" routerLinkActive="active">
         <div class="caption">
-          <h4>Add Customer</h4>
+          <h4>Add Client</h4>
           <p>Lorem Ipsum</p>
         </div>
-        <img class="img-thumbnail rounded-circle" src="assets/images/menu_icons/add_customer.ico" alt="Add Customer"
+        <img class="img-thumbnail rounded-circle" src="assets/images/menu_icons/add_client.ico" alt="Add Client"
           style="width:100px;height:100px">
       </a>
     </div>
   </div>
   <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 grid-margin">
     <div class="thumbnail">
-      <a class="nav-link" routerLink="/customer-edit/" routerLinkActive="active">
+      <a class="nav-link" routerLink="/client-edit/" routerLinkActive="active">
         <div class="caption">
-          <h4>Search & Edit Customer</h4>
+          <h4>Search & Edit Client</h4>
           <p>Lorem Ipsum</p>
         </div>
-        <img class="img-thumbnail rounded-circle" src="assets/images/menu_icons/edit_customer.jpeg" alt="Edit Customer"
+        <img class="img-thumbnail rounded-circle" src="assets/images/menu_icons/edit_client.jpeg" alt="Edit Client"
           style="width:80px;height:80px">
       </a>
     </div>
   </div>
   <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 grid-margin">
     <div class="thumbnail">
-      <a class="nav-link" routerLink="/customer-details/" routerLinkActive="active">
+      <a class="nav-link" routerLink="/client-details/" routerLinkActive="active">
         <div class="caption">
-          <h4>Details Customer</h4>
+          <h4>Details Client</h4>
           <p>Lorem Ipsum</p>
         </div>
-        <img class="img-thumbnail rounded-circle" src="assets/images/menu_icons/customer_detail.png"
-          alt="Details Customer" style="width:80px;height:80px">
+        <img class="img-thumbnail rounded-circle" src="assets/images/menu_icons/client_detail.png"
+          alt="Details Client" style="width:80px;height:80px">
       </a>
     </div>
   </div>
   <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 grid-margin">
     <div class="thumbnail">
-      <a class="nav-link" routerLink="/customers/" routerLinkActive="active">
+      <a class="nav-link" routerLink="/clients/" routerLinkActive="active">
         <div class="caption">
-          <h4>View Customers</h4>
+          <h4>View Clients</h4>
           <p>Lorem Ipsum</p>
         </div>
-        <img class="img-thumbnail rounded-circle" src="assets/images/menu_icons/customers.jpg" alt="View Customers"
+        <img class="img-thumbnail rounded-circle" src="assets/images/menu_icons/clients.jpg" alt="View Clients"
           style="width:80px;height:80px">
       </a>
     </div>
@@ -54,11 +54,11 @@
       <div class="col-sm-12 grid-margin">
         <div class="card">
           <div class="card-body">
-            <h4 class="card-title">Existing Customers</h4>
+            <h4 class="card-title">Existing Clients</h4>
             <p class="card-description">
-              Below are all available Customers!!
+              Below are all available Clients!!
             </p>
-            <div *ngIf="customerList" class="table-responsive">
+            <div *ngIf="clientList" class="table-responsive">
               <table class="table table-bordered">
                 <thead>
                   <tr>
@@ -69,9 +69,9 @@
                     <th> Location </th>
                   </tr>
                 </thead>
-                <tbody *ngFor="let cl of customerList">
+                <tbody *ngFor="let cl of clientList">
                   <tr>
-                    <td class="font-weight-medium"> {{ cl.customer_id }} </td>
+                    <td class="font-weight-medium"> {{ cl.client_id }} </td>
                     <td>{{ cl.first_name + ' ' }} {{ cl.middle_name + ' '}} {{ cl.last_name }} </td>
                     <td>{{ cl.primary_phone }} </td>
                     <td>{{ cl.email }} </td>

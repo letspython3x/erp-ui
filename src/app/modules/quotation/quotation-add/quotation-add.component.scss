@@ -17,7 +17,7 @@ div.col-sm-1, div.col-sm-2 {
     margin: 0px;
   }
   
-table.quotation {
+table.order {
   position: center;
   font-family: "Times New Roman", Times, serif;
   border: 1px solid #FFFFFF;
@@ -26,38 +26,38 @@ table.quotation {
   text-align: center;
   border-collapse: collapse;
 }
-table.quotation td, table.quotation th {
+table.order td, table.order th {
   border: 1px solid #FFFFFF;
   padding: 3px 2px;
 }
-table.quotation tbody td {
+table.order tbody td {
   font-size: 13px;
 }
-table.quotation tr:nth-child(even) {
+table.order tr:nth-child(even) {
   background: #D0E4F5;
 }
-table.quotation thead {
+table.order thead {
   background: #0B6FA4;
   border-bottom: 5px solid #FFFFFF;
 }
-table.quotation thead th {
+table.order thead th {
   font-size: 17px;
   font-weight: bold;
   color: #FFFFFF;
   text-align: center;
   border-left: 2px solid #FFFFFF;
 }
-table.quotation thead th:first-child {
+table.order thead th:first-child {
   border-left: none;
 }
 
-table.quotation tfoot {
+table.order tfoot {
   font-size: 14px;
   font-weight: bold;
   color: #333333;
   background: #D0E4F5;
   border-top: 3px solid #444444;
 }
-table.quotation tfoot td {
+table.order tfoot td {
   font-size: 14px;
 }

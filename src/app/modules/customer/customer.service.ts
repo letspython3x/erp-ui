@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ICustomer } from '../../shared/models/customer.model';
+import { IClient } from '../../shared/models/client.model';
 import { Observable, of, throwError } from 'rxjs';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { catchError, tap, map } from 'rxjs/operators';
@@ -10,13 +10,13 @@ const httpOptions = {
     'crossDomain': 'true'
   })
 };
-const apiUrl = 'http://127.0.0.1:3001/customer';
+const apiUrl = 'http://127.0.0.1:3001/client';
 
 
 @Injectable({
   providedIn: 'root'
 })
-export class CustomerService {
+export class ClientService {
   constructor(private http: HttpClient) { }
 
   private handleError<T>(operation = 'operation', result?: T) {
@@ -30,56 +30,51 @@ export class CustomerService {
     };
   }
 
-  addCustomer(customer): Observable<ICustomer> {
-    return this.http.post<ICustomer>(apiUrl, customer, httpOptions).pipe(
-      tap((customer: ICustomer) => console.log(`added Customer w/ id=${customer.customer_id}`)),
-      catchError(this.handleError<ICustomer>('addCustomer'))
+  addClient(client): Observable<IClient> {
+    return this.http.post<IClient>(apiUrl, client, httpOptions).pipe(
+      tap((client: IClient) => console.log(`added Client w/ id=${client.client_id}`)),
+      catchError(this.handleError<IClient>('addClient'))
     );
   }
 
-  getCustomers(): Observable<ICustomer[]> {
-    const url = `${apiUrl}`;    
-    return this.http.get<ICustomer[]>(url);
+  getClients(): Observable<IClient[]> {
+    const url = `${apiUrl}`;
+    return this.http.get<IClient[]>(url);
     // .pipe(
     //   tap(heroes => console.log('fetched products below')),
     //   catchError(this.handleError('getProducts', []))
 
   }
 
-  // getCustomer(param: any): Observable<ICustomer> {
-  //   // const url = `${apiUrl}?customer_id=${customer_id}&phone=${phone}&email=${email}`;
-  //   const url = `${apiUrl}${param}`;
-  //   return this.http.get<ICustomer>(url).pipe(
-  //     tap(_ => console.log(`fetched Customer id=${param}`)),
-  //     catchError(this.handleError<ICustomer>(`getCustomer id=${param}`))
-  //   );
-  // }
-
-  getCustomer(customer_id: number, phone:string, email:string): Observable<ICustomer> {
-    const url = `${apiUrl}?customer_id=${customer_id}&phone=${phone}&email=${email}`;
+  getClient(client_id: number, phone: string, email: string): Observable<IClient> {
+    const url = `${apiUrl}?client_id=${client_id}&phone=${phone}&email=${email}`;
     // const url = `${apiUrl}${param}`;
     console.log(url);
-    return this.http.get<ICustomer>(url).pipe(
-      tap(_ => console.log(`fetched Customer id=${customer_id}`)),
-      catchError(this.handleError<ICustomer>(`getCustomer id=${customer_id}`))
-    );
+    return this.http.get<IClient>(url).pipe(
+      tap(_ => console.log(`fetched Client id=${client_id}`)),
+      catchError(this.handleError<IClient>(`getClient id=${client_id}`)));
   }
 
-  updateCustomer(id, customer): Observable<any> {
+  updateClient(id, client): Observable<any> {
     const url = `${apiUrl}${id}`;
-    return this.http.put(url, customer, httpOptions).pipe(
-      tap(_ => console.log(`updated Customer id=${id}`)),
-      catchError(this.handleError<any>('updateCustomer'))
-    );
+    return this.http.put(url, client, httpOptions).pipe(
+      tap(_ => console.log(`updated Client id=${id}`)),
+      catchError(this.handleError<any>('updateClient')));
   }
 
-  deleteCustomer(id): Observable<ICustomer> {
+  updateClientAccounts(account) {
+    const url = `${apiUrl}${account.client_id}`;
+    return this.http.patch(url, account, httpOptions).pipe(
+      tap(_ => console.log(`Updated Client accounts id=${account.client_id}`)),
+      catchError(this.handleError('updateClientAccount')));
+  }
+
+  deleteClient(id): Observable<IClient> {
     const url = `${apiUrl}${id}`;
 
-    return this.http.delete<ICustomer>(url, httpOptions).pipe(
-      tap(_ => console.log(`deleted Customer id=${id}`)),
-      catchError(this.handleError<ICustomer>('deleteCustomer'))
-    );
+    return this.http.delete<IClient>(url, httpOptions).pipe(
+      tap(_ => console.log(`deleted Client id=${id}`)),
+      catchError(this.handleError<IClient>('deleteClient')));
   }
 
 }

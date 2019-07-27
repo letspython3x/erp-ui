@@ -4,7 +4,7 @@ import { ICategory } from '../../shared/models/category.model';
 import { Observable, of, throwError } from 'rxjs';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { catchError, tap, map } from 'rxjs/operators';
-import { IQuotation } from '@/shared/models/quotation.model';
+import { IOrder } from '@/shared/models/order.model';
 
 
 const httpOptions = {
@@ -37,8 +37,8 @@ export class CategoryService {
         const url = `${apiUrl}?category_id=${category_id}`;
         return this.api.get<any>(url);
         // .pipe(
-        //     tap(_ => console.log(`fetched quotation id=${quotation_id}`)),
-        //     catchError(this.handleError<IQuotation>(`getProduct id=${quotation_id}`))
+        //     tap(_ => console.log(`fetched order id=${order_id}`)),
+        //     catchError(this.handleError<IOrder>(`getProduct id=${order_id}`))
 
     }
 

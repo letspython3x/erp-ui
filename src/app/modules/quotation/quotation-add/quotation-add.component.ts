@@ -1,26 +1,26 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, FormArray, Validators } from '@angular/forms';
-import { QuotationService } from '../quotation.service';
+import { OrderService } from '../order.service';
 import { CategoryService } from '../../category/category.service';
 import { Router } from "@angular/router";
 import { ProductService } from '@/modules/product/product.service';
 // import { StoreService } from '../../store/store.service';
-// import { CustomerService } from '../../customer/customer.service';
+// import { ClientService } from '../../client/client.service';
 // import { ProductsComponent } from '@/modules/product/products/products.component';
 // import { ICategory } from '@/shared/models/category.model';
 
 
 @Component({
-  selector: 'app-quotation-add',
-  templateUrl: './quotation-add.component.html',
-  styleUrls: ['./quotation-add.component.scss']
+  selector: 'app-order-add',
+  templateUrl: './order-add.component.html',
+  styleUrls: ['./order-add.component.scss']
 })
-export class QuotationAddComponent implements OnInit {
-  quotation_form_group: FormGroup;
-  quotation: any;
-  quotation_id: any;
+export class OrderAddComponent implements OnInit {
+  order_form_group: FormGroup;
+  order: any;
+  order_id: any;
   store: any;
-  customer: any;
+  client: any;
 
   filteredProducts: any;
 
@@ -28,28 +28,29 @@ export class QuotationAddComponent implements OnInit {
   product_names: any = [];
   total: number;
   total_row: number;
-  quotation_submitted: boolean = false;
+  order_submitted: boolean = false;
   isLoadingResults: boolean = true;
 
-  constructor(private qsApi: QuotationService,
+  constructor(private qsApi: OrderService,
     // private storeApi: StoreService,
-    // private customerApi: CustomerService,
+    // private clientApi: ClientService,
     private categoryApi: CategoryService,
     private productApi: ProductService,
     private _fb: FormBuilder,
     private router: Router) { }
 
   ngOnInit() {
-    this.quotation_form_group = this._fb.group({
-      customer_id: new FormControl(999, Validators.required),
+    this.order_form_group = this._fb.group({
+      client_id: new FormControl(999, Validators.required),
       employee_id: new FormControl(999, Validators.required),
       store_id: new FormControl(999, Validators.required),
-      quotation_type: new FormControl('', Validators.required),
+      order_type: new FormControl('', Validators.required),
       payment_type: new FormControl('', Validators.required),
+      client_type: new FormControl('', Validators.required),
       discount_on_total: new FormControl(0, Validators.required),
       total_tax: new FormControl(0, Validators.required),
       discounted_sub_total: new FormControl(0, Validators.required),
-      quotation_total: new FormControl(0, Validators.required),
+      order_total: new FormControl(0, Validators.required),
       item_rows: this._fb.array([this.initItemRow()])
     });
 
@@ -69,15 +70,15 @@ export class QuotationAddComponent implements OnInit {
       line_item_total: new FormControl(0, Validators.required),
     });
   }
-
+  
   addNewRow() {
     console.log('Add a new row');
-    const control = <FormArray>this.quotation_form_group.controls['item_rows'];
+    const control = <FormArray>this.order_form_group.controls['item_rows'];
     control.push(this.initItemRow());
   }
 
   deleteRow(index: number) {
-    const control = <FormArray>this.quotation_form_group.controls['item_rows'];
+    const control = <FormArray>this.order_form_group.controls['item_rows'];
     if (control != null) {
       this.total_row = control.value.length;
     }
@@ -91,18 +92,18 @@ export class QuotationAddComponent implements OnInit {
 
   onFormSubmit() {
     this.isLoadingResults = false;
-    this.quotation_submitted = true;
-    console.log("Sending request to add the quotation");
-    let formObj = this.quotation_form_group.getRawValue();
+    this.order_submitted = true;
+    console.log("Sending request to add the order");
+    let formObj = this.order_form_group.getRawValue();
     let serializedForm = JSON.stringify(formObj);
     console.log(serializedForm);
-    this.qsApi.addQuotation(serializedForm)
+    this.qsApi.addOrder(serializedForm)
       .subscribe(res => {
         console.log(res);
-        this.quotation_id = res['quotation_id'];
-        alert(`Quotation Saved: ${this.quotation_id}`);
-        this.quotation_form_group.reset();
-        this.router.navigate([`/quotation-details/${this.quotation_id}`]);
+        this.order_id = res['order_id'];
+        alert(`Order Saved: ${this.order_id}`);
+        this.order_form_group.reset();
+        this.router.navigate([`/order-details/${this.order_id}`]);
       }, (err) => {
         console.log(err);
       });
@@ -144,7 +145,7 @@ export class QuotationAddComponent implements OnInit {
 
   calculateTotal(item_rows) {
     let sub_total = 0;
-    let discount_on_total = this.quotation_form_group.controls.discount_on_total.value;
+    let discount_on_total = this.order_form_group.controls.discount_on_total.value;
     let total = 0;
     if (item_rows) {
       item_rows.forEach(row => {
@@ -158,12 +159,12 @@ export class QuotationAddComponent implements OnInit {
     return total;
   }
 
-  createQuotationHtml() {
-    this.quotation_id = 2;
-    this.qsApi.getQuotation(this.quotation_id)
+  createOrderHtml() {
+    this.order_id = 2;
+    this.qsApi.getOrder(this.order_id)
       .subscribe(res => {
-        this.quotation = res["data"];
-        console.log(this.quotation);
+        this.order = res["data"];
+        console.log(this.order);
       });
   }
 

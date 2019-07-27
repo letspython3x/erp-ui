@@ -1,81 +1,81 @@
 import { Component, OnInit } from '@angular/core';
-import { CustomerService } from '../customer.service';
-import { ICustomer } from '../../../shared/models/customer.model';
+import { ClientService } from '../client.service';
+import { IClient } from '../../../shared/models/client.model';
 import { FormControl, FormGroupDirective, FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 
 @Component({
-  selector: 'app-customer-detail',
-  templateUrl: './customer-detail.component.html',
-  styleUrls: ['./customer-detail.component.scss']
+  selector: 'app-client-detail',
+  templateUrl: './client-detail.component.html',
+  styleUrls: ['./client-detail.component.scss']
 })
-export class CustomerDetailComponent {
-  customer_id: number;
+export class ClientDetailComponent {
+  client_id: number;
   email: string;
   phone: string;
-  customer: ICustomer;
-  customerDetailForm: FormGroup;
+  client: IClient;
+  clientDetailForm: FormGroup;
 
-  constructor(private api: CustomerService, private formBuilder: FormBuilder) {
-    this.customerDetailForm = this.formBuilder.group({
-      customer_id: new FormControl(),
+  constructor(private api: ClientService, private formBuilder: FormBuilder) {
+    this.clientDetailForm = this.formBuilder.group({
+      client_id: new FormControl(),
       email: new FormControl(),
       phone: new FormControl(),
     });
   }
 
-  onFormSubmit(customerDetailForm: any) {
-    this.customer_id = customerDetailForm.customer_id;
-    this.email = customerDetailForm.email;
-    this.phone = customerDetailForm.phone;
+  onFormSubmit(clientDetailForm: any) {
+    this.client_id = clientDetailForm.client_id;
+    this.email = clientDetailForm.email;
+    this.phone = clientDetailForm.phone;
 
-    console.log(`Fetching product data for ${this.customer_id} ${this.phone}`);
-    this.api.getCustomer(this.customer_id, this.phone, this.email).
+    console.log(`Fetching product data for ${this.client_id} ${this.phone}`);
+    this.api.getClient(this.client_id, this.phone, this.email).
       subscribe(data => {
         if (data) {
           console.log(data);
-          this.customer = data;
+          this.client = data;
         }
         else {
-          this.customer = null;
+          this.client = null;
         }
       });
   }
 
 
-  // onFormSubmit(customerDetailForm: any) {
-  //   this.customer_id = customerDetailForm.customer_id;
-  //   this.email = customerDetailForm.email;
-  //   this.phone = customerDetailForm.phone;
+  // onFormSubmit(clientDetailForm: any) {
+  //   this.client_id = clientDetailForm.client_id;
+  //   this.email = clientDetailForm.email;
+  //   this.phone = clientDetailForm.phone;
 
-  //   console.log(`Fetching product data for ${this.customer_id} ${this.phone}`);
-  //   if (this.customer_id) {
-  //     this.api.getCustomer(this.customer_id).
+  //   console.log(`Fetching product data for ${this.client_id} ${this.phone}`);
+  //   if (this.client_id) {
+  //     this.api.getClient(this.client_id).
   //       subscribe(data => {
   //         if (data) {
-  //           this.customer = data;
+  //           this.client = data;
   //         }
   //         else {
-  //           this.customer = null;
+  //           this.client = null;
   //         }
   //       });
   //   }
   //   else if (this.email) {
-  //     this.api.getCustomer(this.email).
+  //     this.api.getClient(this.email).
   //       subscribe(data => {
   //         if (data) {
-  //           this.customer = data
+  //           this.client = data
   //         } else {
-  //           this.customer = null;
+  //           this.client = null;
   //         }
   //       });
   //   }
   //   else if (this.phone) {
-  //     this.api.getCustomer(this.phone).
+  //     this.api.getClient(this.phone).
   //       subscribe(data => {
   //         if (data) {
-  //           this.customer = data
+  //           this.client = data
   //         } else {
-  //           this.customer = null;
+  //           this.client = null;
   //         }
   //       });
   //   }

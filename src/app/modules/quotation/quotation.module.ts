@@ -3,9 +3,9 @@ import { CommonModule } from '@angular/common';
 // import the new component
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
-import { QuotationRoutingModule } from './quotation-routing.module';
-import { QuotationAddComponent } from './quotation-add/quotation-add.component';
-import { QuotationsComponent } from './quotations/quotations.component';
+import { OrderRoutingModule } from './order-routing.module';
+import { OrderAddComponent } from './order-add/order-add.component';
+import { OrdersComponent } from './orders/orders.component';
 
 // import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
@@ -19,15 +19,15 @@ import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
     TypeaheadModule.forRoot(),
     // BrowserAnimationsModule,
     ReactiveFormsModule,
-    QuotationRoutingModule,
+    OrderRoutingModule,
   ],
   declarations: [
-    QuotationAddComponent,
-    QuotationsComponent,
+    OrderAddComponent,
+    OrdersComponent,
 
   ],
 })
-export class QuotationDashboardModule { }
+export class OrderDashboardModule { }
 /*
 Copyright Google LLC. All Rights Reserved.
 Use of this source code is governed by an MIT-style license that

@@ -1,86 +1,86 @@
 import { Component, OnInit } from '@angular/core';
-import { QuotationService } from '../quotation.service';
+import { OrderService } from '../order.service';
 import { FormControl, FormGroupDirective, FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 import { Htmltopdf } from '../../../shared/html_to_pdf';
 
 @Component({
-  selector: 'app-quotations',
-  templateUrl: './quotations.component.html',
-  styleUrls: ['./quotations.component.scss']
+  selector: 'app-orders',
+  templateUrl: './orders.component.html',
+  styleUrls: ['./orders.component.scss']
 })
-export class QuotationsComponent {
-  quotation: any;
-  quotation_id: number;
+export class OrdersComponent {
+  order: any;
+  order_id: number;
   store: any;
-  customer: any;
+  client: any;
   metadata: any;
   line_items: any;
 
-  quotationList: any;
-  quotationByIdForm: FormGroup;
-  quotationByEntityForm: FormGroup;
+  orderList: any;
+  orderByIdForm: FormGroup;
+  orderByEntityForm: FormGroup;
 
-  constructor(private api: QuotationService, private formBuilder: FormBuilder) {
-    this.quotationByIdForm = this.formBuilder.group({
-      quotation_id: new FormControl(Validators.required)
+  constructor(private api: OrderService, private formBuilder: FormBuilder) {
+    this.orderByIdForm = this.formBuilder.group({
+      order_id: new FormControl(Validators.required)
     });
-    this.quotationByEntityForm = this.formBuilder.group({
-      customer_id: new FormControl(),
+    this.orderByEntityForm = this.formBuilder.group({
+      client_id: new FormControl(),
       employee_id: new FormControl(),
       store_id: new FormControl(),
-      quotation_type: new FormControl(),
+      order_type: new FormControl(),
       start_date: new FormControl(),
       end_date: new FormControl()
     });
   }
 
-  onQidFormSubmit(quotationByIdForm: any) {
-    let qid = quotationByIdForm.quotation_id;
-    console.log(`Fetching quotation data for ID: ${qid}`);
+  onQidFormSubmit(orderByIdForm: any) {
+    let qid = orderByIdForm.order_id;
+    console.log(`Fetching order data for ID: ${qid}`);
     if (qid) {
-      this.api.getQuotation(qid).
+      this.api.getOrder(qid).
         subscribe(res => {
           if (res) {
-            this.quotation = res["data"];
-            this.metadata = this.quotation["metadata"];
-            this.store = this.quotation["store"];
-            this.customer = this.quotation["customer"];
-            this.line_items = this.quotation["line_items"];
-            this.quotation_id = this.metadata["order_id"];
-            this.quotationByIdForm.reset();
-            this.quotationList = null;
+            this.order = res["data"];
+            this.metadata = this.order["metadata"];
+            this.store = this.order["store"];
+            this.client = this.order["client"];
+            this.line_items = this.order["line_items"];
+            this.order_id = this.metadata["order_id"];
+            this.orderByIdForm.reset();
+            this.orderList = null;
           } else {
-            this.quotationList = null;
-            this.quotation = null;
+            this.orderList = null;
+            this.order = null;
           }
         });
     }
   }
-  onQbeFormSubmit(quotationByEntityForm: any) {
-    let apiUrl = this.constructApiUrl(quotationByEntityForm);
-    console.log(`Fetching quotation data by URL ${apiUrl}`);
-    this.api.getQuotations(apiUrl).
+  onQbeFormSubmit(orderByEntityForm: any) {
+    let apiUrl = this.constructApiUrl(orderByEntityForm);
+    console.log(`Fetching order data by URL ${apiUrl}`);
+    this.api.getOrders(apiUrl).
       subscribe(res => {
         if (res) {
-          this.quotationList = res["data"];
-          this.quotationByEntityForm.reset();
-          this.quotation = null;
+          this.orderList = res["data"];
+          this.orderByEntityForm.reset();
+          this.order = null;
         } else {
-          this.quotationList = null;
+          this.orderList = null;
         }
       });
   }
-  constructApiUrl(quotationByEntityForm: any) {
-    let cid = quotationByEntityForm.customer_id;
-    let eid = quotationByEntityForm.employee_id;
-    let sid = quotationByEntityForm.store_id;
-    let quotation_type = quotationByEntityForm.quotation_type;
-    let start_date = quotationByEntityForm.start_date;
-    let end_date = quotationByEntityForm.end_date;
+  constructApiUrl(orderByEntityForm: any) {
+    let cid = orderByEntityForm.client_id;
+    let eid = orderByEntityForm.employee_id;
+    let sid = orderByEntityForm.store_id;
+    let order_type = orderByEntityForm.order_type;
+    let start_date = orderByEntityForm.start_date;
+    let end_date = orderByEntityForm.end_date;
     let apiUrl = '';
 
     if (cid) {
-      apiUrl = `?customer_id=${cid}`;
+      apiUrl = `?client_id=${cid}`;
     }
     else if (eid) {
       apiUrl = `?employee_id=${eid}`;
@@ -89,7 +89,7 @@ export class QuotationsComponent {
       apiUrl = `?store_id=${sid}`;
     }
 
-    if (quotation_type) { apiUrl += `&quotation_type=${quotation_type}`; }
+    if (order_type) { apiUrl += `&order_type=${order_type}`; }
     if (start_date) { apiUrl += `&start_date=${start_date}`; }
     if (end_date) { apiUrl += `&end_date=${end_date}`; }
 
@@ -97,9 +97,9 @@ export class QuotationsComponent {
   }
 
   capture() {
-    // this.createQuotationHtml();
+    // this.createOrderHtml();
     let obj = new Htmltopdf();
-    obj.captureScreen("quotationPdf");
+    obj.captureScreen("orderPdf");
   }
 
   print(){

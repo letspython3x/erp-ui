@@ -7,7 +7,7 @@ import { ReportService } from './report.service';
 })
 export class ReportComponent implements OnInit {
   revenue: number = 0;
-  customer_count: number = 0;
+  client_count: number = 0;
   orders_count: number = 0;
   products_count: number = 0;
   isLoadingResults: Boolean = false;
@@ -41,7 +41,7 @@ export class ReportComponent implements OnInit {
       .subscribe(res => {
         console.log(res);
         this.revenue = res['revenue'];
-        this.customer_count = res['customers'];
+        this.client_count = res['clients'];
         this.orders_count = res['orders'];
         this.products_count = res['products'];
         this.isLoadingResults = false;

@@ -1,29 +1,29 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 // import the new component
-import { CustomerAddComponent } from './customer-add/customer-add.component';
-import { CustomerEditComponent } from './customer-edit/customer-edit.component';
-import { CustomersComponent } from './customers/customers.component';
+import { ClientAddComponent } from './client-add/client-add.component';
+import { ClientEditComponent } from './client-edit/client-edit.component';
+import { ClientsComponent } from './clients/clients.component';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
-import { CustomerRoutingModule } from './customer-routing.module';
-import { CustomerDetailComponent } from './customer-detail/customer-detail.component';
+import { ClientRoutingModule } from './client-routing.module';
+import { ClientDetailComponent } from './client-detail/client-detail.component';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,    
     ReactiveFormsModule,
-    CustomerRoutingModule
+    ClientRoutingModule
   ],
   declarations: [
-    CustomerAddComponent,
-    CustomerEditComponent,
-    CustomersComponent,
-    CustomerDetailComponent
+    ClientAddComponent,
+    ClientEditComponent,
+    ClientsComponent,
+    ClientDetailComponent
   ],
 })
-export class CustomerDashboardModule { 
+export class ClientDashboardModule { 
 
 }
 
